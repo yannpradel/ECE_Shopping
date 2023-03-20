@@ -2,7 +2,6 @@ package org.example.model;
 
 public class Model {
     private String message;
-
     public Model() {
         message = "Hello, World!";
     }

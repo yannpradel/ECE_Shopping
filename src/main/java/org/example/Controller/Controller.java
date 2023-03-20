@@ -2,7 +2,6 @@ package org.example.Controller;
 
 import org.example.View.*;
 import org.example.model.*;
-
 public class Controller {
     private Model model;
     private View view;
