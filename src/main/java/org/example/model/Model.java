@@ -8,6 +8,7 @@ public class Model {
 
     public String getMessage() {
         return message;
+
     }
 
     public void setMessage(String message) {
