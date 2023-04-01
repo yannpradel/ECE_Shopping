@@ -23,8 +23,20 @@ public class Controller {
 
 
         data.createDatabase();
-        data.addNewCustomer(15,"John", "Doe", "john.doe@example.com", "mypassword123", 1000.0);
+        data.addNewCustomer("John", "Doe", "john.doe@example.com", "mypassword123", 1000.0,"dans ton cul");
+        data.addProduct("Ordinateur portable", "Intel Core i7, 16 Go RAM, SSD 512 Go, écran 15 pouces", 1499.99, 10);
+        data.addEmployes("John Doe", 25);
+        data.addLivres("Le Petit Prince", "Antoine de Saint-Exupéry", "Gallimard", "2001-01-25", "9782070612758", 9.99);
+        data.addAccessoires("Souris sans fil", "Logitech", 29.99, 50);
+        data.addPanier(12,1,3);
+
+        //Averif
         data.addNewCustomer();
+        data.addProduct();
+        data.addEmployes();
+        data.addLivres();
+        data.addAccessoires();
+        data.addPanier();
     }
 }
 
