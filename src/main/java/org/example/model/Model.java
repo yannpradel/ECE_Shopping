@@ -4,6 +4,7 @@ public class Model {
     private String message;
     public Model() {
         message = "Hello, World!";
+
     }
 
     public String getMessage() {
