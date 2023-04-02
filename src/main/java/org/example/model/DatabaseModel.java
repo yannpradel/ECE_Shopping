@@ -309,7 +309,6 @@ public class DatabaseModel {
 
         addAccessoires(name, description, price, quantity);
     }
-
     public void addAccessoires(String name, String description, double price, int quantity) {
         try (Connection conn= DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
             stmt = conn.createStatement();
@@ -337,7 +336,6 @@ public class DatabaseModel {
         int quantity = scanner.nextInt();
 
     }
-
     public void addPanier(int customerId, int productId, int quantity) {
         try (Connection conn= DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
             stmt = conn.createStatement();
@@ -351,6 +349,46 @@ public class DatabaseModel {
             stmt.close();
         } catch (SQLException e) {
             System.out.println("Erreur lors de l'ajout du produit au panier : " + e.getMessage());
+        }
+    }
+
+
+    public void addSomething(String nomTab){
+        System.out.println("----------addSomething-------------");
+        // Récupération du nom du tableau
+        Scanner sc = new Scanner(System.in);
+
+        // Récupération des noms de colonnes du tableau
+        ResultSet rs = null;
+        try (Connection conn= DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
+            rs = conn.getMetaData().getColumns(null, null, nomTab, null);
+            String colonnes = "";
+            String valeurs = "";
+            while (rs.next()) {
+                String nomColonne = rs.getString("COLUMN_NAME");
+                String typeColonne = rs.getString("TYPE_NAME");
+                System.out.print("Entrez la valeur pour la colonne " + nomColonne + " de type " + typeColonne + " : ");
+                String valeurColonne = sc.nextLine();
+                colonnes += nomColonne + ",";
+                valeurs += "'" + valeurColonne + "',";
+            }
+            // suppression de la dernière virgule
+            colonnes = colonnes.substring(0, colonnes.length()-1);
+            valeurs = valeurs.substring(0, valeurs.length()-1);
+
+            // Ajout de la valeur dans le tableau
+            String query = "INSERT INTO " + nomTab + " (" + colonnes + ") VALUES (" + valeurs + ")";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -372,6 +410,8 @@ public class DatabaseModel {
 
         System.out.println("Nom de tab:");
         String nomTable= saisie.nextLine();
+
+        addSomething(nomTable);
 
         //descriptiontab(nomTable,1);
         descriptiontab(nomTable,0,0);
