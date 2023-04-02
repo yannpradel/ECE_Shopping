@@ -1,6 +1,8 @@
 package org.example.model;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.math.*;
 
@@ -319,6 +321,7 @@ public class DatabaseModel {
             stmt.executeUpdate(insertAccessoryQuery);
 
             System.out.println("L'accessoire a été ajouté avec succès.");
+            stmt.close();
         } catch (SQLException e) {
             System.out.println("Erreur lors de l'ajout de l'accessoire : " + e.getMessage());
         }
@@ -345,8 +348,138 @@ public class DatabaseModel {
             stmt.executeUpdate(insertCartQuery);
 
             System.out.println("Le produit a été ajouté au panier avec succès.");
+            stmt.close();
         } catch (SQLException e) {
             System.out.println("Erreur lors de l'ajout du produit au panier : " + e.getMessage());
+        }
+    }
+
+
+
+    public void afficherTableau(){
+        Scanner saisie=new Scanner(System.in);
+
+        try (Connection conn= DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
+            stmt = conn.createStatement();
+            ResultSet resultSet = stmt.executeQuery("SHOW TABLES");
+            while(resultSet.next()) {
+                System.out.println(resultSet.getString(1));
+            }
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Nom de tab:");
+        String nomTable= saisie.nextLine();
+        descriptiontab(nomTable,1);
+        //descriptiontab(nomTable,0);
+    }
+
+    public void descriptiontab(String nomTab, int avecrecherche) {
+        try (Connection conn= DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
+            stmt = conn.createStatement();
+            String query;
+            // Création de la requête SQL pour récupérer toutes les données du tableau "compte"
+            if (avecrecherche==1) {
+                Scanner scanner = new Scanner(System.in);
+                System.out.print("Entrez le nom à rechercher : ");
+                String nomRecherche = scanner.nextLine();
+
+                DatabaseMetaData metadata = conn.getMetaData();
+                ResultSet rsColumns = metadata.getColumns(null, null, nomTab, null);
+                List<String> columnNames = new ArrayList<>();
+                while (rsColumns.next()) {
+                    String columnName = rsColumns.getString("COLUMN_NAME");
+                    columnNames.add(columnName);
+                }
+                rsColumns.close();
+
+                // construction dynamique de la clause WHERE
+                StringBuilder whereClause = new StringBuilder();
+                for (String columnName : columnNames) {
+                    whereClause.append(columnName).append(" LIKE '%").append(nomRecherche).append("%' OR ");
+                }
+                // suppression de la dernière occurrence de "OR" dans la clause WHERE
+                whereClause.delete(whereClause.length() - 4, whereClause.length());
+
+                // construction de la requête complète
+                query = "SELECT * FROM " + nomTab + " WHERE " + whereClause.toString();
+
+                // Création de la requête SQL pour récupérer les produits avec le nom saisi
+                //query = "SELECT * FROM "+nomTab+" WHERE * LIKE '%" + nomRecherche + "%'";
+
+            }else {
+                query = "SELECT * FROM "+nomTab;
+            }
+
+
+            // Exécution de la requête et récupération du résultat
+            ResultSet rs = stmt.executeQuery(query);
+
+
+            // Boucle pour parcourir le résultat et afficher les données sur la console
+            while (rs.next()) {
+                switch(nomTab){
+                     case "comptes":
+                         System.out.println("ID: " + rs.getInt("id"));
+                         System.out.println("Nom: " + rs.getString("last_name"));
+                         System.out.println("Prénom: " + rs.getString("first_name"));
+                         System.out.println("Email: " + rs.getString("email"));
+                         System.out.println("Mot de passe: " + rs.getString("password"));
+                         System.out.println("Solde: " + rs.getDouble("balance"));
+                         System.out.println("Adresse: " + rs.getString("adress"));
+                         System.out.println("--------------------------");
+                    break;
+
+                    case "livres":
+                        System.out.println("ID: " + rs.getInt("id"));
+                        System.out.println("Titre: " + rs.getString("title"));
+                        System.out.println("Auteur: " + rs.getString("author"));
+                        System.out.println("Editeur: "+ rs.getString("publisher"));
+                        System.out.println("Date de Parrution: " + rs.getString("publication_date"));
+                        System.out.println("ISBN: " + rs.getDouble("isbn"));
+                        System.out.println("Prix: " + rs.getDouble("price"));
+                        System.out.println("--------------------------");
+                        break;
+
+                    case "employes":
+                        System.out.println("ID: " + rs.getInt("id"));
+                        System.out.println("Nom et Prenom: " + rs.getString("name"));
+                        System.out.println("Age: " + rs.getString("age"));
+                        break;
+                    case "produits":
+                        System.out.println("ID: " + rs.getInt("id"));
+                        System.out.println("Nom: " + rs.getString("name"));
+                        System.out.println("Description: " + rs.getString("description"));
+                        System.out.println("Prix: " + rs.getDouble("price"));
+                        System.out.println("Stock: " + rs.getDouble("stock_quantity"));
+                        break;
+
+                    case "accessoires":
+                        System.out.println("ID: " + rs.getInt("id"));
+                        System.out.println("Nom: " + rs.getString("name"));
+                        System.out.println("Description: " + rs.getString("description"));
+                        System.out.println("Prix: " + rs.getDouble("price"));
+                        System.out.println("Stock: " + rs.getDouble("stock_quantity"));
+                        break;
+
+                    case "panier":
+                        System.out.println("ID: " + rs.getInt("id"));
+                        System.out.println("User_id: " + rs.getString("user_id"));
+                        System.out.println("Product_id: " + rs.getString("product_id"));
+                        System.out.println("Stock: " + rs.getDouble("quantity"));
+                        break;
+                default:
+                    break;
+                }
+            }
+
+            // Fermeture des ressources
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 

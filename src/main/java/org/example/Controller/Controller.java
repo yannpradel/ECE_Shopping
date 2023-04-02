@@ -30,6 +30,8 @@ public class Controller {
         data.addAccessoires("Souris sans fil", "Logitech", 29.99, 50);
         data.addPanier(12,1,3);
 
+        data.afficherTableau();
+
         //Averif
         data.addNewCustomer();
         data.addProduct();
