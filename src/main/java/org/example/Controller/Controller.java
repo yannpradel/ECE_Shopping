@@ -31,6 +31,7 @@ public class Controller {
         data.addPanier(12,1,3);
 
         data.afficherTableau();
+        data.supprimeligne();
 
         //Averif
         data.addNewCustomer();

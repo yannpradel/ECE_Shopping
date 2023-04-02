@@ -483,6 +483,65 @@ public class DatabaseModel {
         }
     }
 
+    public void supprimeligne(){
+        System.out.println("-----------------SUPPRESSION LIGNE---------------");
+        Scanner saisie=new Scanner(System.in);
+
+        try (Connection conn= DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
+            stmt = conn.createStatement();
+            ResultSet resultSet = stmt.executeQuery("SHOW TABLES");
+            while(resultSet.next()) {
+                System.out.println(resultSet.getString(1));
+            }
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Nom de tab:");
+        String nomTable= saisie.nextLine();
+        supprimeLigne(nomTable);
+    }
+
+    public void supprimeLigne(String nomTable) {
+        try (Connection conn = DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Entrez le nom à rechercher : ");
+            String nomRecherche = scanner.nextLine();
+
+            DatabaseMetaData metadata = conn.getMetaData();
+            ResultSet rsColumns = metadata.getColumns(null, null, nomTable, null);
+            List<String> columnNames = new ArrayList<>();
+            while (rsColumns.next()) {
+                String columnName = rsColumns.getString("COLUMN_NAME");
+                columnNames.add(columnName);
+            }
+            rsColumns.close();
+
+            // construction dynamique de la clause WHERE
+            StringBuilder whereClause = new StringBuilder();
+            for (String columnName : columnNames) {
+                whereClause.append(columnName).append(" LIKE '%").append(nomRecherche).append("%' OR ");
+            }
+            // suppression de la dernière occurrence de "OR" dans la clause WHERE
+            whereClause.delete(whereClause.length() - 4, whereClause.length());
+
+            // construction de la requête complète
+            String query = "DELETE FROM " + nomTable + " WHERE " + whereClause.toString();
+
+            // Exécution de la requête et récupération du résultat
+            PreparedStatement ps = conn.prepareStatement(query);
+            int rowsDeleted = ps.executeUpdate();
+
+            // Affichage du résultat
+            System.out.println(rowsDeleted + " ligne(s) ont été supprimées.");
+
+            // Fermeture des ressources
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 }
