@@ -372,7 +372,12 @@ public class DatabaseModel {
 
         System.out.println("Nom de tab:");
         String nomTable= saisie.nextLine();
-        descriptiontab(nomTable,1);
+
+        //descriptiontab(nomTable,1);
+        descriptiontab(nomTable,0,0);
+        descriptiontab(nomTable,0,1);
+        descriptiontab(nomTable,1,0);
+        descriptiontab(nomTable,1,1);
         //descriptiontab(nomTable,0);
     }
 
@@ -483,6 +488,198 @@ public class DatabaseModel {
         }
     }
 
+    public void descriptiontab(String nomTab, int avecrecherche, int trie) {
+
+        try (Connection conn= DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
+            stmt = conn.createStatement();
+            String query;
+            // Création de la requête SQL pour récupérer toutes les données du tableau "compte"
+            if (avecrecherche==1&&trie==1) {
+                System.out.println("-----------AVEC RECHERCHE ET AVEC TRIE-------------");
+                Scanner scanner = new Scanner(System.in);
+                System.out.print("Entrez le nom à rechercher : ");
+                String nomRecherche = scanner.nextLine();
+
+                DatabaseMetaData metadata = conn.getMetaData();
+                ResultSet rsColumns = metadata.getColumns(null, null, nomTab, null);
+                List<String> columnNames = new ArrayList<>();
+                System.out.println("Colonnes de la table " + nomTab + " : ");
+                while (rsColumns.next()) {
+                    String columnName = rsColumns.getString("COLUMN_NAME");
+                    columnNames.add(columnName);
+                    System.out.println(columnName);
+                }
+                rsColumns.close();
+
+                // construction dynamique de la clause WHERE
+                StringBuilder whereClause = new StringBuilder();
+                for (String columnName : columnNames) {
+                    whereClause.append(columnName).append(" LIKE '%").append(nomRecherche).append("%' OR ");
+                }
+                // suppression de la dernière occurrence de "OR" dans la clause WHERE
+                whereClause.delete(whereClause.length() - 4, whereClause.length());
+
+
+
+                // construction de la requête complète
+                query = "SELECT * FROM " + nomTab + " WHERE " + whereClause.toString();
+
+
+                Scanner col= new Scanner(System.in);
+                System.out.println("Quel colonne?");
+                String colonne=col.nextLine();
+
+                System.out.println("Quel ordre?");
+                System.out.println("1:DESC");
+                System.out.println("2: ASC");
+                int orderchoix=col.nextInt();
+                String ordre;
+                if (orderchoix==1){
+                    ordre="DESC";
+                }else{
+                    ordre="ASC";
+                }
+                // Ajout de l'ordre de tri
+                query += " ORDER BY " + colonne + " " + ordre;
+
+
+            } else if (avecrecherche==1) {
+                System.out.println("-----------AVEC RECHERCHE ET SANS TRIE-------------");
+                Scanner scanner = new Scanner(System.in);
+                System.out.print("Entrez le nom à rechercher : ");
+                String nomRecherche = scanner.nextLine();
+
+                DatabaseMetaData metadata = conn.getMetaData();
+                ResultSet rsColumns = metadata.getColumns(null, null, nomTab, null);
+                List<String> columnNames = new ArrayList<>();
+                while (rsColumns.next()) {
+                    String columnName = rsColumns.getString("COLUMN_NAME");
+                    columnNames.add(columnName);
+                }
+                rsColumns.close();
+
+                // construction dynamique de la clause WHERE
+                StringBuilder whereClause = new StringBuilder();
+                for (String columnName : columnNames) {
+                    whereClause.append(columnName).append(" LIKE '%").append(nomRecherche).append("%' OR ");
+                }
+                // suppression de la dernière occurrence de "OR" dans la clause WHERE
+                whereClause.delete(whereClause.length() - 4, whereClause.length());
+
+                // construction de la requête complète
+                query = "SELECT * FROM " + nomTab + " WHERE " + whereClause.toString();
+
+
+            } else if(avecrecherche==0&&trie==1) {
+                System.out.println("-----------SANS RECHERCHE ET AVEC TRIE-------------");
+
+                DatabaseMetaData metadata = conn.getMetaData();
+                ResultSet rsColumns = metadata.getColumns(null, null, nomTab, null);
+                List<String> columnNames = new ArrayList<>();
+                System.out.println("Colonnes de la table " + nomTab + " : ");
+                while (rsColumns.next()) {
+                    String columnName = rsColumns.getString("COLUMN_NAME");
+                    columnNames.add(columnName);
+                    System.out.println(columnName);
+                }
+                rsColumns.close();
+
+                Scanner col= new Scanner(System.in);
+                System.out.println("Quel colonne?");
+                String colonne=col.nextLine();
+
+                System.out.println("Quel ordre?");
+                System.out.println("1:DESC");
+                System.out.println("2: ASC");
+                int orderchoix=col.nextInt();
+                String ordre;
+                if (orderchoix==1){
+                    ordre="DESC";
+                }else{
+                    ordre="ASC";
+                }
+                query = "SELECT * FROM "+nomTab;
+                // Ajout de l'ordre de tri
+                query += " ORDER BY " + colonne + " " + ordre;
+
+            }
+            else {
+                System.out.println("-----------SANS RECHERCHE ET SANS TRIE-------------");
+                query = "SELECT * FROM "+nomTab;
+            }
+
+
+
+            // Exécution de la requête et récupération du résultat
+            ResultSet rs = stmt.executeQuery(query);
+
+
+            // Boucle pour parcourir le résultat et afficher les données sur la console
+            while (rs.next()) {
+                switch(nomTab){
+                    case "comptes":
+                        System.out.println("ID: " + rs.getInt("id"));
+                        System.out.println("Nom: " + rs.getString("last_name"));
+                        System.out.println("Prénom: " + rs.getString("first_name"));
+                        System.out.println("Email: " + rs.getString("email"));
+                        System.out.println("Mot de passe: " + rs.getString("password"));
+                        System.out.println("Solde: " + rs.getDouble("balance"));
+                        System.out.println("Adresse: " + rs.getString("adress"));
+                        System.out.println("--------------------------");
+                        break;
+
+                    case "livres":
+                        System.out.println("ID: " + rs.getInt("id"));
+                        System.out.println("Titre: " + rs.getString("title"));
+                        System.out.println("Auteur: " + rs.getString("author"));
+                        System.out.println("Editeur: "+ rs.getString("publisher"));
+                        System.out.println("Date de Parrution: " + rs.getString("publication_date"));
+                        System.out.println("ISBN: " + rs.getDouble("isbn"));
+                        System.out.println("Prix: " + rs.getDouble("price"));
+                        System.out.println("--------------------------");
+                        break;
+
+                    case "employes":
+                        System.out.println("ID: " + rs.getInt("id"));
+                        System.out.println("Nom et Prenom: " + rs.getString("name"));
+                        System.out.println("Age: " + rs.getString("age"));
+                        break;
+                    case "produits":
+                        System.out.println("ID: " + rs.getInt("id"));
+                        System.out.println("Nom: " + rs.getString("name"));
+                        System.out.println("Description: " + rs.getString("description"));
+                        System.out.println("Prix: " + rs.getDouble("price"));
+                        System.out.println("Stock: " + rs.getDouble("stock_quantity"));
+                        break;
+
+                    case "accessoires":
+                        System.out.println("ID: " + rs.getInt("id"));
+                        System.out.println("Nom: " + rs.getString("name"));
+                        System.out.println("Description: " + rs.getString("description"));
+                        System.out.println("Prix: " + rs.getDouble("price"));
+                        System.out.println("Stock: " + rs.getDouble("stock_quantity"));
+                        break;
+
+                    case "panier":
+                        System.out.println("ID: " + rs.getInt("id"));
+                        System.out.println("User_id: " + rs.getString("user_id"));
+                        System.out.println("Product_id: " + rs.getString("product_id"));
+                        System.out.println("Stock: " + rs.getDouble("quantity"));
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            // Fermeture des ressources
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     public void supprimeligne(){
         System.out.println("-----------------SUPPRESSION LIGNE---------------");
         Scanner saisie=new Scanner(System.in);
@@ -502,7 +699,6 @@ public class DatabaseModel {
         String nomTable= saisie.nextLine();
         supprimeLigne(nomTable);
     }
-
     public void supprimeLigne(String nomTable) {
         try (Connection conn = DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
             Scanner scanner = new Scanner(System.in);
@@ -538,6 +734,90 @@ public class DatabaseModel {
 
             // Fermeture des ressources
             ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void metAJourLigne(){
+        System.out.println("-----------------MAJ LIGNE---------------");
+        Scanner saisie=new Scanner(System.in);
+
+        try (Connection conn= DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
+            stmt = conn.createStatement();
+            ResultSet resultSet = stmt.executeQuery("SHOW TABLES");
+            while(resultSet.next()) {
+                System.out.println(resultSet.getString(1));
+            }
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Nom de tab:");
+        String nomTable= saisie.nextLine();
+        metAJourLigne(nomTable);
+    }
+    public void metAJourLigne(String nomTable) {
+        try (Connection conn = DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Entrez le nom à rechercher : ");
+            String nomRecherche = scanner.nextLine();
+
+            DatabaseMetaData metadata = conn.getMetaData();
+            ResultSet rsColumns = metadata.getColumns(null, null, nomTable, null);
+            List<String> columnNames = new ArrayList<>();
+            while (rsColumns.next()) {
+                String columnName = rsColumns.getString("COLUMN_NAME");
+                columnNames.add(columnName);
+            }
+            rsColumns.close();
+
+            // construction dynamique de la clause WHERE
+            StringBuilder whereClause = new StringBuilder();
+            for (String columnName : columnNames) {
+                whereClause.append(columnName).append(" LIKE '%").append(nomRecherche).append("%' OR ");
+            }
+            // suppression de la dernière occurrence de "OR" dans la clause WHERE
+            whereClause.delete(whereClause.length() - 4, whereClause.length());
+
+            // construction de la requête complète pour récupérer la ligne à mettre à jour
+            String querySelect = "SELECT * FROM " + nomTable + " WHERE " + whereClause.toString();
+
+            // exécution de la requête SELECT pour récupérer la ligne à mettre à jour
+            PreparedStatement psSelect = conn.prepareStatement(querySelect);
+            ResultSet rs = psSelect.executeQuery();
+
+            // récupération des informations de la ligne
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int numColumns = rsmd.getColumnCount();
+            rs.next();
+
+            // construction de la requête UPDATE pour mettre à jour les informations de la ligne
+            StringBuilder updateClause = new StringBuilder();
+            for (int i = 1; i <= numColumns; i++) {
+                String columnName = rsmd.getColumnName(i);
+                System.out.print("Entrez la nouvelle valeur pour " + columnName + " : ");
+                String nouvelleValeur = scanner.nextLine();
+                updateClause.append(columnName).append("='").append(nouvelleValeur).append("', ");
+            }
+            // suppression de la dernière occurrence de la virgule dans la clause UPDATE
+            updateClause.delete(updateClause.length() - 2, updateClause.length());
+
+            String queryUpdate = "UPDATE " + nomTable + " SET " + updateClause.toString() + " WHERE " + whereClause.toString();
+
+            // exécution de la requête UPDATE pour mettre à jour les informations de la ligne
+            PreparedStatement psUpdate = conn.prepareStatement(queryUpdate);
+            int rowsUpdated = psUpdate.executeUpdate();
+
+            // affichage du résultat
+            System.out.println(rowsUpdated + " ligne(s) ont été mises à jour.");
+
+            // fermeture des ressources
+            rs.close();
+            psSelect.close();
+            psUpdate.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
