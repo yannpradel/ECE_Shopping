@@ -21,7 +21,7 @@ public class Main extends Application{
 
         DatabaseModel databasemodel= new DatabaseModel();
         //Controller controller = new Controller(databasemodel,model, view);
-        databasemodel.run();
+        //databasemodel.run();
 
         System.out.println("dfsdf");
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("hello-view.fxml"));
