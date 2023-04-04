@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="ECE_Booking" />
         <module name="Test" />
+        <module name="demo" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
