@@ -665,14 +665,14 @@ public boolean Connexion(String username, String mdp) {
             ResultSet rs= stmt.executeQuery(query);
 
             while(rs.next()){
-                System.out.println("ID: " + rs.getInt("id"));
-                System.out.println("Nom: " + rs.getString("last_name"));
-                System.out.println("Prénom: " + rs.getString("first_name"));
-                System.out.println("Email: " + rs.getString("email"));
-                System.out.println("Mot de passe: " + rs.getString("password"));
-                System.out.println("Solde: " + rs.getDouble("balance"));
-                System.out.println("Adresse: " + rs.getString("adress"));
                 if(username== rs.getString("first_name")&&mdp== rs.getString("password")){
+                    System.out.println("ID: " + rs.getInt("id"));
+                    System.out.println("Nom: " + rs.getString("last_name"));
+                    System.out.println("Prénom: " + rs.getString("first_name"));
+                    System.out.println("Email: " + rs.getString("email"));
+                    System.out.println("Mot de passe: " + rs.getString("password"));
+                    System.out.println("Solde: " + rs.getDouble("balance"));
+                    System.out.println("Adresse: " + rs.getString("adress"));
                     this.identifiantS= rs.getString("first_name");
                     this.motdepasseS= rs.getString("password");
                     if(this.motdepasseS!=null&&this.identifiantS!=null){
