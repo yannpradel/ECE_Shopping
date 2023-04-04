@@ -3,13 +3,10 @@
 <!--
   Copyright (c) 2015, 2019, Gluon and/or its affiliates.
   All rights reserved. Use is subject to license terms.
-
   This file is available and licensed under the following license:
-
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions
   are met:
-
   - Redistributions of source code must retain the above copyright
     notice, this list of conditions and the following disclaimer.
   - Redistributions in binary form must reproduce the above copyright
@@ -18,7 +15,6 @@
   - Neither the name of Oracle Corporation nor the names of its
     contributors may be used to endorse or promote products derived
     from this software without specific prior written permission.
-
   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
   "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
   LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -94,30 +90,30 @@
             <Font size="18.0" />
           </font>
         </Label>
-            <GridPane prefHeight="1054.0" prefWidth="469.0">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-               <children>
-                  <Pane prefHeight="1054.0" prefWidth="450.0" style="-fx-background-color: #808080;">
-                     <children>
-                        <Text layoutX="65.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="E-Celect" wrappingWidth="336.4224166870117">
-                           <font>
-                              <Font name="STXingkai" size="96.0" />
-                           </font>
-                        </Text>
-                        <Text layoutX="61.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bijoux" wrappingWidth="140.13673400878906">
-                           <font>
-                              <Font name="Tw Cen MT Condensed" size="36.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </Pane>
-               </children>
-            </GridPane>
+        <GridPane prefHeight="1054.0" prefWidth="469.0">
+          <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+          </rowConstraints>
+          <children>
+            <Pane prefHeight="1054.0" prefWidth="450.0" style="-fx-background-color: #808080;">
+              <children>
+                <Text layoutX="65.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="E-Celect" wrappingWidth="336.4224166870117">
+                  <font>
+                    <Font name="STXingkai" size="96.0" />
+                  </font>
+                </Text>
+                <Text layoutX="61.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bijoux" wrappingWidth="140.13673400878906">
+                  <font>
+                    <Font name="Tw Cen MT Condensed" size="36.0" />
+                  </font>
+                </Text>
+              </children>
+            </Pane>
+          </children>
+        </GridPane>
       </children>
     </AnchorPane>
   </children>
