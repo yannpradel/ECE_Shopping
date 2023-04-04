@@ -114,22 +114,12 @@ public class DatabaseModel {
                     " PRIMARY KEY ( id ))";
             stmt.executeUpdate(createTable6Query);
             System.out.println("Table panier created successfully...");
-
-
+            if(stmt!=null) stmt.close();
+            if(conn!=null) conn.close();
         } catch(SQLException se) {
             se.printStackTrace();
         } catch(Exception e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if(stmt!=null) stmt.close();
-            } catch(SQLException se2) {
-            }
-            try {
-                if(conn!=null) conn.close();
-            } catch(SQLException se) {
-                se.printStackTrace();
-            }
         }
     }
 
@@ -160,15 +150,10 @@ public class DatabaseModel {
             String query = "INSERT INTO " + nomTab + " (" + colonnes + ") VALUES (" + valeurs + ")";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.executeUpdate();
+            if (rs != null) rs.close();
+            if (conn != null) conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (rs != null) rs.close();
-                if (conn != null) conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
     }
 
@@ -188,18 +173,6 @@ public class DatabaseModel {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        System.out.println("Nom de tab:");
-        String nomTable= saisie.nextLine();
-
-        //addSomething(nomTable);
-
-        //descriptiontab(nomTable,1);
-        descriptiontab(nomTable,0,0);
-        descriptiontab(nomTable,0,1);
-        descriptiontab(nomTable,1,0);
-        descriptiontab(nomTable,1,1);
-        //descriptiontab(nomTable,0);
     }
 
     public void descriptiontab(String nomTab, int avecrecherche) {
@@ -657,6 +630,19 @@ public class DatabaseModel {
 
         afficherTableau();
         //supprimeligne();
+
+        Scanner saisie=new Scanner(System.in);
+        System.out.println("Nom de tab:");
+        String nomTable= saisie.nextLine();
+
+        //addSomething(nomTable);
+
+        //descriptiontab(nomTable,1);
+        descriptiontab(nomTable,0,0);
+        descriptiontab(nomTable,0,1);
+        descriptiontab(nomTable,1,0);
+        descriptiontab(nomTable,1,1);
+        //descriptiontab(nomTable,0);
 
 
     }
