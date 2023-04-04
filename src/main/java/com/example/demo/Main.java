@@ -5,22 +5,32 @@ import com.example.demo.View.View;
 import com.example.demo.model.DatabaseModel;
 import com.example.demo.model.Model;
 
-public class Main{
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+
+public class Main extends Application{
+    @Override
+    public void start(Stage stage) throws IOException {
+        System.out.println("dfsdf");
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("hello-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 1360, 768);
+        stage.setTitle("Hello!");
+        stage.setScene(scene);
+        stage.show();
+    }
     public static void main(String[] args) {
+        launch();
         Model model = new Model();
         View view = new View();
 
         DatabaseModel databasemodel= new DatabaseModel();
-        view.displayMessage(model.getMessage());
-        view.displayMessage("Please enter a new message:");
-        String newMessage = view.getInput();
-        model.setMessage(newMessage);
-        view.displayMessage(model.getMessage());
-        databasemodel.run();
+
+
         Controller controller = new Controller(databasemodel,model, view);
-
-
-        databasemodel.afficherTableau();
-
+        controller.run();
     }
 }
