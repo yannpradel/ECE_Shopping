@@ -19,6 +19,17 @@ public class DatabaseModel {
 
     private Connection conn = null;
     private Statement stmt = null;
+    private String identifiantS=null;
+
+    public String getIdentifiantS() {
+        return identifiantS;
+    }
+
+    public String getMotdepasseS() {
+        return motdepasseS;
+    }
+
+    private String motdepasseS=null;
 
     public DatabaseModel() {
         try {
@@ -91,6 +102,8 @@ public class DatabaseModel {
                     " publisher VARCHAR(100), " +
                     " publication_date VARCHAR(12), " +
                     " isbn VARCHAR(20), " +
+                    " vendu INT(100), " +
+                    " pricereduction DECIMAL(10,2), " +
                     " price DECIMAL(10,2), " +
                     " PRIMARY KEY ( id ))";
             stmt.executeUpdate(createTable2Query);
@@ -617,8 +630,7 @@ public class DatabaseModel {
         }
     }
 
-    public void run()
-    {
+    public void run() {
         createDatabase();
        /* addSomething("comptes");
         addSomething("produits");
@@ -643,9 +655,46 @@ public class DatabaseModel {
         descriptiontab(nomTable,1,0);
         descriptiontab(nomTable,1,1);
         //descriptiontab(nomTable,0);
-
-
     }
 
+public boolean Connexion(String username, String mdp) {
+        try (Connection conn= DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
+            stmt = conn.createStatement();
+            String query;
+            query = "SELECT * FROM comptes";
+            ResultSet rs= stmt.executeQuery(query);
 
+            while(rs.next()){
+                System.out.println("ID: " + rs.getInt("id"));
+                System.out.println("Nom: " + rs.getString("last_name"));
+                System.out.println("Prénom: " + rs.getString("first_name"));
+                System.out.println("Email: " + rs.getString("email"));
+                System.out.println("Mot de passe: " + rs.getString("password"));
+                System.out.println("Solde: " + rs.getDouble("balance"));
+                System.out.println("Adresse: " + rs.getString("adress"));
+                if(username== rs.getString("first_name")&&mdp== rs.getString("password")){
+                    this.identifiantS= rs.getString("first_name");
+                    this.motdepasseS= rs.getString("password");
+                    if(this.motdepasseS!=null&&this.identifiantS!=null){
+                        System.out.println("Bienvenue "+this.identifiantS);
+                    }
+                    return true;
+                }
+                System.out.println("--------------------------");
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("error username or password");
+        return false;
+}
+    public void Deconnexion() {
+        System.out.println("Au revoir "+this.identifiantS);
+       this.identifiantS=null;
+       this.motdepasseS=null;
+       System.out.println("deconnection");
+    }
 }
