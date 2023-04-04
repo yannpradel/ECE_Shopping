@@ -184,6 +184,7 @@ public class DatabaseModel {
                 System.out.println(resultSet.getString(1));
             }
             stmt.close();
+            resultSet.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -433,7 +434,6 @@ public class DatabaseModel {
             // Exécution de la requête et récupération du résultat
             ResultSet rs = stmt.executeQuery(query);
 
-
             // Boucle pour parcourir le résultat et afficher les données sur la console
             while (rs.next()) {
                 switch(nomTab){
@@ -647,14 +647,18 @@ public class DatabaseModel {
     public void run()
     {
         createDatabase();
-        addSomething("comptes");
+       /* addSomething("comptes");
         addSomething("produits");
         addSomething("employes");
         addSomething("livres");
         addSomething("accessoires");
         addSomething("panier");
-        metAJourLigne();
-        //data.supprimeligne();
+        metAJourLigne();*/
+
+        afficherTableau();
+        //supprimeligne();
+
+
     }
 
 
