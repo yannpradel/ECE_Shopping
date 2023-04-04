@@ -11,12 +11,16 @@ public class Main{
         View view = new View();
 
         DatabaseModel databasemodel= new DatabaseModel();
-
-
+        view.displayMessage(model.getMessage());
+        view.displayMessage("Please enter a new message:");
+        String newMessage = view.getInput();
+        model.setMessage(newMessage);
+        view.displayMessage(model.getMessage());
+        databasemodel.run();
         Controller controller = new Controller(databasemodel,model, view);
-        controller.run();
 
 
+        databasemodel.afficherTableau();
 
     }
 }
