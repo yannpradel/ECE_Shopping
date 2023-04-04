@@ -114,22 +114,12 @@ public class DatabaseModel {
                     " PRIMARY KEY ( id ))";
             stmt.executeUpdate(createTable6Query);
             System.out.println("Table panier created successfully...");
-
-
+            if(stmt!=null) stmt.close();
+            if(conn!=null) conn.close();
         } catch(SQLException se) {
             se.printStackTrace();
         } catch(Exception e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if(stmt!=null) stmt.close();
-            } catch(SQLException se2) {
-            }
-            try {
-                if(conn!=null) conn.close();
-            } catch(SQLException se) {
-                se.printStackTrace();
-            }
         }
     }
 
@@ -160,15 +150,10 @@ public class DatabaseModel {
             String query = "INSERT INTO " + nomTab + " (" + colonnes + ") VALUES (" + valeurs + ")";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.executeUpdate();
+            if (rs != null) rs.close();
+            if (conn != null) conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (rs != null) rs.close();
-                if (conn != null) conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
     }
 
@@ -184,21 +169,10 @@ public class DatabaseModel {
                 System.out.println(resultSet.getString(1));
             }
             stmt.close();
+            resultSet.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        System.out.println("Nom de tab:");
-        String nomTable= saisie.nextLine();
-
-        //addSomething(nomTable);
-
-        //descriptiontab(nomTable,1);
-        descriptiontab(nomTable,0,0);
-        descriptiontab(nomTable,0,1);
-        descriptiontab(nomTable,1,0);
-        descriptiontab(nomTable,1,1);
-        //descriptiontab(nomTable,0);
     }
 
     public void descriptiontab(String nomTab, int avecrecherche) {
@@ -433,7 +407,6 @@ public class DatabaseModel {
             // Exécution de la requête et récupération du résultat
             ResultSet rs = stmt.executeQuery(query);
 
-
             // Boucle pour parcourir le résultat et afficher les données sur la console
             while (rs.next()) {
                 switch(nomTab){
@@ -647,14 +620,31 @@ public class DatabaseModel {
     public void run()
     {
         createDatabase();
-        addSomething("comptes");
+       /* addSomething("comptes");
         addSomething("produits");
         addSomething("employes");
         addSomething("livres");
         addSomething("accessoires");
         addSomething("panier");
-        metAJourLigne();
-        //data.supprimeligne();
+        metAJourLigne();*/
+
+        afficherTableau();
+        //supprimeligne();
+
+        Scanner saisie=new Scanner(System.in);
+        System.out.println("Nom de tab:");
+        String nomTable= saisie.nextLine();
+
+        //addSomething(nomTable);
+
+        //descriptiontab(nomTable,1);
+        descriptiontab(nomTable,0,0);
+        descriptiontab(nomTable,0,1);
+        descriptiontab(nomTable,1,0);
+        descriptiontab(nomTable,1,1);
+        //descriptiontab(nomTable,0);
+
+
     }
 
 

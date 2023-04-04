@@ -20,8 +20,8 @@ public class Main extends Application{
         View view = new View();
 
         DatabaseModel databasemodel= new DatabaseModel();
-        Controller controller = new Controller(databasemodel,model, view);
-        //controller.run();
+        //Controller controller = new Controller(databasemodel,model, view);
+        databasemodel.run();
 
         System.out.println("dfsdf");
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("hello-view.fxml"));

@@ -14,24 +14,5 @@ public class Controller {
         this.data = data;
     }
 
-    public void run() {
-        view.displayMessage(model.getMessage());
-        view.displayMessage("Please enter a new message:");
-        String newMessage = view.getInput();
-        model.setMessage(newMessage);
-        view.displayMessage(model.getMessage());
-        data.createDatabase();
-
-
-        data.afficherTableau();
-        data.supprimeligne();
-        data.metAJourLigne();
-
-        //data.addSomething("livres");
-
-
-    }
-
-
 }
 
