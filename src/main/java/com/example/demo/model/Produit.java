@@ -5,6 +5,8 @@ public class Produit {
     private double prix;
     private String description;
 
+    private String type;
+
     public Produit(String nom, double prix, String description) {
         this.nom = nom;
         this.prix = prix;
@@ -35,5 +37,9 @@ public class Produit {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getType() {
+        return type;
     }
 }
