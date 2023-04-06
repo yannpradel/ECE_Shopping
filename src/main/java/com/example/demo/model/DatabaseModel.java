@@ -522,7 +522,7 @@ public class DatabaseModel {
                     Statement stmt1=conn.createStatement();
                     stmt1.executeUpdate(update1);
                     String update;
-                    if(reduc==1){
+                    if(reduc==1||quantity>4){
                         int venteReduc= res.getInt("vendu_reduc")+quantity;
                         update = "UPDATE "+tableNom+" SET vendu_reduc = "+venteReduc+" WHERE id ="+productid;
                     }else{
