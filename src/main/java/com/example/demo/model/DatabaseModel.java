@@ -1,6 +1,6 @@
 package com.example.demo.model;
 import java.lang.Exception;
-
+import java.math.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -19,7 +19,19 @@ public class DatabaseModel {
 
     private Connection conn = null;
     private Statement stmt = null;
+
     private String identifiantS=null;
+    private String motdepasseS=null;
+
+    private int adminS=666;
+
+    public int getAdminS() {
+        return adminS;
+    }
+
+    public void setAdminS(int adminS) {
+        this.adminS = adminS;
+    }
 
     public String getIdentifiantS() {
         return identifiantS;
@@ -29,7 +41,7 @@ public class DatabaseModel {
         return motdepasseS;
     }
 
-    private String motdepasseS=null;
+
 
     public DatabaseModel() {
         try {
@@ -73,6 +85,7 @@ public class DatabaseModel {
                     " password VARCHAR(50), " +
                     " balance DECIMAL(10,2), " +
                     " adress VARCHAR(100)," +
+                    " admin INT, " +
                     " PRIMARY KEY ( id ))";
             stmt.executeUpdate(createTableQuery);
             System.out.println("Table comptes created successfully...");
@@ -81,19 +94,23 @@ public class DatabaseModel {
                     "(id INT not NULL AUTO_INCREMENT, " +
                     " name VARCHAR(100), " +
                     " description VARCHAR(255), " +
+                    " en_reduction INT, "+
                     " price DECIMAL(10,2), " +
+                    " price_reduc DECIMAL(10,2), " +
                     " stock_quantity INT, " +
+                    " venduTotal INT, " +
+                    " vendu_reduc INT, " +
                     " PRIMARY KEY ( id ))";
             stmt.executeUpdate(createTable3Query);
             System.out.println("Table produits created successfully...");
 
-            String createTable1Query = "CREATE TABLE employes " +
+            /*String createTable1Query = "CREATE TABLE employes " +
                     "(id INT not NULL AUTO_INCREMENT, " +
                     " name VARCHAR(255), " +
                     " age INT, " +
                     " PRIMARY KEY ( id ))";
             stmt.executeUpdate(createTable1Query);
-            System.out.println("Table employes created successfully...");
+            System.out.println("Table employes created successfully...");*/
 
             String createTable2Query = "CREATE TABLE livres " +
                     "(id INT not NULL AUTO_INCREMENT, " +
@@ -102,9 +119,13 @@ public class DatabaseModel {
                     " publisher VARCHAR(100), " +
                     " publication_date VARCHAR(12), " +
                     " isbn VARCHAR(20), " +
-                    " vendu INT(100), " +
-                    " pricereduction DECIMAL(10,2), " +
+                    " en_reduction INT, "+
                     " price DECIMAL(10,2), " +
+                    " price_reduc DECIMAL(10,2), " +
+                    " stock_quantity INT, " +
+                    " venduTotal INT, " +
+                    " vendu_reduc INT, " +
+                    " image VARCHAR(1000), " +
                     " PRIMARY KEY ( id ))";
             stmt.executeUpdate(createTable2Query);
             System.out.println("Table livres created successfully...");
@@ -113,20 +134,155 @@ public class DatabaseModel {
                     "(id INT not NULL AUTO_INCREMENT, " +
                     " name VARCHAR(100), " +
                     " description VARCHAR(255), " +
+                    " en_reduction INT, "+
                     " price DECIMAL(10,2), " +
+                    " price_reduc DECIMAL(10,2), " +
                     " stock_quantity INT, " +
+                    " venduTotal INT, " +
+                    " vendu_reduc INT, " +
+                    " image VARCHAR(1000), " +
                     " PRIMARY KEY ( id ))";
             stmt.executeUpdate(createTable4Query);
             System.out.println("Table accessoires created successfully...");
 
             String createTable6Query = "CREATE TABLE panier " +
                     "(id INT not NULL AUTO_INCREMENT, " +
-                    " user_id INT, " +
                     " product_id INT, " +
+                    " table_nom VARCHAR(50), " +
                     " quantity INT, " +
+                    " date_created DATETIME DEFAULT CURRENT_TIMESTAMP, "+
                     " PRIMARY KEY ( id ))";
             stmt.executeUpdate(createTable6Query);
             System.out.println("Table panier created successfully...");
+
+            String createTable7Query = "CREATE TABLE historique " +
+                    "(id INT not NULL AUTO_INCREMENT, " +
+                    " first_name VARCHAR(1000), " +
+                    " product_id INT, " +
+                    " table_nom VARCHAR(50), " +
+                    " quantity INT, " +
+                    " date_created DATETIME DEFAULT CURRENT_TIMESTAMP, " +
+                    " PRIMARY KEY ( id ))";
+            stmt.executeUpdate(createTable7Query);
+            System.out.println("Table historique client created successfully...");
+
+            //INITILISATION DES TABLEAUX
+            Statement stmt = conn.createStatement();
+            String query = "INSERT INTO comptes (last_name, first_name, email, password, balance, admin) VALUES "
+                    + "('Dupont', 'Jean', 'jean.dupont@mail.com', '123456', 1000.0,0),"
+                    + "('Martin', 'Lucie', 'lucie.martin@mail.com', 'abcdef', 2000.0,0),"
+                    + "('Garcia', 'Pedro', 'pedro.garcia@mail.com', 'ghijkl', 500.0,0),"
+                    + "('Doe', 'John', 'john.doe@mail.com', 'mnopqr', 3000.0,0),"
+                    + "('Smith', 'Alice', 'alice.smith@mail.com', 'stuvwx', 1500.0,0)";
+            stmt.executeUpdate(query);
+            query = "INSERT INTO accessoires (name, description, en_reduction, price, price_reduc, stock_quantity, venduTotal, vendu_reduc, image) VALUES "
+                    + "('Souris sans fil', 'Souris optique sans fil avec 5 boutons', 0, 29.99, 0, 50, 0, 0, 'https://example.com/souris.jpg'),"
+                    + "('Clavier filaire', 'Clavier filaire avec 105 touches', 0, 19.99, 0, 30, 0, 0, 'https://example.com/clavier.jpg'),"
+                    + "('Casque audio', 'Casque audio stéréo avec micro', 0, 49.99, 0, 20, 0, 0, 'https://example.com/casque.jpg'),"
+                    + "('Webcam HD', 'Webcam HD 720p avec microphone intégré', 0, 39.99, 0, 15, 0, 0, 'https://example.com/webcam.jpg'),"
+                    + "('Tapis de souris', 'Tapis de souris avec surface lisse', 0, 9.99, 0, 100, 0, 0, 'https://example.com/tapis.jpg')";
+            stmt.executeUpdate(query);
+
+            String insertQuery = "INSERT INTO produits (name, description, en_reduction, price, price_reduc, stock_quantity, venduTotal, vendu_reduc) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement pstmt = conn.prepareStatement(insertQuery);
+            // Étape 3 : Ajout de 5 entrées uniques
+            pstmt.setString(1, "Produit 1");
+            pstmt.setString(2, "Description du produit 1");
+            pstmt.setInt(3, 0);
+            pstmt.setBigDecimal(4, new BigDecimal("10.99"));
+            pstmt.setBigDecimal(5, new BigDecimal("0"));
+            pstmt.setInt(6, 50);
+            pstmt.setInt(7, 0);
+            pstmt.setInt(8, 0);
+            pstmt.executeUpdate();
+
+            pstmt.setString(1, "Produit 2");
+            pstmt.setString(2, "Description du produit 2");
+            pstmt.setInt(3, 1);
+            pstmt.setBigDecimal(4, new BigDecimal("20.99"));
+            pstmt.setBigDecimal(5, new BigDecimal("15.99"));
+            pstmt.setInt(6, 30);
+            pstmt.setInt(7, 10);
+            pstmt.setInt(8, 5);
+            pstmt.executeUpdate();
+
+            pstmt.setString(1, "Produit 3");
+            pstmt.setString(2, "Description du produit 3");
+            pstmt.setInt(3, 1);
+            pstmt.setBigDecimal(4, new BigDecimal("15.99"));
+            pstmt.setBigDecimal(5, new BigDecimal("12.99"));
+            pstmt.setInt(6, 20);
+            pstmt.setInt(7, 5);
+            pstmt.setInt(8, 2);
+            pstmt.executeUpdate();
+
+            pstmt.setString(1, "Produit 4");
+            pstmt.setString(2, "Description du produit 4");
+            pstmt.setInt(3, 0);
+            pstmt.setBigDecimal(4, new BigDecimal("5.99"));
+            pstmt.setBigDecimal(5, new BigDecimal("0"));
+            pstmt.setInt(6, 100);
+            pstmt.setInt(7, 20);
+            pstmt.setInt(8, 0);
+            pstmt.executeUpdate();
+
+            pstmt.setString(1, "Produit 5");
+            pstmt.setString(2, "Description du produit 5");
+            pstmt.setInt(3, 1);
+            pstmt.setBigDecimal(4, new BigDecimal("25.99"));
+            pstmt.setBigDecimal(5, new BigDecimal("18.99"));
+            pstmt.setInt(6, 10);
+            pstmt.setInt(7, 2);
+            pstmt.setInt(8, 1);
+            pstmt.executeUpdate();
+
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO livres (title, author, publisher, publication_date, isbn, en_reduction, price, price_reduc, stock_quantity, venduTotal, vendu_reduc, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+            // Premier livre
+            ps.setString(1, "Le Seigneur des anneaux : La Communauté de l'anneau");
+            ps.setString(2, "J.R.R. Tolkien");
+            ps.setString(3, "Christian Bourgois éditeur");
+            ps.setString(4, "01/09/2003");
+            ps.setString(5, "978-2266121018");
+            ps.setInt(6, 1);
+            ps.setBigDecimal(7, new BigDecimal("12.99"));
+            ps.setBigDecimal(8, new BigDecimal("10.99"));
+            ps.setInt(9, 50);
+            ps.setInt(10, 0);
+            ps.setInt(11, 0);
+            ps.setString(12, "https://images-na.ssl-images-amazon.com/images/I/51bjgPhyqML._SX323_BO1,204,203,200_.jpg");
+            ps.executeUpdate();
+
+            // Deuxième livre
+            ps.setString(1, "Harry Potter à l'école des sorciers");
+            ps.setString(2, "J.K. Rowling");
+            ps.setString(3, "Gallimard Jeunesse");
+            ps.setString(4, "12/10/1998");
+            ps.setString(5, "2070543025");
+            ps.setInt(6, 1);
+            ps.setBigDecimal(7, new BigDecimal("8.50"));
+            ps.setBigDecimal(8, new BigDecimal("7.99"));
+            ps.setInt(9, 20);
+            ps.setInt(10, 0);
+            ps.setInt(11, 0);
+            ps.setString(12, "https://images-na.ssl-images-amazon.com/images/I/51A5LXdWYAL._SX305_BO1,204,203,200_.jpg");
+            ps.executeUpdate();
+
+            // Troisième livre
+            ps.setString(1, "1984");
+            ps.setString(2, "George Orwell");
+            ps.setString(3, "Gallimard");
+            ps.setString(4, "01/01/1950");
+            ps.setString(5, "2070368229");
+            ps.setInt(6, 0);
+            ps.setBigDecimal(7, new BigDecimal("7.20"));
+            ps.setBigDecimal(8, new BigDecimal("0.00"));
+            ps.setInt(9, 10);
+            ps.setInt(10, 0);
+            ps.setInt(11, 0);
+            ps.setString(12, "https://images-na.ssl-images-amazon.com/images/I/51M8+7SxSvL._SX305_BO1,204,203,200_.jpg");
+            ps.executeUpdate();
+
             if(stmt!=null) stmt.close();
             if(conn!=null) conn.close();
         } catch(SQLException se) {
@@ -170,6 +326,202 @@ public class DatabaseModel {
         }
     }
 
+    public void effacePanier() {
+        try (Connection conn = DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("DELETE FROM panier");
+            System.out.println("Panier cleared successfully");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public void addPanier(){
+
+
+        Scanner scan=new Scanner(System.in);
+
+
+        afficherTableau();
+        System.out.print("Entrez le nom de la table : ");
+        String tableNom = scan.nextLine();
+
+        descriptiontab(tableNom,0);
+        System.out.print("Entrez l'ID du produit : ");
+        int productId = scan.nextInt();
+        scan.nextLine(); // pour vider le tampon
+
+        try (Connection conn= DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
+            stmt = conn.createStatement();
+            String query;
+            query = "SELECT * FROM "+tableNom+" WHERE id="+productId;
+            ResultSet rs= stmt.executeQuery(query);
+
+            while(rs.next()){
+                System.out.println("ID: " + rs.getInt("id"));
+                System.out.println("Quantity: " + rs.getInt("stock_quantity"));
+                System.out.println("--------------------------");
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.print("Entrez la quantité : ");
+        int quantity = scan.nextInt();
+
+        addPanier(productId, tableNom, quantity);
+    }
+    public void addPanier(int productId, String tableNom, int quantity){
+        try (Connection conn = DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
+            String sql = "INSERT INTO panier (product_id, table_nom, quantity) VALUES (?, ?, ?)";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, productId);
+            pstmt.setString(2, tableNom);
+            pstmt.setInt(3, quantity);
+            int rowsInserted = pstmt.executeUpdate();
+            if (rowsInserted > 0) {
+                System.out.println("L'article a été ajouté au panier avec succès.");
+            }
+            pstmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public void afficherPanier(){
+       String query = "SELECT * FROM panier";
+
+        try (Connection conn= DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
+            stmt = conn.createStatement();
+
+            ResultSet rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String tableNom = rs.getString("table_nom");
+                int quantity = rs.getInt("quantity");
+                int productid = rs.getInt("product_id");
+                Timestamp date = rs.getTimestamp("date_created");
+                System.out.println("Panier item #" + id + ":");
+                System.out.println("  Product: " + productid);
+                System.out.println("  Table name: " + tableNom);
+                System.out.println("  Quantity: " + quantity);
+                System.out.println("  Date: " + date);
+
+                Statement stmtlia = conn.createStatement();
+                String querylia="SELECT * FROM "+tableNom+" WHERE id="+productid;
+                ResultSet rslia = stmtlia.executeQuery(querylia);
+
+                ResultSetMetaData metadata = rslia.getMetaData();
+                int columnCount = metadata.getColumnCount();
+                String[] columnNames = new String[columnCount];
+                for (int i = 0; i < columnCount; i++) {
+                    columnNames[i] = metadata.getColumnName(i + 1);
+                }
+                // Boucle pour parcourir le résultat et afficher les données sur la console
+                while (rslia.next()) {
+                    for (String columnName : columnNames) {
+                        Object columnValue = rslia.getObject(columnName);
+                        System.out.println("  "+columnName + ": " + columnValue);
+                    }
+                }
+
+
+                System.out.println("--------------------------");
+            }
+
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+    }
+
+    public void afficherHisto(){
+        System.out.println("--------------------------afficherHisto-----------------------");
+        String query = "SELECT * FROM historique";
+
+        try (Connection conn= DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
+            stmt = conn.createStatement();
+
+            ResultSet rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String first_name=rs.getString("first_name");
+                String tableNom = rs.getString("table_nom");
+                int quantity = rs.getInt("quantity");
+                int productid = rs.getInt("product_id");
+                Timestamp date = rs.getTimestamp("date_created");
+                System.out.println("Panier item #" + id + ":");
+                System.out.println("  first_name: " +first_name);
+                System.out.println("  Product: " + productid);
+                System.out.println("  Table name: " + tableNom);
+                System.out.println("  Quantity: " + quantity);
+                System.out.println("  Date: " + date);
+
+                Statement stmtlia = conn.createStatement();
+                String querylia="SELECT * FROM "+tableNom+" WHERE id="+productid;
+                ResultSet rslia = stmtlia.executeQuery(querylia);
+
+                ResultSetMetaData metadata = rslia.getMetaData();
+                int columnCount = metadata.getColumnCount();
+                String[] columnNames = new String[columnCount];
+                for (int i = 0; i < columnCount; i++) {
+                    columnNames[i] = metadata.getColumnName(i + 1);
+                }
+                // Boucle pour parcourir le résultat et afficher les données sur la console
+                while (rslia.next()) {
+                    for (String columnName : columnNames) {
+                        Object columnValue = rslia.getObject(columnName);
+                        System.out.println("  "+columnName + ": " + columnValue);
+                    }
+                }
+
+
+                System.out.println("--------------------------");
+            }
+
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    public void ConfirmationAchat() {
+        if(this.identifiantS==null){
+            Connexion("Jean","123456");
+        }
+        String firstname=this.identifiantS;
+        try (Connection conn= DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
+            // Création de la commande SQL pour copier les données
+            stmt = conn.createStatement();
+            String appel="SELECT * FROM panier";
+
+            ResultSet rs1 = stmt.executeQuery(appel);
+            while (rs1.next()) {
+                int id = rs1.getInt("id");
+                String tableNom = rs1.getString("table_nom");
+                int quantity = rs1.getInt("quantity");
+                int productid = rs1.getInt("product_id");
+                Timestamp date = rs1.getTimestamp("date_created");
+                String query = "INSERT INTO historique (first_name, product_id, table_nom, quantity) VALUES "
+                        + "('"+firstname+"',"+productid+", '"+tableNom+"', "+quantity+")";
+                Statement stmt2=conn.createStatement();
+                stmt2.executeUpdate(query);
+            }
+            System.out.println("voir historique");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     public void afficherTableau(){
@@ -229,62 +581,20 @@ public class DatabaseModel {
             // Exécution de la requête et récupération du résultat
             ResultSet rs = stmt.executeQuery(query);
 
+            ResultSetMetaData metadata = rs.getMetaData();
+            int columnCount = metadata.getColumnCount();
+            String[] columnNames = new String[columnCount];
+            for (int i = 0; i < columnCount; i++) {
+                columnNames[i] = metadata.getColumnName(i + 1);
+            }
 
             // Boucle pour parcourir le résultat et afficher les données sur la console
             while (rs.next()) {
-                switch(nomTab){
-                     case "comptes":
-                         System.out.println("ID: " + rs.getInt("id"));
-                         System.out.println("Nom: " + rs.getString("last_name"));
-                         System.out.println("Prénom: " + rs.getString("first_name"));
-                         System.out.println("Email: " + rs.getString("email"));
-                         System.out.println("Mot de passe: " + rs.getString("password"));
-                         System.out.println("Solde: " + rs.getDouble("balance"));
-                         System.out.println("Adresse: " + rs.getString("adress"));
-                         System.out.println("--------------------------");
-                    break;
-
-                    case "livres":
-                        System.out.println("ID: " + rs.getInt("id"));
-                        System.out.println("Titre: " + rs.getString("title"));
-                        System.out.println("Auteur: " + rs.getString("author"));
-                        System.out.println("Editeur: "+ rs.getString("publisher"));
-                        System.out.println("Date de Parrution: " + rs.getString("publication_date"));
-                        System.out.println("ISBN: " + rs.getDouble("isbn"));
-                        System.out.println("Prix: " + rs.getDouble("price"));
-                        System.out.println("--------------------------");
-                        break;
-
-                    case "employes":
-                        System.out.println("ID: " + rs.getInt("id"));
-                        System.out.println("Nom et Prenom: " + rs.getString("name"));
-                        System.out.println("Age: " + rs.getString("age"));
-                        break;
-                    case "produits":
-                        System.out.println("ID: " + rs.getInt("id"));
-                        System.out.println("Nom: " + rs.getString("name"));
-                        System.out.println("Description: " + rs.getString("description"));
-                        System.out.println("Prix: " + rs.getDouble("price"));
-                        System.out.println("Stock: " + rs.getDouble("stock_quantity"));
-                        break;
-
-                    case "accessoires":
-                        System.out.println("ID: " + rs.getInt("id"));
-                        System.out.println("Nom: " + rs.getString("name"));
-                        System.out.println("Description: " + rs.getString("description"));
-                        System.out.println("Prix: " + rs.getDouble("price"));
-                        System.out.println("Stock: " + rs.getDouble("stock_quantity"));
-                        break;
-
-                    case "panier":
-                        System.out.println("ID: " + rs.getInt("id"));
-                        System.out.println("User_id: " + rs.getString("user_id"));
-                        System.out.println("Product_id: " + rs.getString("product_id"));
-                        System.out.println("Stock: " + rs.getDouble("quantity"));
-                        break;
-                default:
-                    break;
+                for (String columnName : columnNames) {
+                    Object columnValue = rs.getObject(columnName);
+                    System.out.println(columnName + ": " + columnValue);
                 }
+                System.out.println("--------------------------");
             }
 
             // Fermeture des ressources
@@ -420,61 +730,20 @@ public class DatabaseModel {
             // Exécution de la requête et récupération du résultat
             ResultSet rs = stmt.executeQuery(query);
 
+            ResultSetMetaData metadata = rs.getMetaData();
+            int columnCount = metadata.getColumnCount();
+            String[] columnNames = new String[columnCount];
+            for (int i = 0; i < columnCount; i++) {
+                columnNames[i] = metadata.getColumnName(i + 1);
+            }
+
             // Boucle pour parcourir le résultat et afficher les données sur la console
             while (rs.next()) {
-                switch(nomTab){
-                    case "comptes":
-                        System.out.println("ID: " + rs.getInt("id"));
-                        System.out.println("Nom: " + rs.getString("last_name"));
-                        System.out.println("Prénom: " + rs.getString("first_name"));
-                        System.out.println("Email: " + rs.getString("email"));
-                        System.out.println("Mot de passe: " + rs.getString("password"));
-                        System.out.println("Solde: " + rs.getDouble("balance"));
-                        System.out.println("Adresse: " + rs.getString("adress"));
-                        System.out.println("--------------------------");
-                        break;
-
-                    case "livres":
-                        System.out.println("ID: " + rs.getInt("id"));
-                        System.out.println("Titre: " + rs.getString("title"));
-                        System.out.println("Auteur: " + rs.getString("author"));
-                        System.out.println("Editeur: "+ rs.getString("publisher"));
-                        System.out.println("Date de Parrution: " + rs.getString("publication_date"));
-                        System.out.println("ISBN: " + rs.getDouble("isbn"));
-                        System.out.println("Prix: " + rs.getDouble("price"));
-                        System.out.println("--------------------------");
-                        break;
-
-                    case "employes":
-                        System.out.println("ID: " + rs.getInt("id"));
-                        System.out.println("Nom et Prenom: " + rs.getString("name"));
-                        System.out.println("Age: " + rs.getString("age"));
-                        break;
-                    case "produits":
-                        System.out.println("ID: " + rs.getInt("id"));
-                        System.out.println("Nom: " + rs.getString("name"));
-                        System.out.println("Description: " + rs.getString("description"));
-                        System.out.println("Prix: " + rs.getDouble("price"));
-                        System.out.println("Stock: " + rs.getDouble("stock_quantity"));
-                        break;
-
-                    case "accessoires":
-                        System.out.println("ID: " + rs.getInt("id"));
-                        System.out.println("Nom: " + rs.getString("name"));
-                        System.out.println("Description: " + rs.getString("description"));
-                        System.out.println("Prix: " + rs.getDouble("price"));
-                        System.out.println("Stock: " + rs.getDouble("stock_quantity"));
-                        break;
-
-                    case "panier":
-                        System.out.println("ID: " + rs.getInt("id"));
-                        System.out.println("User_id: " + rs.getString("user_id"));
-                        System.out.println("Product_id: " + rs.getString("product_id"));
-                        System.out.println("Stock: " + rs.getDouble("quantity"));
-                        break;
-                    default:
-                        break;
+                for (String columnName : columnNames) {
+                    Object columnValue = rs.getObject(columnName);
+                    System.out.println(columnName + ": " + columnValue);
                 }
+                System.out.println("--------------------------");
             }
 
             // Fermeture des ressources
@@ -640,12 +909,22 @@ public class DatabaseModel {
         addSomething("panier");
         metAJourLigne();*/
 
+        //addPanier();
+        //addPanier();
+        afficherPanier();
+        ConfirmationAchat();
+        afficherHisto();
+        Deconnexion();
+
+
+
         afficherTableau();
         //supprimeligne();
 
         Scanner saisie=new Scanner(System.in);
         System.out.println("Nom de tab:");
         String nomTable= saisie.nextLine();
+
 
         //addSomething(nomTable);
 
@@ -657,15 +936,14 @@ public class DatabaseModel {
         //descriptiontab(nomTable,0);
     }
 
-public boolean Connexion(String username, String mdp) {
+    public boolean Connexion(String username, String mdp) {
         try (Connection conn= DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
             stmt = conn.createStatement();
-            String query;
-            query = "SELECT * FROM comptes";
+            String query = "SELECT * FROM comptes";
             ResultSet rs= stmt.executeQuery(query);
 
             while(rs.next()){
-                if(username== rs.getString("first_name")&&mdp== rs.getString("password")){
+                if(username.equals(rs.getString("first_name"))&&mdp.equals(rs.getString("password"))){
                     System.out.println("ID: " + rs.getInt("id"));
                     System.out.println("Nom: " + rs.getString("last_name"));
                     System.out.println("Prénom: " + rs.getString("first_name"));
@@ -673,8 +951,10 @@ public boolean Connexion(String username, String mdp) {
                     System.out.println("Mot de passe: " + rs.getString("password"));
                     System.out.println("Solde: " + rs.getDouble("balance"));
                     System.out.println("Adresse: " + rs.getString("adress"));
+                    System.out.println("Admin: " + rs.getString("admin"));
                     this.identifiantS= rs.getString("first_name");
                     this.motdepasseS= rs.getString("password");
+                    this.adminS=rs.getInt("admin");
                     if(this.motdepasseS!=null&&this.identifiantS!=null){
                         System.out.println("Bienvenue "+this.identifiantS);
                     }
@@ -692,9 +972,15 @@ public boolean Connexion(String username, String mdp) {
         return false;
 }
     public void Deconnexion() {
+        effacePanier();
         System.out.println("Au revoir "+this.identifiantS);
        this.identifiantS=null;
        this.motdepasseS=null;
+       this.adminS=666;
        System.out.println("deconnection");
     }
+
+
+
+
 }
