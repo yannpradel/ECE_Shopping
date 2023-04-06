@@ -481,7 +481,6 @@ public class DatabaseModel {
                     }
                 }
 
-
                 System.out.println("--------------------------");
             }
 
@@ -504,6 +503,47 @@ public class DatabaseModel {
             stmt = conn.createStatement();
             String appel="SELECT * FROM panier";
 
+            ResultSet rs = stmt.executeQuery(appel);
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String tableNom = rs.getString("table_nom");
+                int quantity = rs.getInt("quantity");
+                int productid = rs.getInt("product_id");
+                Timestamp date = rs.getTimestamp("date_created");
+                Statement stmt2=conn.createStatement();
+                String appel2="SELECT * FROM "+tableNom+" WHERE id="+productid;
+                ResultSet res= stmt2.executeQuery(appel2);
+                while (res.next()){
+                    int stock=res.getInt("stock_quantity");
+                    int reduc=res.getInt("en_reduction");
+                    int newstock=stock-quantity;
+                    String update1;
+                        update1 = "UPDATE "+tableNom+" SET stock_quantity = "+newstock+" WHERE id ="+productid;
+                    Statement stmt1=conn.createStatement();
+                    stmt1.executeUpdate(update1);
+                    String update;
+                    if(reduc==1){
+                        int venteReduc= res.getInt("vendu_reduc")+quantity;
+                        update = "UPDATE "+tableNom+" SET vendu_reduc = "+venteReduc+" WHERE id ="+productid;
+                    }else{
+                        int ventetot= res.getInt("venduTotal")+quantity;
+                        update = "UPDATE "+tableNom+" SET venduTotal = "+ventetot+" WHERE id ="+productid;
+                    }
+                    Statement stmtU=conn.createStatement();
+                    stmtU.executeUpdate(update);
+                }
+            }
+            System.out.println("voir stock");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try (Connection conn= DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
+            // Création de la commande SQL pour copier les données
+            stmt = conn.createStatement();
+            String appel="SELECT * FROM panier";
+
             ResultSet rs1 = stmt.executeQuery(appel);
             while (rs1.next()) {
                 int id = rs1.getInt("id");
@@ -521,6 +561,8 @@ public class DatabaseModel {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        effacePanier();
     }
 
 
