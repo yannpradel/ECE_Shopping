@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import javafx.scene.image.Image;
+
 public class Bijou {
     private int id;
     private String name;
@@ -24,6 +26,14 @@ public class Bijou {
         this.vendu_sans_reduc = vendu_sans_reduc;
         this.vendu_reduc = vendu_reduc;
         this.image = image;
+    }
+
+    public Bijou(String name, double price, String description, String image) {
+        this.name=name;
+        this.price=price;
+        this.description=description;
+        this.image=image;
+
     }
 
     public int getId() {

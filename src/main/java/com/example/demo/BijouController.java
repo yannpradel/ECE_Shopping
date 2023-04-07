@@ -27,9 +27,9 @@ public class BijouController implements Initializable {
         File file = new File("a.jpg");
         Image image = new Image(file.toURI().toString());
         Bijou[] objets = {
-                new Bijou("Collier", 34.0, "C'est trop cool le collier !",image),
-                new Bijou("Bracelet", 34.0, "Nickel mon gars !",image),
-                new Bijou("Boucle d'oreilles", 34.0, "Pas mal !",image)
+                new Bijou("Collier", 34.0, "C'est trop cool le collier !","oui"),
+                new Bijou("Bracelet", 34.0, "Nickel mon gars !","oui"),
+                new Bijou("Boucle d'oreilles", 34.0, "Pas mal !","oui")
                 //new Bijou("Collier", 34.0, "C'est trop cool le collier !",new Image("https://cdn.pixabay.com/photo/2023/03/22/20/16/muffin-7870491_960_720.jpg")),
                // new Bijou("Collier", 34.0, "C'est trop cool le collier !",new Image("https://cdn.pixabay.com/photo/2023/03/22/20/16/muffin-7870491_960_720.jpg")),
 
@@ -44,10 +44,10 @@ public class BijouController implements Initializable {
             imageView.setPreserveRatio(true);
 
             // Créez un Label pour le nom de l'objet
-            Label nomLabel = new Label(objet.getBijouName());
+            Label nomLabel = new Label(objet.getName());
 
             // Créez un Label pour la description de l'objet
-            Label descriptionLabel = new Label(objet.getBijouDescription());
+            Label descriptionLabel = new Label(objet.getDescription());
             descriptionLabel.setWrapText(true);
 
             // Ajoutez les éléments à la GridPane
