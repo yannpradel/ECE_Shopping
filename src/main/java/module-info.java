@@ -12,4 +12,6 @@ module example {
     exports com.example.demo.Controller;
     opens com.example.demo.Controller to javafx.fxml;
 
+    opens com.example.demo.model to javafx.base;
+
 }
