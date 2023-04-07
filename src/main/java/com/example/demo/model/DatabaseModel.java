@@ -32,6 +32,13 @@ public class DatabaseModel {
 
     List<Compte> comptes = new ArrayList<>();
 
+
+
+    List<Accessoire> accessoires = new ArrayList<>();
+
+    List<Bijou> bijoux = new ArrayList<>();
+    List<Livre> livres= new ArrayList<>();
+
     public List<Compte> getComptes() {
         return comptes;
     }
@@ -47,12 +54,6 @@ public class DatabaseModel {
     public List<Livre> getLivres() {
         return livres;
     }
-
-    List<Accessoire> accessoires = new ArrayList<>();
-
-    List<Bijou> bijoux = new ArrayList<>();
-    List<Livre> livres= new ArrayList<>();
-
     public int getAdminS() {
         return adminS;
     }
