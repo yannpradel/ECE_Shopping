@@ -66,5 +66,4 @@ public class Bijou {
         return image;
     }
 
-
 }

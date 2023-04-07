@@ -102,7 +102,9 @@ public class DatabaseModel {
             stmt.executeUpdate(createTableQuery);
             System.out.println("Table comptes created successfully...");
 
+
             String createTable3Query = "CREATE TABLE bijoux " +
+
                     "(id INT not NULL AUTO_INCREMENT, " +
                     " name VARCHAR(100), " +
                     " description VARCHAR(255), " +
@@ -115,6 +117,7 @@ public class DatabaseModel {
                     " image VARCHAR(1000), " +
                     " PRIMARY KEY ( id ))";
             stmt.executeUpdate(createTable3Query);
+
             System.out.println("Table bijoux created successfully...");
 
             /*String createTable1Query = "CREATE TABLE man " +
@@ -196,11 +199,13 @@ public class DatabaseModel {
                     + "('Tapis de souris', 'Tapis de souris avec surface lisse', 0, 9.99, 0, 100, 0, 0, 'https://example.com/tapis.jpg')";
             stmt.executeUpdate(query);
 
+
             String insertQuery = "INSERT INTO bijoux (name, description, en_reduction, price, price_reduc, stock_quantity, vendu_sans_reduc, vendu_reduc, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
             PreparedStatement pstmt = conn.prepareStatement(insertQuery);
             // Étape 3 : Ajout de 5 entrées uniques
-            pstmt.setString(1, "Produit 1");
-            pstmt.setString(2, "Description du produit 1");
+            pstmt.setString(1, "bijou 1");
+            pstmt.setString(2, "Description du bijou 1");
             pstmt.setInt(3, 0);
             pstmt.setBigDecimal(4, new BigDecimal("10.99"));
             pstmt.setBigDecimal(5, new BigDecimal("0"));
@@ -210,8 +215,8 @@ public class DatabaseModel {
             pstmt.setString(9,"https://example.com/tapis.jpg");
             pstmt.executeUpdate();
 
-            pstmt.setString(1, "Produit 2");
-            pstmt.setString(2, "Description du produit 2");
+            pstmt.setString(1, "bijou 2");
+            pstmt.setString(2, "Description du bijou 2");
             pstmt.setInt(3, 1);
             pstmt.setBigDecimal(4, new BigDecimal("20.99"));
             pstmt.setBigDecimal(5, new BigDecimal("15.99"));
@@ -221,8 +226,8 @@ public class DatabaseModel {
             pstmt.setString(9,"https://example.com/tapis.jpg");
             pstmt.executeUpdate();
 
-            pstmt.setString(1, "Produit 3");
-            pstmt.setString(2, "Description du produit 3");
+            pstmt.setString(1, "bijou 3");
+            pstmt.setString(2, "Description du bijou 3");
             pstmt.setInt(3, 1);
             pstmt.setBigDecimal(4, new BigDecimal("15.99"));
             pstmt.setBigDecimal(5, new BigDecimal("12.99"));
@@ -232,8 +237,8 @@ public class DatabaseModel {
             pstmt.setString(9,"https://example.com/tapis.jpg");
             pstmt.executeUpdate();
 
-            pstmt.setString(1, "Produit 4");
-            pstmt.setString(2, "Description du produit 4");
+            pstmt.setString(1, "bijou 4");
+            pstmt.setString(2, "Description du bijou 4");
             pstmt.setInt(3, 0);
             pstmt.setBigDecimal(4, new BigDecimal("5.99"));
             pstmt.setBigDecimal(5, new BigDecimal("0"));
@@ -243,8 +248,8 @@ public class DatabaseModel {
             pstmt.setString(9,"https://example.com/tapis.jpg");
             pstmt.executeUpdate();
 
-            pstmt.setString(1, "Produit 5");
-            pstmt.setString(2, "Description du produit 5");
+            pstmt.setString(1, "bijou 5");
+            pstmt.setString(2, "Description du bijou 5");
             pstmt.setInt(3, 1);
             pstmt.setBigDecimal(4, new BigDecimal("25.99"));
             pstmt.setBigDecimal(5, new BigDecimal("18.99"));
@@ -364,7 +369,7 @@ public class DatabaseModel {
         String tableNom = scan.nextLine();
 
         descriptiontab(tableNom,0);
-        System.out.print("Entrez l'ID du produit : ");
+        System.out.print("Entrez l'ID du bijou : ");
         int productId = scan.nextInt();
         scan.nextLine(); // pour vider le tampon
 
@@ -630,7 +635,7 @@ public class DatabaseModel {
                 // construction de la requête complète
                 query = "SELECT * FROM " + nomTab + " WHERE " + whereClause.toString();
 
-                // Création de la requête SQL pour récupérer les produits avec le nom saisi
+                // Création de la requête SQL pour récupérer les bijous avec le nom saisi
                 //query = "SELECT * FROM "+nomTab+" WHERE * LIKE '%" + nomRecherche + "%'";
 
             }else {
@@ -1192,7 +1197,12 @@ public class DatabaseModel {
         createDatabase();
         graphvente("livres");
        /* addSomething("comptes");
+
+        addSomething("bijous");
+        addSomething("employes");
+
         addSomething("bijoux");
+
         addSomething("livres");
         addSomething("accessoires");
         addSomething("panier");
