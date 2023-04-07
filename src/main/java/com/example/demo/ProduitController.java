@@ -43,7 +43,7 @@ public class ProduitController implements Initializable {
     }
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Produit testProduit = new Produit("Collier",34.0,"C'est trop cool le collier !");
+        Produit testProduit = new Produit("Collier",34.0,"C'est trop cool le collier !","bijou");
         // Récupérer la liste de tous les produits depuis la base de données ou autre source de données
         List<Produit> allProducts = new ArrayList<>();
 

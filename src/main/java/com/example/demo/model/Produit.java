@@ -7,10 +7,11 @@ public class Produit {
 
     private String type;
 
-    public Produit(String nom, double prix, String description) {
+    public Produit(String nom, double prix, String description, String type) {
         this.nom = nom;
         this.prix = prix;
         this.description = description;
+        this.type = type;
     }
 
     // Getters et setters
