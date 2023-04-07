@@ -31,6 +31,23 @@ public class DatabaseModel {
     private int adminS=666;
 
     List<Compte> comptes = new ArrayList<>();
+
+    public List<Compte> getComptes() {
+        return comptes;
+    }
+
+    public List<Accessoire> getAccessoires() {
+        return accessoires;
+    }
+
+    public List<Bijou> getBijoux() {
+        return bijoux;
+    }
+
+    public List<Livre> getLivres() {
+        return livres;
+    }
+
     List<Accessoire> accessoires = new ArrayList<>();
 
     List<Bijou> bijoux = new ArrayList<>();
