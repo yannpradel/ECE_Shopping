@@ -7,6 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.category.DefaultCategoryDataset;
+
 public class DatabaseModel {
     private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     private static final String DB_URL = "jdbc:mysql://localhost/";
@@ -941,7 +946,31 @@ public class DatabaseModel {
         }
     }
 
+    public void graphtest() {
+
+        // Création du jeu de données
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        dataset.setValue(10, "Revenue", "Janvier");
+        dataset.setValue(20, "Revenue", "Février");
+        dataset.setValue(15, "Revenue", "Mars");
+        dataset.setValue(25, "Revenue", "Avril");
+        dataset.setValue(30, "Revenue", "Mai");
+
+        // Création du graphique en barres
+        JFreeChart chart = ChartFactory.createBarChart(
+                "Revenus par mois", // Titre
+                "Mois", // Axe des abscisses
+                "Revenus (€)", // Axe des ordonnées
+                dataset // Jeu de données
+        );
+
+        // Création de la fenêtre contenant le graphique
+        ChartFrame frame = new ChartFrame("Graphique en barres", chart);
+        frame.pack();
+        frame.setVisible(true);
+    }
     public void run() {
+        graphtest();
         createDatabase();
        /* addSomething("comptes");
         addSomething("produits");
