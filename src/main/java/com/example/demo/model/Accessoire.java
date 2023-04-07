@@ -1,6 +1,6 @@
 package com.example.demo.model;
 
-public class Bijou {
+public class Accessoire {
     private int id;
     private String name;
     private String description;
@@ -12,7 +12,7 @@ public class Bijou {
     private int vendu_reduc;
     private String image;
 
-    public Bijou(int id, String name, String description, int en_reduction, double price,
+    public Accessoire(int id, String name, String description, int en_reduction, double price,
                       double price_reduc, int stock_quantity, int vendu_sans_reduc, int vendu_reduc, String image) {
         this.id = id;
         this.name = name;
@@ -54,7 +54,7 @@ public class Bijou {
         return stock_quantity;
     }
 
-    public int getVendu_sans_reduc() {
+    public int getVendu_sans_reducl() {
         return vendu_sans_reduc;
     }
 
@@ -65,5 +65,6 @@ public class Bijou {
     public String getImage() {
         return image;
     }
+
 
 }
