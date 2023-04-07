@@ -30,6 +30,12 @@ public class DatabaseModel {
 
     private int adminS=666;
 
+    List<Compte> comptes = new ArrayList<>();
+    List<Accessoire> accessoires = new ArrayList<>();
+
+    List<Bijou> bijoux = new ArrayList<>();
+    List<Livre> livres= new ArrayList<>();
+
     public int getAdminS() {
         return adminS;
     }
@@ -64,6 +70,7 @@ public class DatabaseModel {
         try {
             // Execute a query to check if database exists
             String checkDatabaseQuery = "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '" + DATABASE_NAME + "'";
+            stmt= conn.createStatement();
             ResultSet rs = stmt.executeQuery(checkDatabaseQuery);
             if (rs.next()) {
                 System.out.println("Database already exists...");
@@ -95,7 +102,7 @@ public class DatabaseModel {
             stmt.executeUpdate(createTableQuery);
             System.out.println("Table comptes created successfully...");
 
-            String createTable3Query = "CREATE TABLE produits " +
+            String createTable3Query = "CREATE TABLE bijoux " +
                     "(id INT not NULL AUTO_INCREMENT, " +
                     " name VARCHAR(100), " +
                     " description VARCHAR(255), " +
@@ -103,19 +110,20 @@ public class DatabaseModel {
                     " price DECIMAL(10,2), " +
                     " price_reduc DECIMAL(10,2), " +
                     " stock_quantity INT, " +
-                    " venduTotal INT, " +
+                    " vendu_sans_reduc INT, " +
                     " vendu_reduc INT, " +
+                    " image VARCHAR(1000), " +
                     " PRIMARY KEY ( id ))";
             stmt.executeUpdate(createTable3Query);
-            System.out.println("Table produits created successfully...");
+            System.out.println("Table bijoux created successfully...");
 
-            /*String createTable1Query = "CREATE TABLE employes " +
+            /*String createTable1Query = "CREATE TABLE man " +
                     "(id INT not NULL AUTO_INCREMENT, " +
                     " name VARCHAR(255), " +
                     " age INT, " +
                     " PRIMARY KEY ( id ))";
             stmt.executeUpdate(createTable1Query);
-            System.out.println("Table employes created successfully...");*/
+            System.out.println("Table man created successfully...");*/
 
             String createTable2Query = "CREATE TABLE livres " +
                     "(id INT not NULL AUTO_INCREMENT, " +
@@ -128,7 +136,7 @@ public class DatabaseModel {
                     " price DECIMAL(10,2), " +
                     " price_reduc DECIMAL(10,2), " +
                     " stock_quantity INT, " +
-                    " venduTotal INT, " +
+                    " vendu_sans_reduc INT, " +
                     " vendu_reduc INT, " +
                     " image VARCHAR(1000), " +
                     " PRIMARY KEY ( id ))";
@@ -143,7 +151,7 @@ public class DatabaseModel {
                     " price DECIMAL(10,2), " +
                     " price_reduc DECIMAL(10,2), " +
                     " stock_quantity INT, " +
-                    " venduTotal INT, " +
+                    " vendu_sans_reduc INT, " +
                     " vendu_reduc INT, " +
                     " image VARCHAR(1000), " +
                     " PRIMARY KEY ( id ))";
@@ -180,7 +188,7 @@ public class DatabaseModel {
                     + "('Doe', 'John', 'john.doe@mail.com', 'mnopqr', 3000.0,0),"
                     + "('Smith', 'Alice', 'alice.smith@mail.com', 'stuvwx', 1500.0,0)";
             stmt.executeUpdate(query);
-            query = "INSERT INTO accessoires (name, description, en_reduction, price, price_reduc, stock_quantity, venduTotal, vendu_reduc, image) VALUES "
+            query = "INSERT INTO accessoires (name, description, en_reduction, price, price_reduc, stock_quantity, vendu_sans_reduc, vendu_reduc, image) VALUES "
                     + "('Souris sans fil', 'Souris optique sans fil avec 5 boutons', 0, 29.99, 0, 50, 0, 0, 'https://example.com/souris.jpg'),"
                     + "('Clavier filaire', 'Clavier filaire avec 105 touches', 0, 19.99, 0, 30, 0, 0, 'https://example.com/clavier.jpg'),"
                     + "('Casque audio', 'Casque audio stéréo avec micro', 0, 49.99, 0, 20, 0, 0, 'https://example.com/casque.jpg'),"
@@ -188,7 +196,7 @@ public class DatabaseModel {
                     + "('Tapis de souris', 'Tapis de souris avec surface lisse', 0, 9.99, 0, 100, 0, 0, 'https://example.com/tapis.jpg')";
             stmt.executeUpdate(query);
 
-            String insertQuery = "INSERT INTO produits (name, description, en_reduction, price, price_reduc, stock_quantity, venduTotal, vendu_reduc) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String insertQuery = "INSERT INTO bijoux (name, description, en_reduction, price, price_reduc, stock_quantity, vendu_sans_reduc, vendu_reduc, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(insertQuery);
             // Étape 3 : Ajout de 5 entrées uniques
             pstmt.setString(1, "Produit 1");
@@ -199,6 +207,7 @@ public class DatabaseModel {
             pstmt.setInt(6, 50);
             pstmt.setInt(7, 0);
             pstmt.setInt(8, 0);
+            pstmt.setString(9,"https://example.com/tapis.jpg");
             pstmt.executeUpdate();
 
             pstmt.setString(1, "Produit 2");
@@ -209,6 +218,7 @@ public class DatabaseModel {
             pstmt.setInt(6, 30);
             pstmt.setInt(7, 10);
             pstmt.setInt(8, 5);
+            pstmt.setString(9,"https://example.com/tapis.jpg");
             pstmt.executeUpdate();
 
             pstmt.setString(1, "Produit 3");
@@ -219,6 +229,7 @@ public class DatabaseModel {
             pstmt.setInt(6, 20);
             pstmt.setInt(7, 5);
             pstmt.setInt(8, 2);
+            pstmt.setString(9,"https://example.com/tapis.jpg");
             pstmt.executeUpdate();
 
             pstmt.setString(1, "Produit 4");
@@ -229,6 +240,7 @@ public class DatabaseModel {
             pstmt.setInt(6, 100);
             pstmt.setInt(7, 20);
             pstmt.setInt(8, 0);
+            pstmt.setString(9,"https://example.com/tapis.jpg");
             pstmt.executeUpdate();
 
             pstmt.setString(1, "Produit 5");
@@ -239,9 +251,10 @@ public class DatabaseModel {
             pstmt.setInt(6, 10);
             pstmt.setInt(7, 2);
             pstmt.setInt(8, 1);
+            pstmt.setString(9,"https://example.com/tapis.jpg");
             pstmt.executeUpdate();
 
-            PreparedStatement ps = conn.prepareStatement("INSERT INTO livres (title, author, publisher, publication_date, isbn, en_reduction, price, price_reduc, stock_quantity, venduTotal, vendu_reduc, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO livres (title, author, publisher, publication_date, isbn, en_reduction, price, price_reduc, stock_quantity, vendu_sans_reduc, vendu_reduc, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
             // Premier livre
             ps.setString(1, "Le Seigneur des anneaux : La Communauté de l'anneau");
@@ -445,8 +458,8 @@ public class DatabaseModel {
 
     }
 
-    public void afficherHisto(){
-        System.out.println("--------------------------afficherHisto-----------------------");
+    public void afficherHistorique(){
+        System.out.println("--------------------------afficherHistorique-----------------------");
         String query = "SELECT * FROM historique";
 
         try (Connection conn= DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
@@ -531,8 +544,8 @@ public class DatabaseModel {
                         int venteReduc= res.getInt("vendu_reduc")+quantity;
                         update = "UPDATE "+tableNom+" SET vendu_reduc = "+venteReduc+" WHERE id ="+productid;
                     }else{
-                        int ventetot= res.getInt("venduTotal")+quantity;
-                        update = "UPDATE "+tableNom+" SET venduTotal = "+ventetot+" WHERE id ="+productid;
+                        int ventetot= res.getInt("vendu_sans_reduc")+quantity;
+                        update = "UPDATE "+tableNom+" SET vendu_sans_reduc = "+ventetot+" WHERE id ="+productid;
                     }
                     Statement stmtU=conn.createStatement();
                     stmtU.executeUpdate(update);
@@ -683,11 +696,8 @@ public class DatabaseModel {
                 // suppression de la dernière occurrence de "OR" dans la clause WHERE
                 whereClause.delete(whereClause.length() - 4, whereClause.length());
 
-
-
                 // construction de la requête complète
                 query = "SELECT * FROM " + nomTab + " WHERE " + whereClause.toString();
-
 
                 Scanner col= new Scanner(System.in);
                 System.out.println("Quel colonne?");
@@ -705,8 +715,6 @@ public class DatabaseModel {
                 }
                 // Ajout de l'ordre de tri
                 query += " ORDER BY " + colonne + " " + ordre;
-
-
             } else if (avecrecherche==1) {
                 System.out.println("-----------AVEC RECHERCHE ET SANS TRIE-------------");
                 Scanner scanner = new Scanner(System.in);
@@ -801,7 +809,201 @@ public class DatabaseModel {
         }
     }
 
+    public void descriptiontabbrutarray(String nomTab, int avecrecherche, int trie) {
 
+        try (Connection conn= DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
+            stmt = conn.createStatement();
+            String query;
+            // Création de la requête SQL pour récupérer toutes les données du tableau "compte"
+            if (avecrecherche==1&&trie==1) {
+                System.out.println("-----------AVEC RECHERCHE ET AVEC TRIE-------------");
+                Scanner scanner = new Scanner(System.in);
+                System.out.print("Entrez le nom à rechercher : ");
+                String nomRecherche = scanner.nextLine();
+
+                DatabaseMetaData metadata = conn.getMetaData();
+                ResultSet rsColumns = metadata.getColumns(null, null, nomTab, null);
+                List<String> columnNames = new ArrayList<>();
+                System.out.println("Colonnes de la table " + nomTab + " : ");
+                while (rsColumns.next()) {
+                    String columnName = rsColumns.getString("COLUMN_NAME");
+                    columnNames.add(columnName);
+                    System.out.println(columnName);
+                }
+                rsColumns.close();
+
+                // construction dynamique de la clause WHERE
+                StringBuilder whereClause = new StringBuilder();
+                for (String columnName : columnNames) {
+                    whereClause.append(columnName).append(" LIKE '%").append(nomRecherche).append("%' OR ");
+                }
+                // suppression de la dernière occurrence de "OR" dans la clause WHERE
+                whereClause.delete(whereClause.length() - 4, whereClause.length());
+
+                // construction de la requête complète
+                query = "SELECT * FROM " + nomTab + " WHERE " + whereClause.toString();
+
+                Scanner col= new Scanner(System.in);
+                System.out.println("Quel colonne?");
+                String colonne=col.nextLine();
+
+                System.out.println("Quel ordre?");
+                System.out.println("1:DESC");
+                System.out.println("2: ASC");
+                int orderchoix=col.nextInt();
+                String ordre;
+                if (orderchoix==1){
+                    ordre="DESC";
+                }else{
+                    ordre="ASC";
+                }
+                // Ajout de l'ordre de tri
+                query += " ORDER BY " + colonne + " " + ordre;
+            } else if (avecrecherche==1) {
+                System.out.println("-----------AVEC RECHERCHE ET SANS TRIE-------------");
+                Scanner scanner = new Scanner(System.in);
+                System.out.print("Entrez le nom à rechercher : ");
+                String nomRecherche = scanner.nextLine();
+
+                DatabaseMetaData metadata = conn.getMetaData();
+                ResultSet rsColumns = metadata.getColumns(null, null, nomTab, null);
+                List<String> columnNames = new ArrayList<>();
+                while (rsColumns.next()) {
+                    String columnName = rsColumns.getString("COLUMN_NAME");
+                    columnNames.add(columnName);
+                }
+                rsColumns.close();
+
+                // construction dynamique de la clause WHERE
+                StringBuilder whereClause = new StringBuilder();
+                for (String columnName : columnNames) {
+                    whereClause.append(columnName).append(" LIKE '%").append(nomRecherche).append("%' OR ");
+                }
+                // suppression de la dernière occurrence de "OR" dans la clause WHERE
+                whereClause.delete(whereClause.length() - 4, whereClause.length());
+
+                // construction de la requête complète
+                query = "SELECT * FROM " + nomTab + " WHERE " + whereClause.toString();
+
+
+            } else if(avecrecherche==0&&trie==1) {
+                System.out.println("-----------SANS RECHERCHE ET AVEC TRIE-------------");
+
+                DatabaseMetaData metadata = conn.getMetaData();
+                ResultSet rsColumns = metadata.getColumns(null, null, nomTab, null);
+                List<String> columnNames = new ArrayList<>();
+                columnNames.clear();
+                System.out.println("Colonnes de la table " + nomTab + " : ");
+                while (rsColumns.next()) {
+                    String columnName = rsColumns.getString("COLUMN_NAME");
+                    columnNames.add(columnName);
+                    System.out.println(columnName);
+                }
+                rsColumns.close();
+
+                Scanner col= new Scanner(System.in);
+                System.out.println("Quel colonne?");
+                String colonne=col.nextLine();
+
+                System.out.println("Quel ordre?");
+                System.out.println("1:DESC");
+                System.out.println("2: ASC");
+                int orderchoix=col.nextInt();
+                String ordre;
+                if (orderchoix==1){
+                    ordre="DESC";
+                }else{
+                    ordre="ASC";
+                }
+                query = "SELECT * FROM "+nomTab;
+                // Ajout de l'ordre de tri
+                query += " ORDER BY " + colonne + " " + ordre;
+
+            }
+            else {
+                System.out.println("-----------SANS RECHERCHE ET SANS TRIE-------------");
+                query = "SELECT * FROM "+nomTab;
+            }
+
+
+
+            // Exécution de la requête et récupération du résultat
+            ResultSet rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+
+                switch (nomTab) {
+                    case "comptes":
+                        String first_name = rs.getString("first_name");
+                        String last_name = rs.getString("last_name");
+                        String email = rs.getString("email");
+                        String password = rs.getString("password");
+                        double balance = rs.getDouble("balance");
+                        String address = rs.getString("adress");
+                        int admin = rs.getInt("admin");
+                        Compte compte = new Compte(id, first_name, last_name, email, password, balance, address, admin);
+                        comptes.add(compte);
+                        break;
+
+                    case "accessoires":
+                        String name = rs.getString("name");
+                        String description = rs.getString("description");
+                        int en_reduction = rs.getInt("en_reduction");
+                        double price = rs.getDouble("price");
+                        double price_reduc = rs.getDouble("price_reduc");
+                        int stock_quantity = rs.getInt("stock_quantity");
+                        int vendu_sans_reduc = rs.getInt("vendu_sans_reduc");
+                        int vendu_reduc = rs.getInt("vendu_reduc");
+                        String image = rs.getString("image");
+                        Accessoire accessoire = new Accessoire(id, name, description, en_reduction, price, price_reduc, stock_quantity, vendu_reduc, vendu_reduc, image);
+                        accessoires.add(accessoire);
+                        break;
+
+                    case "livres":
+                        String title = rs.getString("title");
+                        String author = rs.getString("author");
+                        String publisher = rs.getString("publisher");
+                        String publicationDate = rs.getString("publication_date");
+                        String isbn = rs.getString("isbn");
+                        int enReduction = rs.getInt("en_reduction");
+                        double pricel = rs.getDouble("price");
+                        double priceReduc = rs.getDouble("price_reduc");
+                        int stockQuantity = rs.getInt("stock_quantity");
+                        int venduSansReduc = rs.getInt("vendu_sans_reduc");
+                        int venduReduc = rs.getInt("vendu_reduc");
+                        String imagel = rs.getString("image");
+
+                        Livre livre = new Livre(id, title, author, publisher, publicationDate, isbn, enReduction, pricel, priceReduc, stockQuantity, venduSansReduc, venduReduc, imagel);
+                        livres.add(livre);
+                        break;
+
+                    case "bijoux":
+                        String nameb = rs.getString("name");
+                        String descriptionb = rs.getString("description");
+                        int en_reductionb = rs.getInt("en_reduction");
+                        double priceb = rs.getDouble("price");
+                        double price_reducb = rs.getDouble("price_reduc");
+                        int stock_quantityb = rs.getInt("stock_quantity");
+                        int vendu_sans_reducb = rs.getInt("vendu_sans_reduc");
+                        int vendu_reducb = rs.getInt("vendu_reduc");
+                        String imageb = rs.getString("image");
+                        Bijou bijou = new Bijou(id, nameb, descriptionb, en_reductionb, priceb, price_reducb, stock_quantityb, vendu_sans_reducb, vendu_reducb, imageb);
+                        bijoux.add(bijou);
+                        break;
+
+                    default:
+                        throw new IllegalArgumentException("Tableau inconnu : " + nomTab);
+                }
+            }
+
+            // Fermeture des ressources
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     public void supprimeligne(){
         System.out.println("-----------------SUPPRESSION LIGNE---------------");
         Scanner saisie=new Scanner(System.in);
@@ -946,15 +1148,31 @@ public class DatabaseModel {
         }
     }
 
-    public void graphtest() {
-
+    public void graphvente(String nombtab) {
         // Création du jeu de données
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        dataset.setValue(10, "Revenue", "Janvier");
-        dataset.setValue(20, "Revenue", "Février");
-        dataset.setValue(15, "Revenue", "Mars");
-        dataset.setValue(25, "Revenue", "Avril");
-        dataset.setValue(30, "Revenue", "Mai");
+        try (Connection conn= DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
+            stmt = conn.createStatement();
+            String query="SELECT * FROM "+nombtab;
+            ResultSet resultSet = stmt.executeQuery(query);
+            String namepd;
+            while(resultSet.next()) {
+                if(resultSet.getString("title")!=null){
+                    namepd=resultSet.getString("title");
+                }else {
+                    namepd=resultSet.getString("name");
+                }
+                dataset.setValue(resultSet.getInt("vendu_sans_reduc"), "vente sans reduction", namepd);
+                dataset.setValue(resultSet.getInt("vendu_reduc"), "vente avec reduction", namepd);
+                int tot=resultSet.getInt("vendu_sans_reduc")+resultSet.getInt("vendu_reduc");
+                dataset.setValue(tot, "Vente Total", namepd);
+                dataset.setValue(resultSet.getInt("stock_quantity"), "stock_quantity", namepd);
+            }
+            stmt.close();
+            resultSet.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         // Création du graphique en barres
         JFreeChart chart = ChartFactory.createBarChart(
@@ -970,21 +1188,73 @@ public class DatabaseModel {
         frame.setVisible(true);
     }
     public void run() {
-        graphtest();
+
         createDatabase();
+        graphvente("livres");
        /* addSomething("comptes");
-        addSomething("produits");
-        addSomething("employes");
+        addSomething("bijoux");
         addSomething("livres");
         addSomething("accessoires");
         addSomething("panier");
         metAJourLigne();*/
 
+        descriptiontabbrutarray("comptes",0,1);
+        // Affichage des comptes
+        for (Compte compte : comptes) {
+            System.out.println("ID : " + compte.getId());
+            System.out.println("Prénom : " + compte.getFirstName());
+            System.out.println("Nom : " + compte.getLastName());
+            System.out.println("Email : " + compte.getEmail());
+            System.out.println("Solde : " + compte.getBalance());
+            System.out.println("Adresse : " + compte.getAddress());
+            System.out.println("Admin : " + compte.getIsAdmin());
+            System.out.println("--------------------");
+        }
+
+        descriptiontabbrutarray("livres",0,0);
+        for (Livre livre : livres) {
+            System.out.println("Titre: " + livre.getTitle());
+            System.out.println("Auteur: " + livre.getAuthor());
+            System.out.println("Editeur: " + livre.getPublisher());
+            System.out.println("Date de publication: " + livre.getPublicationDate());
+            System.out.println("ISBN: " + livre.getIsbn());
+            System.out.println("Prix: " + livre.getPrice());
+            System.out.println("Quantité en stock: " + livre.getStockQuantity());
+            System.out.println("----------------------");
+        }
+        descriptiontabbrutarray("accessoires",1,0);
+        for (Accessoire accessoire : accessoires) {
+            System.out.println("Nom: " + accessoire.getName());
+            System.out.println("Description: " + accessoire.getDescription());
+            System.out.println("Prix: " + accessoire.getPrice() + "€");
+            if (accessoire.getEn_reduction() == 1) {
+                System.out.println("Prix réduit: " + accessoire.getPrice_reduc() + "€");
+            }
+            System.out.println("Stock: " + accessoire.getStock_quantity());
+            System.out.println("Vendus sans réduction: " + accessoire.getVendu_sans_reducl());
+            System.out.println("Vendus avec réduction: " + accessoire.getVendu_reduc());
+            System.out.println("Image: " + accessoire.getImage());
+            System.out.println("----------------------------------");
+        }
+        descriptiontabbrutarray("bijoux",1,1);
+        for (Bijou bijou : bijoux) {
+            System.out.println("ID: " + bijou.getId());
+            System.out.println("Nom: " + bijou.getName());
+            System.out.println("Description: " + bijou.getDescription());
+            System.out.println("En réduction: " + bijou.getEn_reduction() + "%");
+            System.out.println("Prix: " + bijou.getPrice() + "€");
+            System.out.println("Prix réduit: " + bijou.getPrice_reduc() + "€");
+            System.out.println("Quantité en stock: " + bijou.getStock_quantity());
+            System.out.println("Nombre vendu sans réduction: " + bijou.getVendu_sans_reduc());
+            System.out.println("Nombre vendu avec réduction: " + bijou.getVendu_reduc());
+            System.out.println("Image: " + bijou.getImage());
+            System.out.println("-----------------------------------------");
+        }
         //addPanier();
         //addPanier();
         afficherPanier();
         ConfirmationAchat();
-        afficherHisto();
+        afficherHistorique();
         Deconnexion();
 
 
