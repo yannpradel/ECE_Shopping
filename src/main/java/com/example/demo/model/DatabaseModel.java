@@ -32,12 +32,13 @@ public class DatabaseModel {
 
     List<Compte> comptes = new ArrayList<>();
 
-
-
     List<Accessoire> accessoires = new ArrayList<>();
 
     List<Bijou> bijoux = new ArrayList<>();
     List<Livre> livres= new ArrayList<>();
+
+    List<Panier> paniers=new ArrayList<>();
+    List<Historique> historiques=new ArrayList<>();
 
     public List<Compte> getComptes() {
         return comptes;
@@ -54,6 +55,15 @@ public class DatabaseModel {
     public List<Livre> getLivres() {
         return livres;
     }
+
+    public List<Panier> getPaniers() {
+        return paniers;
+    }
+
+    public List<Historique> getHistoriques() {
+        return historiques;
+    }
+
     public int getAdminS() {
         return adminS;
     }
@@ -210,11 +220,11 @@ public class DatabaseModel {
                     + "('Smith', 'Alice', 'alice.smith@mail.com', 'stuvwx', 1500.0,0)";
             stmt.executeUpdate(query);
             query = "INSERT INTO accessoires (name, description, en_reduction, price, price_reduc, stock_quantity, vendu_sans_reduc, vendu_reduc, image) VALUES "
-                    + "('Souris sans fil', 'Souris optique sans fil avec 5 boutons', 0, 29.99, 0, 50, 0, 0, 'https://example.com/souris.jpg'),"
-                    + "('Clavier filaire', 'Clavier filaire avec 105 touches', 0, 19.99, 0, 30, 0, 0, 'https://example.com/clavier.jpg'),"
-                    + "('Casque audio', 'Casque audio stéréo avec micro', 0, 49.99, 0, 20, 0, 0, 'https://example.com/casque.jpg'),"
-                    + "('Webcam HD', 'Webcam HD 720p avec microphone intégré', 0, 39.99, 0, 15, 0, 0, 'https://example.com/webcam.jpg'),"
-                    + "('Tapis de souris', 'Tapis de souris avec surface lisse', 0, 9.99, 0, 100, 0, 0, 'https://example.com/tapis.jpg')";
+                    + "('Souris sans fil', 'Souris optique sans fil avec 5 boutons', 0, 29.99, 0, 50, 0, 0, 'https://m.media-amazon.com/images/I/61AWLK29YrL._AC_SX679_.jpg'),"
+                    + "('Clavier filaire', 'Clavier filaire avec 105 touches', 0, 19.99, 0, 30, 0, 0, 'https://www.mdose.fr/image/cache/catalog/migrated/c/l/clav_med_ip65-500x500.jpg'),"
+                    + "('Casque audio', 'Casque audio stéréo avec micro', 0, 49.99, 0, 20, 0, 0, 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcTR8XcjJuehkVX3jUpO4mJMruYfrPDXY2p4XcbUM4itEeNBeNfcSBJ_DQvZfNDyoVU4IxT7kNlAW8k&usqp=CAc'),"
+                    + "('Webcam HD', 'Webcam HD 720p avec microphone intégré', 0, 39.99, 0, 15, 0, 0, 'https://m.media-amazon.com/images/I/71xjo0lERgL.__AC_SX300_SY300_QL70_ML2_.jpg'),"
+                    + "('Tapis de souris', 'Tapis de souris avec surface lisse', 0, 9.99, 0, 100, 0, 0, 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTT1ESt5FTBqbcsejdqyzbIed4-MMwhXR1tLNMTtZw04wrksvsKYk0fSUtwcSV0RhSmg8PU8o_Mdg&usqp=CAc')";
             stmt.executeUpdate(query);
 
 
@@ -230,7 +240,7 @@ public class DatabaseModel {
             pstmt.setInt(6, 50);
             pstmt.setInt(7, 0);
             pstmt.setInt(8, 0);
-            pstmt.setString(9,"https://example.com/tapis.jpg");
+            pstmt.setString(9,"https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSWyMYiVP5z4AgLpPbdAINjqA-8p2K-9kceO_iO6I91fjgwK2TsBnd6ioZ7yb8U9jizBr5W14NF92vcixwzyrVn21C_sYiT-08u_y7_SxWG8zhDYA3Wtgntd0Mt&usqp=CAc");
             pstmt.executeUpdate();
 
             pstmt.setString(1, "bijou 2");
@@ -241,7 +251,7 @@ public class DatabaseModel {
             pstmt.setInt(6, 30);
             pstmt.setInt(7, 10);
             pstmt.setInt(8, 5);
-            pstmt.setString(9,"https://example.com/tapis.jpg");
+            pstmt.setString(9,"https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTrCrXS5UGIpDgHMAxfmPgqwOi9AkVzpxUcTtkqjx0SaWQJcS5-lNrAEfVG25NTFXg8JRriv9f2HGcn&usqp=CAc");
             pstmt.executeUpdate();
 
             pstmt.setString(1, "bijou 3");
@@ -263,7 +273,7 @@ public class DatabaseModel {
             pstmt.setInt(6, 100);
             pstmt.setInt(7, 20);
             pstmt.setInt(8, 0);
-            pstmt.setString(9,"https://example.com/tapis.jpg");
+            pstmt.setString(9,"https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcTDT6qNqw5ehD-aM1mLkwbx3Z2WCvNqwMAIgv6OhnE-TlncsffMD7YdPtY9ZToCHm5QIGjM4KmnOK3B&usqp=CAc");
             pstmt.executeUpdate();
 
             pstmt.setString(1, "bijou 5");
@@ -274,7 +284,7 @@ public class DatabaseModel {
             pstmt.setInt(6, 10);
             pstmt.setInt(7, 2);
             pstmt.setInt(8, 1);
-            pstmt.setString(9,"https://example.com/tapis.jpg");
+            pstmt.setString(9,"https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRgPUYXZfYpd49pfRvW50vlCg8yFzsLUV8VHRNBBRDk2NlgwAKPc0huy7Glr_C60SASLRWtjYbhow&usqp=CAc");
             pstmt.executeUpdate();
 
             PreparedStatement ps = conn.prepareStatement("INSERT INTO livres (title, author, publisher, publication_date, isbn, en_reduction, price, price_reduc, stock_quantity, vendu_sans_reduc, vendu_reduc, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
@@ -291,7 +301,7 @@ public class DatabaseModel {
             ps.setInt(9, 50);
             ps.setInt(10, 0);
             ps.setInt(11, 0);
-            ps.setString(12, "https://images-na.ssl-images-amazon.com/images/I/51bjgPhyqML._SX323_BO1,204,203,200_.jpg");
+            ps.setString(12, "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRq4SSTvwCmhdm4eYclVM6XTPFSQ1DdK2ngXfMKRobd1qNhNGRv0Zm6YpkoQaeZ84Sxhhr14wBpLNh_1ihrT0U18OV539FApNmGwn-BagBBtFXS_bP-vs_7GQ&usqp=CAc");
             ps.executeUpdate();
 
             // Deuxième livre
@@ -306,7 +316,7 @@ public class DatabaseModel {
             ps.setInt(9, 20);
             ps.setInt(10, 0);
             ps.setInt(11, 0);
-            ps.setString(12, "https://images-na.ssl-images-amazon.com/images/I/51A5LXdWYAL._SX305_BO1,204,203,200_.jpg");
+            ps.setString(12, "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRp716eeg3_XiLAO3M4ofKCX1iDmixULhXAjBnCdXErTbq9hizZDVUq6dkvZctEDTJo9Jq_umiKSz50BvonbGPsqm4VJI7iV4l8a22SwK8&usqp=CAc");
             ps.executeUpdate();
 
             // Troisième livre
@@ -321,7 +331,7 @@ public class DatabaseModel {
             ps.setInt(9, 10);
             ps.setInt(10, 0);
             ps.setInt(11, 0);
-            ps.setString(12, "https://images-na.ssl-images-amazon.com/images/I/51M8+7SxSvL._SX305_BO1,204,203,200_.jpg");
+            ps.setString(12, "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRTUr4i3iCtjUtG-9dvDd_Z7-Mesd3RrIwpBAzPJy0Dt1zstG_p");
             ps.executeUpdate();
 
             if(stmt!=null) stmt.close();
@@ -476,11 +486,92 @@ public class DatabaseModel {
             e.printStackTrace();
         }
 
+    }
+    public void afficherPaniertabbrutarray(){
+        String querylia = "SELECT * FROM panier";
+
+        paniers.clear();
+        try (Connection conn= DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
+            Statement stmtlia = conn.createStatement();
+
+            ResultSet rslia = stmtlia.executeQuery(querylia);
+
+            while (rslia.next()) {
+                int id = rslia.getInt("id");
+                String tableNom = rslia.getString("table_nom");
+                int quantity = rslia.getInt("quantity");
+                int productid = rslia.getInt("product_id");
+                Timestamp date = rslia.getTimestamp("date_created");
+
+                stmt= conn.createStatement();
+                String query="SELECT * FROM "+tableNom+" WHERE id="+productid;
+                ResultSet rs = stmt.executeQuery(query);
 
 
+                while (rs.next()) {
+                    //int id = rs.getInt("id");
+
+                    switch (tableNom) {
+
+                        case "accessoires":
+                            String name = rs.getString("name");
+                            String description = rs.getString("description");
+                            int en_reduction = rs.getInt("en_reduction");
+                            double price = rs.getDouble("price");
+                            double price_reduc = rs.getDouble("price_reduc");
+                            int stock_quantity = rs.getInt("stock_quantity");
+                            int vendu_sans_reduc = rs.getInt("vendu_sans_reduc");
+                            int vendu_reduc = rs.getInt("vendu_reduc");
+                            String image = rs.getString("image");
+                            Panier accessoire = new Panier(id, productid,tableNom, quantity,date,name, description, en_reduction, price, price_reduc, stock_quantity, vendu_reduc, vendu_reduc, image);
+
+                            paniers.add(accessoire);
+                            break;
+
+                        case "livres":
+                            String title = rs.getString("title");
+                            String author = rs.getString("author");
+                            String publisher = rs.getString("publisher");
+                            String publicationDate = rs.getString("publication_date");
+                            String isbn = rs.getString("isbn");
+                            int enReduction = rs.getInt("en_reduction");
+                            double pricel = rs.getDouble("price");
+                            double priceReduc = rs.getDouble("price_reduc");
+                            int stockQuantity = rs.getInt("stock_quantity");
+                            int venduSansReduc = rs.getInt("vendu_sans_reduc");
+                            int venduReduc = rs.getInt("vendu_reduc");
+                            String imagel = rs.getString("image");
+
+                            Panier livre = new Panier(id,productid,tableNom, quantity,date, title, author, publisher, publicationDate, isbn, enReduction, pricel, priceReduc, stockQuantity, venduSansReduc, venduReduc, imagel);
+                            paniers.add(livre);
+                            break;
+
+                        case "bijoux":
+                            String nameb = rs.getString("name");
+                            String descriptionb = rs.getString("description");
+                            int en_reductionb = rs.getInt("en_reduction");
+                            double priceb = rs.getDouble("price");
+                            double price_reducb = rs.getDouble("price_reduc");
+                            int stock_quantityb = rs.getInt("stock_quantity");
+                            int vendu_sans_reducb = rs.getInt("vendu_sans_reduc");
+                            int vendu_reducb = rs.getInt("vendu_reduc");
+                            String imageb = rs.getString("image");
+                            Panier bijou = new Panier(id,productid,tableNom, quantity,date, nameb, descriptionb, en_reductionb, priceb, price_reducb, stock_quantityb, vendu_sans_reducb, vendu_reducb, imageb);
+                            paniers.add(bijou);
+                            break;
+
+                        default:
+                            throw new IllegalArgumentException("Tableau inconnu : " + tableNom);
+                    }
+                }
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
-
     public void afficherHistorique(){
         System.out.println("--------------------------afficherHistorique-----------------------");
         String query = "SELECT * FROM historique";
@@ -531,6 +622,93 @@ public class DatabaseModel {
             e.printStackTrace();
         }
 
+
+    }
+
+    public void afficherHistoriquetabbrutarray(){
+        String querylia = "SELECT * FROM historique";
+
+        historiques.clear();
+        try (Connection conn= DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
+            Statement stmtlia = conn.createStatement();
+
+            ResultSet rslia = stmtlia.executeQuery(querylia);
+
+            while (rslia.next()) {
+                int id = rslia.getInt("id");
+                String first_name=rslia.getString("first_name");
+                String tableNom = rslia.getString("table_nom");
+                int quantity = rslia.getInt("quantity");
+                int productid = rslia.getInt("product_id");
+                Timestamp date = rslia.getTimestamp("date_created");
+
+                stmt= conn.createStatement();
+                String query="SELECT * FROM "+tableNom+" WHERE id="+productid;
+                ResultSet rs = stmt.executeQuery(query);
+
+
+                while (rs.next()) {
+                    //int id = rs.getInt("id");
+
+                    switch (tableNom) {
+
+                        case "accessoires":
+                            String name = rs.getString("name");
+                            String description = rs.getString("description");
+                            int en_reduction = rs.getInt("en_reduction");
+                            double price = rs.getDouble("price");
+                            double price_reduc = rs.getDouble("price_reduc");
+                            int stock_quantity = rs.getInt("stock_quantity");
+                            int vendu_sans_reduc = rs.getInt("vendu_sans_reduc");
+                            int vendu_reduc = rs.getInt("vendu_reduc");
+                            String image = rs.getString("image");
+                            Historique accessoire = new Historique(id, first_name,productid,tableNom, quantity,date,name, description, en_reduction, price, price_reduc, stock_quantity, vendu_reduc, vendu_reduc, image);
+
+                            historiques.add(accessoire);
+                            break;
+
+                        case "livres":
+                            String title = rs.getString("title");
+                            String author = rs.getString("author");
+                            String publisher = rs.getString("publisher");
+                            String publicationDate = rs.getString("publication_date");
+                            String isbn = rs.getString("isbn");
+                            int enReduction = rs.getInt("en_reduction");
+                            double pricel = rs.getDouble("price");
+                            double priceReduc = rs.getDouble("price_reduc");
+                            int stockQuantity = rs.getInt("stock_quantity");
+                            int venduSansReduc = rs.getInt("vendu_sans_reduc");
+                            int venduReduc = rs.getInt("vendu_reduc");
+                            String imagel = rs.getString("image");
+
+                            Historique livre = new Historique(id,first_name,productid,tableNom, quantity,date, title, author, publisher, publicationDate, isbn, enReduction, pricel, priceReduc, stockQuantity, venduSansReduc, venduReduc, imagel);
+                            historiques.add(livre);
+                            break;
+
+                        case "bijoux":
+                            String nameb = rs.getString("name");
+                            String descriptionb = rs.getString("description");
+                            int en_reductionb = rs.getInt("en_reduction");
+                            double priceb = rs.getDouble("price");
+                            double price_reducb = rs.getDouble("price_reduc");
+                            int stock_quantityb = rs.getInt("stock_quantity");
+                            int vendu_sans_reducb = rs.getInt("vendu_sans_reduc");
+                            int vendu_reducb = rs.getInt("vendu_reduc");
+                            String imageb = rs.getString("image");
+                            Historique bijou = new Historique(id,first_name,productid,tableNom, quantity,date, nameb, descriptionb, en_reductionb, priceb, price_reducb, stock_quantityb, vendu_sans_reducb, vendu_reducb, imageb);
+                            historiques.add(bijou);
+                            break;
+
+                        default:
+                            throw new IllegalArgumentException("Tableau inconnu : " + tableNom);
+                    }
+                }
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -834,6 +1012,12 @@ public class DatabaseModel {
 
     public void descriptiontabbrutarray(String nomTab, int avecrecherche, int trie) {
 
+        comptes.clear();
+        accessoires.clear();
+        bijoux.clear();
+        livres.clear();
+
+        List<Panier> paniers=new ArrayList<>();
         try (Connection conn= DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
             stmt = conn.createStatement();
             String query;
@@ -1226,6 +1410,49 @@ public class DatabaseModel {
         addSomething("panier");
         metAJourLigne();*/
 
+        ConfirmationAchat();
+        afficherHistoriquetabbrutarray();
+        for (Historique historique : historiques) {
+            System.out.println("Product ID: " + historique.getProduct_id());
+            System.out.println("First name: " + historique.getFirst_name());
+            System.out.println("Table nom: " + historique.getTable_nom());
+            System.out.println("Quantity: " + historique.getQuantity());
+            System.out.println("Created date: " + historique.getCreated_date());
+            System.out.println("Title: " + historique.getTitle());
+            System.out.println("Author: " + historique.getAuthor());
+            System.out.println("Publisher: " + historique.getPublisher());
+            System.out.println("Publication date: " + historique.getPublicationDate());
+            System.out.println("ISBN: " + historique.getIsbn());
+            System.out.println("En reduction: " + historique.getEnReduction());
+            System.out.println("Price: " + historique.getPrice());
+            System.out.println("Price reduc: " + historique.getPriceReduc());
+            System.out.println("Stock quantity: " + historique.getStockQuantity());
+            System.out.println("Vendu sans reduc: " + historique.getVenduSansReduc());
+            System.out.println("Vendu reduc: " + historique.getVenduReduc());
+            System.out.println("Image: " + historique.getImage());
+            System.out.println("-----------------------------");
+        }
+
+        afficherPaniertabbrutarray();
+        for (Panier panier : paniers) {
+            System.out.println("Product ID: " + panier.getProduct_id());
+            System.out.println("Table nom: " + panier.getTable_nom());
+            System.out.println("Quantity: " + panier.getQuantity());
+            System.out.println("Created date: " + panier.getCreated_date());
+            System.out.println("Title: " + panier.getTitle());
+            System.out.println("Author: " + panier.getAuthor());
+            System.out.println("Publisher: " + panier.getPublisher());
+            System.out.println("Publication date: " + panier.getPublicationDate());
+            System.out.println("ISBN: " + panier.getIsbn());
+            System.out.println("En reduction: " + panier.getEnReduction());
+            System.out.println("Price: " + panier.getPrice());
+            System.out.println("Price reduc: " + panier.getPriceReduc());
+            System.out.println("Stock quantity: " + panier.getStockQuantity());
+            System.out.println("Vendu sans reduc: " + panier.getVenduSansReduc());
+            System.out.println("Vendu reduc: " + panier.getVenduReduc());
+            System.out.println("Image: " + panier.getImage());
+            System.out.println("-----------------------------");
+        }
         descriptiontabbrutarray("comptes",0,1);
         // Affichage des comptes
         for (Compte compte : comptes) {
