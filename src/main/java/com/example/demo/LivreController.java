@@ -5,14 +5,14 @@ import com.example.demo.model.Compte;
 import com.example.demo.model.DatabaseModel;
 import com.example.demo.model.Livre;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -30,6 +30,8 @@ public class LivreController implements Initializable {
     private GridPane gridpane;
 
     public List<Livre> livres;
+
+
 
     @FXML
     ScrollPane scrollpane = new ScrollPane();
@@ -92,8 +94,10 @@ public class LivreController implements Initializable {
 
 
 
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         Compte compte = SessionManager.getLoggedInUser();
         System.out.println("compte.getEmail() : ");
         System.out.println(compte.getFirstName());
@@ -108,7 +112,8 @@ public class LivreController implements Initializable {
         for (Livre objet : livres) {
 
             // image = new Image(getClass().getResource("/com/example/demo/ab.png").toExternalForm());
-            Image image = new Image("https://www.shutterstock.com/image-vector/open-book-vector-clipart-silhouette-600w-358417976.jpg");
+            //Image image = new Image("https://www.shutterstock.com/image-vector/open-book-vector-clipart-silhouette-600w-358417976.jpg");
+            Image image = new Image(objet.getImage());
 
             // Créez un ImageView pour l'image de l'objet
             ImageView imageView = new ImageView();
@@ -123,12 +128,36 @@ public class LivreController implements Initializable {
             Label authorLabel = new Label(objet.getAuthor());
             authorLabel.setWrapText(true);
 
+            Label priceLabel = new Label(String.valueOf(objet.getPrice()));
+            Button button2 = new Button();
+
+            button2.setText("Ajouter au panier");
+            button2.setStyle("-fx-background-color: #676767;");
+
+            Spinner spinner = new Spinner();
+            Spinner<Integer> spinner1 = (Spinner<Integer>) spinner;
+            spinner1.setValueFactory(
+                    new SpinnerValueFactory.IntegerSpinnerValueFactory(
+                            0,
+                            objet.getStockQuantity()
+                    )
+            );
+
             // Ajoutez les éléments à la GridPane
             //gridpane.add(imageView, 0, row);
 
             gridpane.add(imageView,0,row);
             gridpane.add(nomLabel, 1, row);
             gridpane.add(authorLabel, 2, row);
+            gridpane.add(spinner1, 3, row);
+            gridpane.add(priceLabel,4,row);
+            gridpane.add(button2,5,row);
+            button2.setOnAction(new EventHandler<ActionEvent>() {
+                @Override public void handle(ActionEvent e) {
+                    database.addPanier(objet.getId(), "accessoires",spinner1.getValue());
+                    button2.setText("Accepted " + spinner1.getValue());
+                }
+            });
 
 
 
@@ -136,6 +165,8 @@ public class LivreController implements Initializable {
             row++;
         }
         scrollpane.setContent(gridpane);
+
+
     }
 
 

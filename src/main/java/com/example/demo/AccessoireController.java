@@ -92,7 +92,6 @@ public class AccessoireController implements Initializable {
         DatabaseModel database = new DatabaseModel();
         database.descriptiontabbrutarray("accessoires",0,0);
         accessoires = database.getAccessoires();
-        System.out.println(accessoires.get(0).getName());
 
         int row = 0;
         for (Accessoire objet : accessoires) {

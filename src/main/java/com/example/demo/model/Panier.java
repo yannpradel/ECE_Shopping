@@ -39,7 +39,7 @@ public class Panier {
     private int venduReduc;
     private String image;
 
-    // Constructeur avec tous les paramètres
+    // Constructeur avec tous les paramètres (livre)
     public Panier(int id, int product_id,String table_nom, int quantity, Timestamp created_date,String title, String author, String publisher, String publicationDate, String isbn, int enReduction,
                  double price, double priceReduc, int stockQuantity, int venduSansReduc, int venduReduc, String image) {
         this.id = id;
@@ -174,6 +174,7 @@ public class Panier {
     private String name;
     private String description;
 
+    //constructeur accessoires et bijoux
     public Panier(int id,int product_id,String table_nom, int quantity, Timestamp created_date, String name, String description, int en_reduction, double price, double price_reduc, int stock_quantity, int vendu_sans_reduc, int vendu_reduc, String image) {
         this.id = id;
 

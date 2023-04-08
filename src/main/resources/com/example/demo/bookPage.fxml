@@ -68,20 +68,23 @@
       </MenuBar>
       <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <Pane layoutX="470.0" layoutY="124.0" prefHeight="932.0" prefWidth="1451.0">
+            <Pane layoutX="449.0" layoutY="133.0" prefHeight="932.0" prefWidth="1451.0">
                <children>
-                  <Label layoutX="19.0" layoutY="17.0" prefHeight="36.0" prefWidth="298.0" text="Ajoutés recemment">
+                  <Label layoutX="52.0" layoutY="21.0" prefHeight="36.0" prefWidth="570.0" text="Tout les livres sont à votre disposition">
                      <font>
                         <Font name="Cambria" size="24.0" />
                      </font>
                   </Label>
                   <ScrollPane layoutX="52.0" layoutY="109.0" prefHeight="726.0" prefWidth="1272.0">
                      <content>
-                        <GridPane fx:id="gridpane" prefHeight="1515.0" prefWidth="1240.0" stylesheets="@../../../../../target/src/css/styles.css">
+                        <GridPane fx:id="gridpane" alignment="CENTER_RIGHT" prefHeight="1515.0" prefWidth="1240.0" stylesheets="@../../../../../target/src/css/styles.css">
                           <columnConstraints>
-                              <ColumnConstraints fx:id="bijouPic" hgrow="SOMETIMES" maxWidth="360.0" minWidth="10.0" prefWidth="359.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="375.0" minWidth="10.0" prefWidth="375.0" />
-                            <ColumnConstraints fx:id="bijouPrice" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints fx:id="bijouPic" hgrow="SOMETIMES" maxWidth="360.0" minWidth="10.0" prefWidth="223.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="512.0" minWidth="10.0" prefWidth="222.0" />
+                            <ColumnConstraints fx:id="bijouPrice" hgrow="SOMETIMES" maxWidth="441.0" minWidth="10.0" prefWidth="264.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="315.0" minWidth="10.0" prefWidth="172.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="272.0" minWidth="10.0" prefWidth="272.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="272.0" minWidth="10.0" prefWidth="272.0" />
                           </columnConstraints>
                           <rowConstraints>
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -96,6 +99,10 @@
                         </GridPane>
                      </content>
                   </ScrollPane>
+                  <Text fill="#575757" layoutX="52.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Item" wrappingWidth="137.13671875" />
+                  <Text fill="#575757" layoutX="623.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Author" />
+                  <Text fill="#575757" layoutX="851.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity" />
+                  <Text fill="#575757" layoutX="1037.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix" />
                </children>
             </Pane>
             <GridPane prefHeight="1054.0" prefWidth="469.0">
@@ -234,7 +241,7 @@
                                           <Image url="@parametres.png" />
                                        </image>
                                     </ImageView>
-                                    <Button fx:id="bijouxClick11111" mnemonicParsing="false" onAction="#gotoBijoux" prefHeight="39.0" prefWidth="147.0" style="-fx-background-color: #808080;" text="Paramètres" textAlignment="CENTER">
+                                    <Button fx:id="bijouxClick11111" mnemonicParsing="false" onAction="#gotoBijoux" prefHeight="39.0" prefWidth="147.0" style="-fx-background-color: #808080;" text="Panier" textAlignment="CENTER">
                                        <font>
                                           <Font name="Cambria" size="21.0" />
                                        </font>
