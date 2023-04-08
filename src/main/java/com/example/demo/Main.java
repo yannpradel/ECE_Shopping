@@ -17,12 +17,12 @@ public class Main extends Application{
 
         View view = new View();
 
-
-        //Controller controller = new Controller(databasemodel, view); //il sert a r
-        //databasemodel.run();
-
-
         DatabaseModel database = new DatabaseModel();
+        //Controller controller = new Controller(databasemodel, view); //il sert a r
+        //database.run();
+
+
+
         database.createDatabase();
 
 

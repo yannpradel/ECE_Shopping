@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import java.sql.*;
+
 public class Compte {
     private int id;
     private String firstName;
@@ -26,7 +28,21 @@ public class Compte {
         this.firstName=username;
         this.password=password;
 
-        //la ici code taemrei icic az ckjsdfl sdn,abzduqshd qshmzapdqs hj 
+        try (Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/projetECE_Booking","root", "")) {
+            Statement stmtlia = conn.createStatement();
+            String querylia = "SELECT * FROM comptes WHERE first_name='"+username+"'";
+            ResultSet rslia = stmtlia.executeQuery(querylia);
+            while (rslia.next()) {
+                this.id = rslia.getInt("id");
+                this.lastName = rslia.getString("last_name");
+                this.email = rslia.getString("email");
+                this.balance = rslia.getInt("balance");
+                this.address = rslia.getString("adress");
+                this.isAdmin = rslia.getInt("admin");
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public Compte (String username, String password,int admin)
