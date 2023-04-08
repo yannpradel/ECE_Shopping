@@ -22,8 +22,8 @@ public class Main extends Application{
         //databasemodel.run();
 
         System.out.println("dfsdf");
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1920, 1080);
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("connexionPage.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 600, 356);
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
