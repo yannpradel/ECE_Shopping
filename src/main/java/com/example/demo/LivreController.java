@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -28,6 +29,9 @@ public class LivreController implements Initializable {
     private GridPane gridpane;
 
     public List<Livre> livres;
+
+    @FXML
+    ScrollPane scrollpane = new ScrollPane();
 
     @FXML
     void gotoBijoux(ActionEvent event) throws IOException {
@@ -123,6 +127,7 @@ public class LivreController implements Initializable {
             // Incrémentez le numéro de ligne
             row++;
         }
+        scrollpane.setContent(gridpane);
     }
 
 
