@@ -131,6 +131,7 @@ public class LivreController implements Initializable {
             Label priceLabel = new Label(String.valueOf(objet.getPrice()));
             Button button2 = new Button();
 
+
             button2.setText("Ajouter au panier");
             button2.setStyle("-fx-background-color: #676767;");
 
