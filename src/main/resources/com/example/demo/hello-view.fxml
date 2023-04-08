@@ -45,6 +45,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -106,21 +109,33 @@
           <children>
             <Pane prefHeight="1054.0" prefWidth="450.0" style="-fx-background-color: #808080;">
               <children>
-                <Text layoutX="65.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="E-Celect" wrappingWidth="336.4224166870117">
-                  <font>
-                    <Font name="Georgia" size="64.0" />
-                  </font>
-                </Text>
                         <Label fx:id="welcomeText" layoutX="219.0" layoutY="248.0" />
-                        <VBox layoutY="157.0" prefHeight="364.0" prefWidth="469.0" spacing="20.0">
+                        <VBox layoutY="157.0" prefHeight="388.0" prefWidth="469.0" spacing="20.0">
                            <children>
-                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Catégories" wrappingWidth="160.13673400878906">
+                              <Separator opacity="0.87" prefHeight="24.0" prefWidth="469.0" />
+                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Catégories" textAlignment="CENTER" wrappingWidth="446.8034052848816">
                         <font>
-                          <Font name="Cambria" size="29.0" />
+                          <Font name="Cambria Bold" size="32.0" />
                         </font>
                                  <VBox.margin>
-                                    <Insets bottom="3.0" left="10.0" top="15.0" />
+                                    <Insets bottom="15.0" left="10.0" top="5.0" />
                                  </VBox.margin>
+                                 <stroke>
+                                    <LinearGradient endX="1.0" endY="1.0">
+                                       <stops>
+                                          <Stop>
+                                             <color>
+                                                <Color red="0.6973684430122375" green="0.14851364493370056" blue="0.14851364493370056" />
+                                             </color>
+                                          </Stop>
+                                          <Stop offset="1.0">
+                                             <color>
+                                                <Color red="1.0" green="1.0" blue="1.0" />
+                                             </color>
+                                          </Stop>
+                                       </stops>
+                                    </LinearGradient>
+                                 </stroke>
                       </Text>
                               <HBox alignment="CENTER" prefHeight="62.0" prefWidth="469.0">
                                  <children>
@@ -167,23 +182,106 @@
                                     </Button>
                                  </children>
                               </HBox>
-                              <Separator opacity="0.87" prefHeight="64.0" prefWidth="469.0" />
+                              <Separator opacity="0.87" prefHeight="82.0" prefWidth="469.0" />
                            </children>
                         </VBox>
-                        <HBox alignment="CENTER" layoutX="3.0" layoutY="562.0" prefHeight="62.0" prefWidth="469.0">
+                        <VBox layoutY="512.0" prefHeight="541.0" prefWidth="469.0" spacing="20.0">
                            <children>
-                              <ImageView fitHeight="41.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@menu.png" />
-                                 </image>
-                              </ImageView>
-                              <Button fx:id="bijouxClick11121" mnemonicParsing="false" onAction="#gotoMenu" prefHeight="39.0" prefWidth="147.0" style="-fx-background-color: #808080;" text="Menu" textAlignment="CENTER">
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Aide &amp; Paramètres" textAlignment="CENTER" wrappingWidth="468.1367392539978">
                                  <font>
-                                    <Font name="Cambria" size="21.0" />
+                                    <Font name="Cambria Bold" size="32.0" />
                                  </font>
-                              </Button>
+                                 <stroke>
+                                    <LinearGradient endX="1.0" endY="1.0">
+                                       <stops>
+                                          <Stop>
+                                             <color>
+                                                <Color red="0.6973684430122375" green="0.14851364493370056" blue="0.14851364493370056" />
+                                             </color>
+                                          </Stop>
+                                          <Stop offset="1.0">
+                                             <color>
+                                                <Color red="1.0" green="1.0" blue="1.0" />
+                                             </color>
+                                          </Stop>
+                                       </stops>
+                                    </LinearGradient>
+                                 </stroke>
+                                 <VBox.margin>
+                                    <Insets top="35.0" />
+                                 </VBox.margin>
+                              </Text>
+                              <HBox alignment="CENTER" prefHeight="62.0" prefWidth="469.0">
+                                 <children>
+                                    <ImageView fitHeight="43.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@user.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Button fx:id="bijouxClick1111" mnemonicParsing="false" onAction="#gotoAccess" prefHeight="39.0" prefWidth="147.0" style="-fx-background-color: #808080;" text="Profil" textAlignment="CENTER">
+                                       <font>
+                                          <Font name="Cambria" size="21.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="62.0" prefWidth="469.0">
+                                 <children>
+                                    <ImageView fitHeight="41.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@parametres.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Button fx:id="bijouxClick11111" mnemonicParsing="false" onAction="#gotoBijoux" prefHeight="39.0" prefWidth="147.0" style="-fx-background-color: #808080;" text="Paramètres" textAlignment="CENTER">
+                                       <font>
+                                          <Font name="Cambria" size="21.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="62.0" prefWidth="469.0">
+                                 <children>
+                                    <HBox alignment="CENTER" prefHeight="62.0" prefWidth="469.0">
+                                       <children>
+                                          <ImageView fitHeight="41.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@se-deconnecter.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Button fx:id="bijouxClick111211" mnemonicParsing="false" onAction="#gotoMenu" prefHeight="39.0" prefWidth="147.0" style="-fx-background-color: #808080;" text="Déconnexion" textAlignment="CENTER">
+                                             <font>
+                                                <Font name="Cambria" size="21.0" />
+                                             </font>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </HBox>
+                              <Separator opacity="0.87" prefHeight="64.0" prefWidth="469.0" />
+                              <HBox alignment="CENTER" prefHeight="62.0" prefWidth="469.0">
+                                 <children>
+                                    <ImageView fitHeight="41.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@menu.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Button fx:id="bijouxClick11121" mnemonicParsing="false" onAction="#gotoMenu" prefHeight="39.0" prefWidth="147.0" style="-fx-background-color: #808080;" text="Menu" textAlignment="CENTER">
+                                       <font>
+                                          <Font name="Cambria" size="21.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </HBox>
                            </children>
-                        </HBox>
+                        </VBox>
+                <Text layoutX="71.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="E-Celect" textAlignment="CENTER" wrappingWidth="336.4224166870117">
+                  <font>
+                    <Font name="Javanese Text" size="72.0" />
+                  </font>
+                </Text>
               </children>
             </Pane>
           </children>
