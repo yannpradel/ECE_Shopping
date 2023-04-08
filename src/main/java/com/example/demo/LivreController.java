@@ -98,15 +98,18 @@ public class LivreController implements Initializable {
         database.descriptiontabbrutarray("livres",0,0);
         livres = database.getLivres();
         System.out.println(livres.get(0).getTitle());
-        File file = new File("a.jpg");
-        Image image = new Image(file.toURI().toString());
+
 
 
         int row = 0;
         for (Livre objet : livres) {
 
+            // image = new Image(getClass().getResource("/com/example/demo/ab.png").toExternalForm());
+            Image image = new Image("https://www.shutterstock.com/image-vector/open-book-vector-clipart-silhouette-600w-358417976.jpg");
+
             // Créez un ImageView pour l'image de l'objet
-            ImageView imageView = new ImageView(image);
+            ImageView imageView = new ImageView();
+            imageView.setImage(image);
             imageView.setFitWidth(100);
             imageView.setPreserveRatio(true);
 
@@ -118,7 +121,9 @@ public class LivreController implements Initializable {
             authorLabel.setWrapText(true);
 
             // Ajoutez les éléments à la GridPane
-            gridpane.add(imageView, 0, row);
+            //gridpane.add(imageView, 0, row);
+
+            gridpane.add(imageView,0,row);
             gridpane.add(nomLabel, 1, row);
             gridpane.add(authorLabel, 2, row);
 

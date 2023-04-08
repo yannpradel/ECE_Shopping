@@ -94,14 +94,12 @@ public class AccessoireController implements Initializable {
         database.descriptiontabbrutarray("accessoires",0,0);
         accessoires = database.getAccessoires();
         System.out.println(accessoires.get(0).getName());
-        File file = new File("a.jpg");
-        Image image = new Image(file.toURI().toString());
 
         int row = 0;
         for (Accessoire objet : accessoires) {
 
             // Créez un ImageView pour l'image de l'objet
-            ImageView imageView = new ImageView(image);
+            ImageView imageView = new ImageView(objet.getImage());
             imageView.setFitWidth(100);
             imageView.setPreserveRatio(true);
 

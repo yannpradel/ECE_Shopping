@@ -98,22 +98,13 @@ public class BijouController implements Initializable {
         database.descriptiontabbrutarray("bijoux",0,0);
         bijoux = database.getBijoux();
         System.out.println(bijoux.get(0).getName());
-        File file = new File("a.jpg");
-        Image image = new Image(file.toURI().toString());
-        Bijou[] objets = {
-                new Bijou("Collier", 34.0, "C'est trop cool le collier !","oui"),
-                new Bijou("Bracelet", 34.0, "Nickel mon gars !","oui"),
-                new Bijou("Boucle d'oreilles", 34.0, "Pas mal !","oui")
-                //new Bijou("Collier", 34.0, "C'est trop cool le collier !",new Image("https://cdn.pixabay.com/photo/2023/03/22/20/16/muffin-7870491_960_720.jpg")),
-               // new Bijou("Collier", 34.0, "C'est trop cool le collier !",new Image("https://cdn.pixabay.com/photo/2023/03/22/20/16/muffin-7870491_960_720.jpg")),
 
-        };
 
         int row = 0;
         for (Bijou objet : bijoux) {
 
             // Créez un ImageView pour l'image de l'objet
-            ImageView imageView = new ImageView(image);
+            ImageView imageView = new ImageView(objet.getImage());
             imageView.setFitWidth(100);
             imageView.setPreserveRatio(true);
 
