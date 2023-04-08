@@ -17,11 +17,15 @@ public class Main extends Application{
 
         View view = new View();
 
-        DatabaseModel databasemodel= new DatabaseModel();
+
         //Controller controller = new Controller(databasemodel, view); //il sert a r
         //databasemodel.run();
 
-        System.out.println("dfsdf");
+
+        DatabaseModel database = new DatabaseModel();
+        database.createDatabase();
+
+
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("connexionPage.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 356);
         stage.setTitle("Hello!");

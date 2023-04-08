@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.model.Compte;
 import com.example.demo.model.DatabaseModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -33,9 +34,13 @@ public class ConnexionController {
         String password = passwordField.getText();
 
         DatabaseModel database = new DatabaseModel();
-        database.createDatabase();
         if(database.Connexion(username,password) == true)
         {
+            //Compte compte = new Compte(username,password,database.getAdminS());
+            //email = SQL GET EMAIL FROM USERNAME AND PASSWORD
+            Compte compte = new Compte(username,password);
+            SessionManager.setLoggedInUser(compte);
+            System.out.println(SessionManager.getLoggedInUser().getEmail());
             FXMLLoader load = new FXMLLoader(getClass().getResource("hello-view.fxml"));
             Parent root = load.load();
 

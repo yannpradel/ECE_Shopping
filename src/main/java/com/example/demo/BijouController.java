@@ -94,7 +94,6 @@ public class BijouController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         DatabaseModel database = new DatabaseModel();
-        database.createDatabase();
         database.descriptiontabbrutarray("bijoux",0,0);
         bijoux = database.getBijoux();
         System.out.println(bijoux.get(0).getName());

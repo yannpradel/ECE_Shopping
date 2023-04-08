@@ -90,7 +90,6 @@ public class AccessoireController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         DatabaseModel database = new DatabaseModel();
-        database.createDatabase();
         database.descriptiontabbrutarray("accessoires",0,0);
         accessoires = database.getAccessoires();
         System.out.println(accessoires.get(0).getName());

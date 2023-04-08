@@ -21,6 +21,21 @@ public class Compte {
         this.isAdmin = isAdmin;
     }
 
+    public Compte (String username, String password)
+    {
+        this.firstName=username;
+        this.password=password;
+
+        //la ici code taemrei icic az ckjsdfl sdn,abzduqshd qshmzapdqs hj 
+    }
+
+    public Compte (String username, String password,int admin)
+    {
+        this.firstName=username;
+        this.password=password;
+        this.isAdmin=admin;
+    }
+
     public double getBalance() {
         return balance;
     }

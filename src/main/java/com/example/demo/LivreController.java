@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import com.example.demo.model.Bijou;
+import com.example.demo.model.Compte;
 import com.example.demo.model.DatabaseModel;
 import com.example.demo.model.Livre;
 import javafx.event.ActionEvent;
@@ -93,8 +94,10 @@ public class LivreController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        Compte compte = SessionManager.getLoggedInUser();
+        System.out.println("compte.getEmail() : ");
+        System.out.println(compte.getFirstName());
         DatabaseModel database = new DatabaseModel();
-        database.createDatabase();
         database.descriptiontabbrutarray("livres",0,0);
         livres = database.getLivres();
         System.out.println(livres.get(0).getTitle());
