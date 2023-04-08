@@ -39,6 +39,51 @@ public class CatalogueController{
 
     }
 
+    @FXML
+    void gotoMenu(ActionEvent event) throws IOException {
+        counter++;
+        // System.out.println("aaaaa" + counter);
+        //welcomeText.setText("Button Clicked " + counter);
+        FXMLLoader load = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+        Parent root = load.load();
+
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+    @FXML
+    void gotoAccess(ActionEvent event) throws IOException {
+        counter++;
+        // System.out.println("aaaaa" + counter);
+        //welcomeText.setText("Button Clicked " + counter);
+        FXMLLoader load = new FXMLLoader(getClass().getResource("accessPage.fxml"));
+        Parent root = load.load();
+
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+    @FXML
+    void gotoBook(ActionEvent event) throws IOException {
+        counter++;
+        // System.out.println("aaaaa" + counter);
+        //welcomeText.setText("Button Clicked " + counter);
+        FXMLLoader load = new FXMLLoader(getClass().getResource("bookPage.fxml"));
+        Parent root = load.load();
+
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
 
 
 }

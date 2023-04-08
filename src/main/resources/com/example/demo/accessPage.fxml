@@ -118,7 +118,7 @@
                   </Pane>
                </children>
             </GridPane>
-            <Text layoutX="1119.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bijoux" wrappingWidth="384.13673400878906">
+            <Text layoutX="1119.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Accessoires" wrappingWidth="384.13673400878906">
                <font>
                   <Font name="Tw Cen MT Condensed" size="36.0" />
                </font>

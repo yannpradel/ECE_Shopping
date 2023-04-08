@@ -28,15 +28,20 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
@@ -106,13 +111,79 @@
                     <Font name="Georgia" size="64.0" />
                   </font>
                 </Text>
-                <Text layoutX="65.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bijoux" wrappingWidth="140.13673400878906">
-                  <font>
-                    <Font name="Tw Cen MT Condensed" size="36.0" />
-                  </font>
-                </Text>
-                        <Button fx:id="bijouxClick" layoutX="65.0" layoutY="232.0" mnemonicParsing="false" onAction="#gotoBijoux" prefHeight="48.0" prefWidth="104.0" text="Bijoux" />
                         <Label fx:id="welcomeText" layoutX="219.0" layoutY="248.0" />
+                        <VBox layoutY="157.0" prefHeight="364.0" prefWidth="469.0" spacing="20.0">
+                           <children>
+                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Catégories" wrappingWidth="160.13673400878906">
+                        <font>
+                          <Font name="Cambria" size="29.0" />
+                        </font>
+                                 <VBox.margin>
+                                    <Insets bottom="3.0" left="10.0" top="15.0" />
+                                 </VBox.margin>
+                      </Text>
+                              <HBox alignment="CENTER" prefHeight="62.0" prefWidth="469.0">
+                                 <children>
+                                    <ImageView fitHeight="43.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@accessory.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Button fx:id="bijouxClick111" mnemonicParsing="false" onAction="#gotoAccess" prefHeight="39.0" prefWidth="147.0" style="-fx-background-color: #808080;" text="Accessoires" textAlignment="CENTER">
+                                       <font>
+                                          <Font name="Cambria" size="21.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="62.0" prefWidth="469.0">
+                                 <children>
+                                    <ImageView fitHeight="41.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@bague-de-fiancailles.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Button fx:id="bijouxClick1111" mnemonicParsing="false" onAction="#gotoBijoux" prefHeight="39.0" prefWidth="147.0" style="-fx-background-color: #808080;" text="Bijoux" textAlignment="CENTER">
+                                       <font>
+                                          <Font name="Cambria" size="21.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="62.0" prefWidth="469.0">
+                                 <children>
+                                    <ImageView fitHeight="41.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@livre-de-couverture-noire-ferme.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Button fx:id="bijouxClick1112" mnemonicParsing="false" onAction="#gotoBook" prefHeight="39.0" prefWidth="147.0" style="-fx-background-color: #808080;" text="Livres" textAlignment="CENTER">
+                                       <font>
+                                          <Font name="Cambria" size="21.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <Separator opacity="0.87" prefHeight="64.0" prefWidth="469.0" />
+                           </children>
+                        </VBox>
+                        <HBox alignment="CENTER" layoutX="3.0" layoutY="562.0" prefHeight="62.0" prefWidth="469.0">
+                           <children>
+                              <ImageView fitHeight="41.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@menu.png" />
+                                 </image>
+                              </ImageView>
+                              <Button fx:id="bijouxClick11121" mnemonicParsing="false" onAction="#gotoMenu" prefHeight="39.0" prefWidth="147.0" style="-fx-background-color: #808080;" text="Menu" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="Cambria" size="21.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
               </children>
             </Pane>
           </children>
