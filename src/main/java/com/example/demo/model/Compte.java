@@ -83,4 +83,8 @@ public class Compte {
     public String getPassword() {
         return password;
     }
+
+    public void setBalance(int balance) {
+        this.balance=balance;
+    }
 }

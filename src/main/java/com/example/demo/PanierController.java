@@ -97,6 +97,8 @@ public class PanierController implements Initializable {
 
     }
 
+
+
     @FXML
     void gotoPanier(ActionEvent event) throws IOException {
         // System.out.println("aaaaa" + counter);
@@ -111,6 +113,19 @@ public class PanierController implements Initializable {
 
     }
 
+    @FXML
+    private void onConfirmButtonClicked(ActionEvent event) throws IOException{
+        DatabaseModel database = new DatabaseModel();
+        int balance = database.ConfirmationAchatpage(SessionManager.getLoggedInUser().getFirstName());
+        SessionManager.getLoggedInUser().setBalance(balance);
+        FXMLLoader load = new FXMLLoader(getClass().getResource("panierPage.fxml"));
+        Parent root = load.load();
+
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
 
 
 
@@ -152,6 +167,9 @@ public class PanierController implements Initializable {
                 Label authorLabel = new Label(objet.getDescription());
                 authorLabel.setWrapText(true);
 
+                // Créez un Label pour le nom de l'objet
+                Label quantLabel = new Label(String.valueOf(objet.getQuantity()));
+
                 Label priceLabel = new Label(String.valueOf(objet.getPrice()));
                 Button button2 = new Button();
 
@@ -166,9 +184,24 @@ public class PanierController implements Initializable {
                 gridpane.add(nomLabel, 1, row);
                 gridpane.add(authorLabel, 2, row);
                 gridpane.add(priceLabel,3,row);
+                gridpane.add(quantLabel,4,row);
                 gridpane.add(button2,5,row);
                 button2.setOnAction(new EventHandler<ActionEvent>() {
                     @Override public void handle(ActionEvent e) {
+                        database.effacePanieruniqueitem(objet.getId());
+                        FXMLLoader load = new FXMLLoader(getClass().getResource("panierPage.fxml"));
+                        Parent root = null;
+                        try {
+                            root = load.load();
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+
+                        Scene scene = new Scene(root);
+                        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+                        stage.setScene(scene);
+                        stage.show();
+
                     }
                 });
             }
@@ -188,6 +221,9 @@ public class PanierController implements Initializable {
                 // Créez un Label pour le nom de l'objet
                 Label nomLabel = new Label(objet.getTitle());
 
+                // Créez un Label pour le nom de l'objet
+                Label quantLabel = new Label(String.valueOf(objet.getQuantity()));
+
                 // Créez un Label pour la description de l'objet
                 Label authorLabel = new Label(objet.getAuthor());
                 authorLabel.setWrapText(true);
@@ -206,10 +242,24 @@ public class PanierController implements Initializable {
                 gridpane.add(nomLabel, 1, row);
                 gridpane.add(authorLabel, 2, row);
                 gridpane.add(priceLabel, 3, row);
+                gridpane.add(quantLabel,4,row);
                 gridpane.add(button2, 5, row);
                 button2.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent e) {
+                    @Override public void handle(ActionEvent e) {
+                        database.effacePanieruniqueitem(objet.getId());
+                        FXMLLoader load = new FXMLLoader(getClass().getResource("panierPage.fxml"));
+                        Parent root = null;
+                        try {
+                            root = load.load();
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+
+                        Scene scene = new Scene(root);
+                        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+                        stage.setScene(scene);
+                        stage.show();
+
                     }
                 });
             }

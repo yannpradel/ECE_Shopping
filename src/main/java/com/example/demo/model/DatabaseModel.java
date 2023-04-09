@@ -377,8 +377,8 @@ public class DatabaseModel {
         }
     }
 
-    public void effacePanieruniqueitem(String ID) {
-        int num = Integer.parseInt(ID);
+    public void effacePanieruniqueitem(int ID) {
+        int num = ID;
         try (Connection conn = DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
             Statement stmt = conn.createStatement();
             stmt.executeUpdate("DELETE FROM panier WHERE id="+num);
@@ -721,7 +721,8 @@ public class DatabaseModel {
         }
 
     }
-    public void ConfirmationAchatpage(String firstname) {
+    public int ConfirmationAchatpage(String firstname) {
+        int newbalance=0;
         //if(this.identifiantS==null){Connexion("Jean","123456");} String firstname=this.identifiantS;
         try (Connection conn= DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
             // Création de la commande SQL pour copier les données
@@ -769,7 +770,7 @@ public class DatabaseModel {
             while(rsz.next()){
                 balance=rsz.getInt("balance");
             }
-            int newbalance=balance-pricetot;
+            newbalance=balance-pricetot;
             String updatetotbalance= "UPDATE comptes SET balance = "+newbalance+" WHERE first_name = '"+firstname+"'";
             Statement stmt1=conn.createStatement();
             stmt1.executeUpdate(updatetotbalance);
@@ -802,6 +803,7 @@ public class DatabaseModel {
         }
 
         effacePanier();
+        return newbalance;
     }
 
     public void ConfirmationAchat() {
@@ -874,6 +876,7 @@ public class DatabaseModel {
         }
 
         effacePanier();
+
     }
 
 

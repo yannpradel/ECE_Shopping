@@ -169,7 +169,7 @@ public class LivreController implements Initializable {
             gridpane.add(button2,5,row);
             button2.setOnAction(new EventHandler<ActionEvent>() {
                 @Override public void handle(ActionEvent e) {
-                    database.addPanier(objet.getId(), "accessoires",spinner1.getValue());
+                    database.addPanier(objet.getId(), "livres",spinner1.getValue());
                     button2.setText("Accepted " + spinner1.getValue());
                 }
             });
