@@ -377,6 +377,16 @@ public class DatabaseModel {
         }
     }
 
+    public void effacePanieruniqueitem(String ID) {
+        int num = Integer.parseInt(ID);
+        try (Connection conn = DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("DELETE FROM panier WHERE id="+num);
+            System.out.println("Panier where id="+num+" cleared successfully");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     public void effacePanier() {
         try (Connection conn = DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
             Statement stmt = conn.createStatement();
@@ -710,6 +720,88 @@ public class DatabaseModel {
             e.printStackTrace();
         }
 
+    }
+    public void ConfirmationAchatpage(String firstname) {
+        //if(this.identifiantS==null){Connexion("Jean","123456");} String firstname=this.identifiantS;
+        try (Connection conn= DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
+            // Création de la commande SQL pour copier les données
+            stmt = conn.createStatement();
+            String appel="SELECT * FROM panier";
+
+            int pricetot=0;
+            ResultSet rs = stmt.executeQuery(appel);
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String tableNom = rs.getString("table_nom");
+                int quantity = rs.getInt("quantity");
+                int productid = rs.getInt("product_id");
+                Timestamp date = rs.getTimestamp("date_created");
+                Statement stmt2=conn.createStatement();
+                String appel2="SELECT * FROM "+tableNom+" WHERE id="+productid;
+                ResultSet res= stmt2.executeQuery(appel2);
+                while (res.next()){
+                    int stock=res.getInt("stock_quantity");
+                    int reduc=res.getInt("en_reduction");
+                    int newstock=stock-quantity;
+                    String update1;
+                    update1 = "UPDATE "+tableNom+" SET stock_quantity = "+newstock+" WHERE id ="+productid;
+                    Statement stmt1=conn.createStatement();
+                    stmt1.executeUpdate(update1);
+                    String update;
+                    if(reduc==1||quantity>4){
+                        pricetot += res.getInt("price_reduc");
+                        int venteReduc= res.getInt("vendu_reduc")+quantity;
+                        update = "UPDATE "+tableNom+" SET vendu_reduc = "+venteReduc+" WHERE id ="+productid;
+                    }else{
+                        pricetot += res.getInt("price");
+                        int ventesansreduc= res.getInt("vendu_sans_reduc")+quantity;
+                        update = "UPDATE "+tableNom+" SET vendu_sans_reduc = "+ventesansreduc+" WHERE id ="+productid;
+                    }
+                    Statement stmtU=conn.createStatement();
+                    stmtU.executeUpdate(update);
+                }
+            }
+
+            Statement stmtz = conn.createStatement();
+            String appelz="SELECT balance FROM comptes WHERE first_name ='"+firstname+"'";
+            ResultSet rsz = stmtz.executeQuery(appelz);
+            int balance=0;
+            while(rsz.next()){
+                balance=rsz.getInt("balance");
+            }
+            int newbalance=balance-pricetot;
+            String updatetotbalance= "UPDATE comptes SET balance = "+newbalance+" WHERE first_name = '"+firstname+"'";
+            Statement stmt1=conn.createStatement();
+            stmt1.executeUpdate(updatetotbalance);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try (Connection conn= DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
+            // Création de la commande SQL pour copier les données
+            stmt = conn.createStatement();
+            String appel="SELECT * FROM panier";
+
+            ResultSet rs1 = stmt.executeQuery(appel);
+            while (rs1.next()) {
+                int id = rs1.getInt("id");
+                String tableNom = rs1.getString("table_nom");
+                int quantity = rs1.getInt("quantity");
+                int productid = rs1.getInt("product_id");
+                Timestamp date = rs1.getTimestamp("date_created");
+                String query = "INSERT INTO historique (first_name, product_id, table_nom, quantity) VALUES "
+                        + "('"+firstname+"',"+productid+", '"+tableNom+"', "+quantity+")";
+                Statement stmt2=conn.createStatement();
+                stmt2.executeUpdate(query);
+            }
+            System.out.println("voir historique");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        effacePanier();
     }
 
     public void ConfirmationAchat() {
