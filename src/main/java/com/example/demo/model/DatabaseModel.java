@@ -635,6 +635,92 @@ public class DatabaseModel {
 
     }
 
+    public void afficherHistoriquetabbrutarray(String firstname){
+        String querylia = "SELECT * FROM historique WHERE first_name= '"+firstname+"'";
+        historiques.clear();
+        try (Connection conn= DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
+            Statement stmtlia = conn.createStatement();
+
+            ResultSet rslia = stmtlia.executeQuery(querylia);
+
+            while (rslia.next()) {
+                int id = rslia.getInt("id");
+                String first_name=rslia.getString("first_name");
+                String tableNom = rslia.getString("table_nom");
+                int quantity = rslia.getInt("quantity");
+                int productid = rslia.getInt("product_id");
+                Timestamp date = rslia.getTimestamp("date_created");
+
+                stmt= conn.createStatement();
+                String query="SELECT * FROM "+tableNom+" WHERE id="+productid;
+                ResultSet rs = stmt.executeQuery(query);
+
+
+                while (rs.next()) {
+                    //int id = rs.getInt("id");
+
+                    switch (tableNom) {
+
+                        case "accessoires":
+                            String name = rs.getString("name");
+                            String description = rs.getString("description");
+                            int en_reduction = rs.getInt("en_reduction");
+                            double price = rs.getDouble("price");
+                            double price_reduc = rs.getDouble("price_reduc");
+                            int stock_quantity = rs.getInt("stock_quantity");
+                            int vendu_sans_reduc = rs.getInt("vendu_sans_reduc");
+                            int vendu_reduc = rs.getInt("vendu_reduc");
+                            String image = rs.getString("image");
+                            Historique accessoire = new Historique(id, first_name,productid,tableNom, quantity,date,name, description, en_reduction, price, price_reduc, stock_quantity, vendu_reduc, vendu_reduc, image);
+
+                            historiques.add(accessoire);
+                            break;
+
+                        case "livres":
+                            String title = rs.getString("title");
+                            String author = rs.getString("author");
+                            String publisher = rs.getString("publisher");
+                            String publicationDate = rs.getString("publication_date");
+                            String isbn = rs.getString("isbn");
+                            int enReduction = rs.getInt("en_reduction");
+                            double pricel = rs.getDouble("price");
+                            double priceReduc = rs.getDouble("price_reduc");
+                            int stockQuantity = rs.getInt("stock_quantity");
+                            int venduSansReduc = rs.getInt("vendu_sans_reduc");
+                            int venduReduc = rs.getInt("vendu_reduc");
+                            String imagel = rs.getString("image");
+
+                            Historique livre = new Historique(id,first_name,productid,tableNom, quantity,date, title, author, publisher, publicationDate, isbn, enReduction, pricel, priceReduc, stockQuantity, venduSansReduc, venduReduc, imagel);
+                            historiques.add(livre);
+                            break;
+
+                        case "bijoux":
+                            String nameb = rs.getString("name");
+                            String descriptionb = rs.getString("description");
+                            int en_reductionb = rs.getInt("en_reduction");
+                            double priceb = rs.getDouble("price");
+                            double price_reducb = rs.getDouble("price_reduc");
+                            int stock_quantityb = rs.getInt("stock_quantity");
+                            int vendu_sans_reducb = rs.getInt("vendu_sans_reduc");
+                            int vendu_reducb = rs.getInt("vendu_reduc");
+                            String imageb = rs.getString("image");
+                            Historique bijou = new Historique(id,first_name,productid,tableNom, quantity,date, nameb, descriptionb, en_reductionb, priceb, price_reducb, stock_quantityb, vendu_sans_reducb, vendu_reducb, imageb);
+                            historiques.add(bijou);
+                            break;
+
+                        default:
+                            throw new IllegalArgumentException("Tableau inconnu : " + tableNom);
+                    }
+                }
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     public void afficherHistoriquetabbrutarray(){
         String querylia = "SELECT * FROM historique";
 
