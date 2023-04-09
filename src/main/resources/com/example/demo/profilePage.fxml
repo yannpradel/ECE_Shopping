@@ -21,50 +21,194 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox minHeight="1080.0" minWidth="1920.0" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.PanierController">
+<VBox minHeight="1080.0" minWidth="1920.0" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.ProfilController">
    <children>
-      <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+      <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="956.0" prefWidth="1931.0" VBox.vgrow="ALWAYS">
          <children>
-            <Pane layoutX="449.0" layoutY="133.0" prefHeight="932.0" prefWidth="1451.0">
+            <Pane layoutX="471.0" layoutY="-6.0" prefHeight="1088.0" prefWidth="1460.0">
                <children>
-                  <Label layoutX="52.0" layoutY="21.0" prefHeight="36.0" prefWidth="570.0" text="Voici tout les objets de votre panier ! ">
-                     <font>
-                        <Font name="Cambria" size="24.0" />
-                     </font>
-                  </Label>
-                  <ScrollPane layoutX="52.0" layoutY="109.0" prefHeight="726.0" prefWidth="1272.0">
+                  <ScrollPane prefHeight="1092.0" prefWidth="1460.0">
                      <content>
-                        <GridPane fx:id="gridpane" alignment="CENTER_RIGHT" prefHeight="1515.0" prefWidth="1240.0" stylesheets="@../../../../../target/src/css/styles.css">
-                           <columnConstraints>
-                              <ColumnConstraints fx:id="bijouPic" hgrow="SOMETIMES" maxWidth="360.0" minWidth="10.0" prefWidth="223.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="512.0" minWidth="10.0" prefWidth="222.0" />
-                              <ColumnConstraints fx:id="bijouPrice" hgrow="SOMETIMES" maxWidth="441.0" minWidth="10.0" prefWidth="264.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="315.0" minWidth="10.0" prefWidth="172.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="272.0" minWidth="10.0" prefWidth="272.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="272.0" minWidth="10.0" prefWidth="272.0" />
-                           </columnConstraints>
-                           <rowConstraints>
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                           </rowConstraints>
-                           <styleClass>
-                              <String fx:value="maclasse" />
-                              <String fx:value="onHover" />
-                           </styleClass>
-                        </GridPane>
+                        <Pane prefHeight="1626.0" prefWidth="1480.0">
+                           <children>
+                              <ScrollPane layoutX="88.0" layoutY="750.0" prefHeight="726.0" prefWidth="1272.0">
+                                 <content>
+                                    <GridPane fx:id="gridpane" alignment="CENTER_RIGHT" prefHeight="1515.0" prefWidth="1240.0" stylesheets="@../../../../../target/src/css/styles.css">
+                                       <columnConstraints>
+                                          <ColumnConstraints fx:id="bijouPic" hgrow="SOMETIMES" maxWidth="360.0" minWidth="10.0" prefWidth="223.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="512.0" minWidth="10.0" prefWidth="222.0" />
+                                          <ColumnConstraints fx:id="bijouPrice" hgrow="SOMETIMES" maxWidth="441.0" minWidth="10.0" prefWidth="264.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="315.0" minWidth="10.0" prefWidth="172.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="272.0" minWidth="10.0" prefWidth="272.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="272.0" minWidth="10.0" prefWidth="272.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <styleClass>
+                                          <String fx:value="maclasse" />
+                                          <String fx:value="onHover" />
+                                       </styleClass>
+                                    </GridPane>
+                                 </content>
+                              </ScrollPane>
+                              <VBox layoutX="343.0" layoutY="78.0" prefHeight="558.0" prefWidth="767.0" style="-fx-background-color: #F2F2F2; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-width: 1; -fx-border-color: #CDCDCD;">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Informations personnelles">
+                                       <font>
+                                          <Font name="Cambria Bold" size="21.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets left="20.0" top="20.0" />
+                                       </VBox.margin>
+                                    </Text>
+                                    <Separator prefWidth="200.0" style="-fx-background-color: #CDCDCD;">
+                                       <VBox.margin>
+                                          <Insets left="20.0" right="20.0" top="5.0" />
+                                       </VBox.margin>
+                                    </Separator>
+                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Prénom" wrappingWidth="296.041015625">
+                                             <font>
+                                                <Font name="Cambria Bold" size="18.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets left="20.0" right="20.0" top="5.0" />
+                                             </HBox.margin>
+                                          </Text>
+                                          <Text fx:id="firstname" strokeType="OUTSIDE" strokeWidth="0.0">
+                                             <font>
+                                                <Font name="Cambria" size="18.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets top="5.0" />
+                                             </HBox.margin>
+                                          </Text>
+                                       </children>
+                                    </HBox>
+                                    <Separator prefWidth="200.0">
+                                       <VBox.margin>
+                                          <Insets left="20.0" right="20.0" top="4.0" />
+                                       </VBox.margin>
+                                    </Separator>
+                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nom de famille" wrappingWidth="296.041015625">
+                                             <font>
+                                                <Font name="Cambria Bold" size="18.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets left="20.0" right="20.0" top="4.0" />
+                                             </HBox.margin>
+                                          </Text>
+                                          <Text fx:id="lastname" strokeType="OUTSIDE" strokeWidth="0.0">
+                                             <font>
+                                                <Font name="Cambria" size="18.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets top="5.0" />
+                                             </HBox.margin>
+                                          </Text>
+                                       </children>
+                                    </HBox>
+                                    <Separator prefWidth="200.0">
+                                       <VBox.margin>
+                                          <Insets left="20.0" right="20.0" top="4.0" />
+                                       </VBox.margin>
+                                    </Separator>
+                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Email" wrappingWidth="296.041015625">
+                                             <font>
+                                                <Font name="Cambria Bold" size="18.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets left="20.0" right="20.0" top="4.0" />
+                                             </HBox.margin>
+                                          </Text>
+                                          <Text fx:id="email" strokeType="OUTSIDE" strokeWidth="0.0">
+                                             <font>
+                                                <Font name="Cambria" size="18.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets top="5.0" />
+                                             </HBox.margin>
+                                          </Text>
+                                       </children>
+                                    </HBox>
+                                    <Separator prefWidth="200.0">
+                                       <VBox.margin>
+                                          <Insets left="20.0" right="20.0" top="4.0" />
+                                       </VBox.margin>
+                                    </Separator>
+                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Solde" wrappingWidth="296.041015625">
+                                             <font>
+                                                <Font name="Cambria Bold" size="18.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets left="20.0" right="20.0" top="4.0" />
+                                             </HBox.margin>
+                                          </Text>
+                                          <Text fx:id="solde" strokeType="OUTSIDE" strokeWidth="0.0">
+                                             <font>
+                                                <Font name="Cambria" size="18.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets top="5.0" />
+                                             </HBox.margin>
+                                          </Text>
+                                       </children>
+                                    </HBox>
+                                    <Separator prefWidth="200.0">
+                                       <VBox.margin>
+                                          <Insets left="20.0" right="20.0" top="4.0" />
+                                       </VBox.margin>
+                                    </Separator>
+                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse postale" wrappingWidth="296.041015625">
+                                             <font>
+                                                <Font name="Cambria Bold" size="18.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets left="20.0" right="20.0" top="4.0" />
+                                             </HBox.margin>
+                                          </Text>
+                                          <Text fx:id="adressePostale" strokeType="OUTSIDE" strokeWidth="0.0">
+                                             <font>
+                                                <Font name="Cambria" size="18.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets top="5.0" />
+                                             </HBox.margin>
+                                          </Text>
+                                       </children>
+                                    </HBox>
+                                    <Separator prefWidth="200.0">
+                                       <VBox.margin>
+                                          <Insets left="20.0" right="20.0" top="4.0" />
+                                       </VBox.margin>
+                                    </Separator>
+                                    <ImageView fitHeight="436.0" fitWidth="642.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                       <image>
+                                          <Image url="@rob_y.gif" />
+                                       </image>
+                                       <VBox.margin>
+                                          <Insets left="165.0" />
+                                       </VBox.margin>
+                                    </ImageView>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </Pane>
                      </content>
                   </ScrollPane>
-                  <Text fill="#575757" layoutX="52.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Item" wrappingWidth="137.13671875" />
-                  <Text fill="#575757" layoutX="623.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Author" />
-                  <Text fill="#575757" layoutX="851.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity" />
-                  <Text fill="#575757" layoutX="1037.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix" />
-                  <Button layoutX="50.0" layoutY="859.0" mnemonicParsing="false" onAction="#onConfirmButtonClicked" prefHeight="40.0" prefWidth="208.0" style="-fx-background-color: #909090;" text="Confirmer l'achat" textAlignment="CENTER">
-                     <font>
-                        <Font name="Cambria" size="21.0" />
-                     </font>
-                  </Button>
                </children>
             </Pane>
             <GridPane prefHeight="1080.0" prefWidth="469.0">
@@ -254,26 +398,6 @@
                   </Pane>
                </children>
             </GridPane>
-            <Text layoutX="497.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Votre panier" wrappingWidth="209.13673400878906">
-               <font>
-                  <Font name="Tw Cen MT Condensed" size="36.0" />
-               </font>
-            </Text>
-            <Text fx:id="usertext" layoutX="706.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="209.13673400878906">
-               <font>
-                  <Font name="Tw Cen MT Condensed" size="36.0" />
-               </font>
-            </Text>
-            <Text layoutX="1272.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Votre argent :" wrappingWidth="236.08904266357428">
-               <font>
-                  <Font name="Tw Cen MT Condensed" size="36.0" />
-               </font>
-            </Text>
-            <Text fx:id="usertextBalance" layoutX="1529.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="209.13673400878906">
-               <font>
-                  <Font name="Tw Cen MT Condensed" size="36.0" />
-               </font>
-            </Text>
          </children>
       </AnchorPane>
    </children>

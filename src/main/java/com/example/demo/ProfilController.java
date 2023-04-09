@@ -1,7 +1,6 @@
 package com.example.demo;
 
 import com.example.demo.model.*;
-import javafx.beans.value.ObservableStringValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -10,31 +9,41 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class PanierController implements Initializable {
+public class ProfilController implements Initializable {
     private Bijou bijou;
     @FXML
     private GridPane gridpane;
 
-    public List<Panier> paniers;
+    public List<Historique> historiques;
 
     @FXML
-    private Text usertext;
+    private Text firstname;
 
     @FXML
-    private Text usertextBalance;
+    private Text lastname;
+
+    @FXML
+    private Text email;
+
+    @FXML
+    private Text solde;
+
+    @FXML
+    private Text adressePostale;
 
 
 
@@ -97,11 +106,13 @@ public class PanierController implements Initializable {
 
     }
 
+
+
     @FXML
-    void gotoProfile(ActionEvent event) throws IOException {
+    void gotoPanier(ActionEvent event) throws IOException {
         // System.out.println("aaaaa" + counter);
         //welcomeText.setText("Button Clicked " + counter);
-        FXMLLoader load = new FXMLLoader(getClass().getResource("profilePage.fxml"));
+        FXMLLoader load = new FXMLLoader(getClass().getResource("panierPage.fxml"));
         Parent root = load.load();
 
         Scene scene = new Scene(root);
@@ -111,13 +122,11 @@ public class PanierController implements Initializable {
 
     }
 
-
-
     @FXML
-    void gotoPanier(ActionEvent event) throws IOException {
+    void gotoProfile(ActionEvent event) throws IOException {
         // System.out.println("aaaaa" + counter);
         //welcomeText.setText("Button Clicked " + counter);
-        FXMLLoader load = new FXMLLoader(getClass().getResource("panierPage.fxml"));
+        FXMLLoader load = new FXMLLoader(getClass().getResource("profilePage.fxml"));
         Parent root = load.load();
 
         Scene scene = new Scene(root);
@@ -146,22 +155,27 @@ public class PanierController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+        firstname.setText(SessionManager.getLoggedInUser().getFirstName());
+        lastname.setText(SessionManager.getLoggedInUser().getLastName());
+        email.setText(SessionManager.getLoggedInUser().getEmail());
+        solde.setText(String.valueOf(SessionManager.getLoggedInUser().getBalance()));
+        adressePostale.setText(SessionManager.getLoggedInUser().getAddress());
+
         Compte compte = SessionManager.getLoggedInUser();
         System.out.println("ON EST DANS LE PANIER : ");
         System.out.println(compte.getFirstName());
         DatabaseModel database = new DatabaseModel();
-        database.afficherPaniertabbrutarray();
-        paniers = database.getPaniers();
-        System.out.println(paniers.size());
+        database.afficherHistoriquetabbrutarray(SessionManager.getLoggedInUser().getFirstName());
+        historiques = database.getHistoriques();
+        System.out.println(historiques.size());
 
-        usertext.setText(SessionManager.getLoggedInUser().getFirstName());
-        usertextBalance.setText(String.valueOf(SessionManager.getLoggedInUser().getBalance()));
+
 
 
         int row = 0;
-        for (Panier objet : paniers) {
+        for (Historique objet : historiques) {
 
-            System.out.println(paniers.size());
+            System.out.println(historiques.size());
 
             if(objet.getTable_nom().equals("accessoires") || objet.getTable_nom().equals("bijoux"))
             {
@@ -199,25 +213,7 @@ public class PanierController implements Initializable {
                 gridpane.add(authorLabel, 2, row);
                 gridpane.add(priceLabel,3,row);
                 gridpane.add(quantLabel,4,row);
-                gridpane.add(button2,5,row);
-                button2.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override public void handle(ActionEvent e) {
-                        database.effacePanieruniqueitem(objet.getId());
-                        FXMLLoader load = new FXMLLoader(getClass().getResource("panierPage.fxml"));
-                        Parent root = null;
-                        try {
-                            root = load.load();
-                        } catch (IOException ex) {
-                            throw new RuntimeException(ex);
-                        }
 
-                        Scene scene = new Scene(root);
-                        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-                        stage.setScene(scene);
-                        stage.show();
-
-                    }
-                });
             }
 
             if(objet.getTable_nom().equals("livres")) {
@@ -257,25 +253,6 @@ public class PanierController implements Initializable {
                 gridpane.add(authorLabel, 2, row);
                 gridpane.add(priceLabel, 3, row);
                 gridpane.add(quantLabel,4,row);
-                gridpane.add(button2, 5, row);
-                button2.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override public void handle(ActionEvent e) {
-                        database.effacePanieruniqueitem(objet.getId());
-                        FXMLLoader load = new FXMLLoader(getClass().getResource("panierPage.fxml"));
-                        Parent root = null;
-                        try {
-                            root = load.load();
-                        } catch (IOException ex) {
-                            throw new RuntimeException(ex);
-                        }
-
-                        Scene scene = new Scene(root);
-                        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-                        stage.setScene(scene);
-                        stage.show();
-
-                    }
-                });
             }
 
 

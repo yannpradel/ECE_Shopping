@@ -9,7 +9,7 @@ public class Compte {
     private String email;
     private String password;
     private double balance;
-    private String address;
+    private String address = "---";
     private int isAdmin;
 
     public Compte(int id, String firstName, String lastName, String email, String password, double balance, String address, int isAdmin) {
@@ -21,6 +21,9 @@ public class Compte {
         this.balance = balance;
         this.address = address;
         this.isAdmin = isAdmin;
+
+        if(this.address == null)
+            this.address = "---";
     }
 
     public Compte (String username, String password)
@@ -43,6 +46,9 @@ public class Compte {
         }catch (SQLException e) {
             e.printStackTrace();
         }
+
+        if(this.address == null)
+            this.address = "---";
     }
 
     public Compte (String username, String password,int admin)
@@ -64,7 +70,11 @@ public class Compte {
         return isAdmin;
     }
 
-    public String getAddress() {
+    public String getAddress()
+
+    {
+        if(this.address == null)
+            this.address = "---";
         return address;
     }
 

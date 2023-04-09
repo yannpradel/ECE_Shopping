@@ -224,7 +224,7 @@
                                           <Image url="@user.png" />
                                        </image>
                                     </ImageView>
-                                    <Button fx:id="bijouxClick1111" mnemonicParsing="false" onAction="#gotoAccess" prefHeight="39.0" prefWidth="147.0" style="-fx-background-color: #808080;" text="Profil" textAlignment="CENTER">
+                                    <Button fx:id="bijouxClick1111" mnemonicParsing="false" onAction="#gotoProfile" prefHeight="39.0" prefWidth="147.0" style="-fx-background-color: #808080;" text="Profil" textAlignment="CENTER">
                                        <font>
                                           <Font name="Cambria" size="21.0" />
                                        </font>
