@@ -749,17 +749,20 @@ public class DatabaseModel {
                     Statement stmt1=conn.createStatement();
                     stmt1.executeUpdate(update1);
                     String update;
-                    if(reduc==1||quantity>4){
-                        pricetot += res.getInt("price_reduc");
-                        int venteReduc= res.getInt("vendu_reduc")+quantity;
-                        update = "UPDATE "+tableNom+" SET vendu_reduc = "+venteReduc+" WHERE id ="+productid;
-                    }else{
-                        pricetot += res.getInt("price");
-                        int ventesansreduc= res.getInt("vendu_sans_reduc")+quantity;
-                        update = "UPDATE "+tableNom+" SET vendu_sans_reduc = "+ventesansreduc+" WHERE id ="+productid;
+                    for (int i=0; i<quantity; i++) {
+                        if(reduc==1||quantity>4){
+                            pricetot += res.getInt("price_reduc");
+                            int venteReduc= res.getInt("vendu_reduc")+1;
+                            update = "UPDATE "+tableNom+" SET vendu_reduc = "+venteReduc+" WHERE id ="+productid;
+                        }else{
+                            pricetot += res.getInt("price");
+                            int ventesansreduc= res.getInt("vendu_sans_reduc")+1;
+                            update = "UPDATE "+tableNom+" SET vendu_sans_reduc = "+ventesansreduc+" WHERE id ="+productid;
+                        }
+                        Statement stmtU=conn.createStatement();
+                        stmtU.executeUpdate(update);
                     }
-                    Statement stmtU=conn.createStatement();
-                    stmtU.executeUpdate(update);
+
                 }
             }
 
