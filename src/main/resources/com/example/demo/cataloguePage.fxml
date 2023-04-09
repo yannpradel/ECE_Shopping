@@ -232,10 +232,10 @@
                                  <children>
                                     <ImageView fitHeight="41.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@parametres.png" />
+                                          <Image url="@carte-de-shopping.png" />
                                        </image>
                                     </ImageView>
-                                    <Button fx:id="bijouxClick11111" mnemonicParsing="false" onAction="#gotoBijoux" prefHeight="39.0" prefWidth="147.0" style="-fx-background-color: #808080;" text="Paramètres" textAlignment="CENTER">
+                                    <Button fx:id="bijouxClick11111" mnemonicParsing="false" onAction="#gotoPanier" prefHeight="39.0" prefWidth="147.0" style="-fx-background-color: #808080;" text="Panier" textAlignment="CENTER">
                                        <font>
                                           <Font name="Cambria" size="21.0" />
                                        </font>

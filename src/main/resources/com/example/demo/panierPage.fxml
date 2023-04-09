@@ -292,31 +292,25 @@
                   </Pane>
                </children>
             </GridPane>
-            <Text layoutX="1119.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Votre panier" wrappingWidth="384.13673400878906">
+            <Text layoutX="497.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Votre panier" wrappingWidth="209.13673400878906">
                <font>
                   <Font name="Tw Cen MT Condensed" size="36.0" />
                </font>
             </Text>
-            <Text layoutX="1524.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="446.8034052848816">
+            <Text fx:id="usertext" layoutX="706.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="209.13673400878906">
                <font>
-                  <Font name="Cambria Bold" size="32.0" />
+                  <Font name="Tw Cen MT Condensed" size="36.0" />
                </font>
-               <stroke>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="0.6973684430122375" green="0.14851364493370056" blue="0.14851364493370056" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </stroke>
+            </Text>
+            <Text layoutX="1272.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Votre argent :" wrappingWidth="236.08904266357428">
+               <font>
+                  <Font name="Tw Cen MT Condensed" size="36.0" />
+               </font>
+            </Text>
+            <Text fx:id="usertextBalance" layoutX="1529.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="209.13673400878906">
+               <font>
+                  <Font name="Tw Cen MT Condensed" size="36.0" />
+               </font>
             </Text>
          </children>
       </AnchorPane>

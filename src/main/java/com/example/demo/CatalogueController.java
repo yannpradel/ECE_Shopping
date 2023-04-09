@@ -44,7 +44,21 @@ public class CatalogueController{
         counter++;
         // System.out.println("aaaaa" + counter);
         //welcomeText.setText("Button Clicked " + counter);
-        FXMLLoader load = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+        FXMLLoader load = new FXMLLoader(getClass().getResource("cataloguePage.fxml"));
+        Parent root = load.load();
+
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+    @FXML
+    void gotoPanier(ActionEvent event) throws IOException {
+        // System.out.println("aaaaa" + counter);
+        //welcomeText.setText("Button Clicked " + counter);
+        FXMLLoader load = new FXMLLoader(getClass().getResource("panierPage.fxml"));
         Parent root = load.load();
 
         Scene scene = new Scene(root);

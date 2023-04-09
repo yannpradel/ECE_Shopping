@@ -54,7 +54,7 @@ public class LivreController implements Initializable {
     void gotoMenu(ActionEvent event) throws IOException {
         // System.out.println("aaaaa" + counter);
         //welcomeText.setText("Button Clicked " + counter);
-        FXMLLoader load = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+        FXMLLoader load = new FXMLLoader(getClass().getResource("cataloguePage.fxml"));
         Parent root = load.load();
 
         Scene scene = new Scene(root);

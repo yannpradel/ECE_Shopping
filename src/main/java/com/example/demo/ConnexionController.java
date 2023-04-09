@@ -41,7 +41,7 @@ public class ConnexionController {
             Compte compte = new Compte(username,password);
             SessionManager.setLoggedInUser(compte);
             System.out.println(SessionManager.getLoggedInUser().getEmail());
-            FXMLLoader load = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+            FXMLLoader load = new FXMLLoader(getClass().getResource("cataloguePage.fxml"));
             Parent root = load.load();
 
             Scene scene = new Scene(root);
