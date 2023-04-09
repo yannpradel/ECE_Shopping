@@ -149,7 +149,7 @@ public class PanierController implements Initializable {
 
             System.out.println(paniers.size());
 
-            if(objet.getTable_nom().equals("accessoires") || objet.getTable_nom().equals("bijou"))
+            if(objet.getTable_nom().equals("accessoires") || objet.getTable_nom().equals("bijoux"))
             {
                 System.out.println("L'objet : " + row + "est un accessoire ou un bijou");
                 Image image = new Image(objet.getImage());

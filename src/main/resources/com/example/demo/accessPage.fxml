@@ -70,18 +70,16 @@
          <children>
             <Pane layoutX="470.0" layoutY="124.0" prefHeight="932.0" prefWidth="1451.0">
                <children>
-                  <Label layoutX="19.0" layoutY="17.0" prefHeight="36.0" prefWidth="298.0" text="Ajoutés recemment">
-                     <font>
-                        <Font name="Cambria" size="24.0" />
-                     </font>
-                  </Label>
                   <ScrollPane layoutX="52.0" layoutY="109.0" prefHeight="726.0" prefWidth="1272.0">
                      <content>
-                        <GridPane fx:id="gridpane" prefHeight="1515.0" prefWidth="1240.0" stylesheets="@../../../../../target/src/css/styles.css">
+                        <GridPane fx:id="gridpane" alignment="CENTER_RIGHT" prefHeight="1515.0" prefWidth="1240.0" stylesheets="@../../../../../target/src/css/styles.css">
                            <columnConstraints>
-                              <ColumnConstraints fx:id="bijouPic1" hgrow="SOMETIMES" maxWidth="360.0" minWidth="10.0" prefWidth="359.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="375.0" minWidth="10.0" prefWidth="375.0" />
-                              <ColumnConstraints fx:id="bijouPrice1" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints fx:id="bijouPic" hgrow="SOMETIMES" maxWidth="360.0" minWidth="10.0" prefWidth="223.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="512.0" minWidth="10.0" prefWidth="222.0" />
+                              <ColumnConstraints fx:id="bijouPrice" hgrow="SOMETIMES" maxWidth="441.0" minWidth="10.0" prefWidth="264.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="315.0" minWidth="10.0" prefWidth="172.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="272.0" minWidth="10.0" prefWidth="272.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="272.0" minWidth="10.0" prefWidth="272.0" />
                            </columnConstraints>
                            <rowConstraints>
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -96,6 +94,15 @@
                         </GridPane>
                      </content>
                   </ScrollPane>
+                  <Label layoutX="52.0" layoutY="21.0" prefHeight="36.0" prefWidth="570.0" text="Tout ces accessoires sont à votre disposition !">
+                     <font>
+                        <Font name="Cambria" size="24.0" />
+                     </font>
+                  </Label>
+                  <Text fill="#575757" layoutX="52.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Item" wrappingWidth="137.13671875" />
+                  <Text fill="#575757" layoutX="623.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Author" />
+                  <Text fill="#575757" layoutX="851.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity" />
+                  <Text fill="#575757" layoutX="1037.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix" />
                </children>
             </Pane>
             <Label alignment="CENTER" layoutX="155.0" layoutY="177.0" style="&#10;" text="Drag components from Library here…" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
@@ -234,16 +241,20 @@
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="62.0" prefWidth="469.0">
                                  <children>
-                                    <ImageView fitHeight="41.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@parametres.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Button fx:id="bijouxClick11111" mnemonicParsing="false" onAction="#gotoBijoux" prefHeight="39.0" prefWidth="147.0" style="-fx-background-color: #808080;" text="Paramètres" textAlignment="CENTER">
-                                       <font>
-                                          <Font name="Cambria" size="21.0" />
-                                       </font>
-                                    </Button>
+                                    <HBox alignment="CENTER" prefHeight="62.0" prefWidth="469.0">
+                                       <children>
+                                          <ImageView fitHeight="41.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@carte-de-shopping.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Button mnemonicParsing="false" onAction="#gotoPanier" prefHeight="39.0" prefWidth="147.0" style="-fx-background-color: #808080;" text="Panier" textAlignment="CENTER">
+                                             <font>
+                                                <Font name="Cambria" size="21.0" />
+                                             </font>
+                                          </Button>
+                                       </children>
+                                    </HBox>
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="62.0" prefWidth="469.0">
