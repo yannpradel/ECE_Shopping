@@ -1,9 +1,6 @@
 package com.example.demo;
 
-import com.example.demo.model.Bijou;
-import com.example.demo.model.Compte;
-import com.example.demo.model.DatabaseModel;
-import com.example.demo.model.Livre;
+import com.example.demo.model.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -24,12 +21,12 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class LivreController implements Initializable {
+public class PanierController implements Initializable {
     private Bijou bijou;
     @FXML
     private GridPane gridpane;
 
-    public List<Livre> livres;
+    public List<Panier> paniers;
 
 
 
@@ -113,17 +110,28 @@ public class LivreController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         Compte compte = SessionManager.getLoggedInUser();
-        System.out.println("compte.getEmail() : ");
+        System.out.println("ON EST DANS LE PANIER : ");
         System.out.println(compte.getFirstName());
         DatabaseModel database = new DatabaseModel();
-        database.descriptiontabbrutarray("livres",0,0);
-        livres = database.getLivres();
-        System.out.println(livres.get(0).getTitle());
-
+        database.afficherPaniertabbrutarray();
+        paniers = database.getPaniers();
+        System.out.println(paniers.size());
 
 
         int row = 0;
-        for (Livre objet : livres) {
+        for (Panier objet : paniers) {
+
+            System.out.println(paniers.size());
+
+            if(objet.getTable_nom().equals("accessoires") || objet.getTable_nom().equals("bijou"))
+            {
+                System.out.println("L'objet : " + row + "est un accessoire ou un bijou");
+            }
+
+            if(objet.getTable_nom().equals("livres"))
+            {
+                System.out.println("L'objet : " + row + "est un livre");
+            }
 
             // image = new Image(getClass().getResource("/com/example/demo/ab.png").toExternalForm());
             //Image image = new Image("https://www.shutterstock.com/image-vector/open-book-vector-clipart-silhouette-600w-358417976.jpg");
