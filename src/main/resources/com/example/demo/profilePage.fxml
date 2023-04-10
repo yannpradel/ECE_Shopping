@@ -363,7 +363,7 @@
                                                 <Image url="@se-deconnecter.png" />
                                              </image>
                                           </ImageView>
-                                          <Button fx:id="bijouxClick111211" mnemonicParsing="false" onAction="#gotoMenu" prefHeight="39.0" prefWidth="147.0" style="-fx-background-color: #808080;" text="Déconnexion" textAlignment="CENTER">
+                                          <Button fx:id="bijouxClick111211" mnemonicParsing="false" onAction="#gotoDisconnect" prefHeight="39.0" prefWidth="147.0" style="-fx-background-color: #808080;" text="Déconnexion" textAlignment="CENTER">
                                              <font>
                                                 <Font name="Cambria" size="21.0" />
                                              </font>

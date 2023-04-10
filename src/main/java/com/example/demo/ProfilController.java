@@ -137,6 +137,21 @@ public class ProfilController implements Initializable {
     }
 
     @FXML
+    void gotoDisconnect(ActionEvent event) throws IOException {
+        SessionManager.clearSession();
+        // System.out.println("aaaaa" + counter);
+        //welcomeText.setText("Button Clicked " + counter);
+        FXMLLoader load = new FXMLLoader(getClass().getResource("ConnexionPage.fxml"));
+        Parent root = load.load();
+
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+    @FXML
     private void onConfirmButtonClicked(ActionEvent event) throws IOException{
         DatabaseModel database = new DatabaseModel();
         int balance = database.ConfirmationAchatpage(SessionManager.getLoggedInUser().getFirstName());
