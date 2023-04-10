@@ -30,17 +30,17 @@ public class DatabaseModel {
 
     private int adminS=666;
 
-    List<Compte> comptes = new ArrayList<>();
+    private List<Compte> comptes = new ArrayList<>();
 
-    List<Accessoire> accessoires = new ArrayList<>();
+    private List<Accessoire> accessoires = new ArrayList<>();
 
-    List<Bijou> bijoux = new ArrayList<>();
-    List<Livre> livres= new ArrayList<>();
+    private List<Bijou> bijoux = new ArrayList<>();
+    private List<Livre> livres= new ArrayList<>();
 
-    List<Panier> paniers=new ArrayList<>();
-    List<Historique> historiques=new ArrayList<>();
+    private List<Panier> paniers=new ArrayList<>();
+    private List<Historique> historiques=new ArrayList<>();
 
-    List<String> columnNames = new ArrayList<>();
+    private List<String> columnNames = new ArrayList<>();
 
     public List<Compte> getComptes() {
         return comptes;
@@ -1804,7 +1804,7 @@ public class DatabaseModel {
         graphvente("livres");
 
         afficherColonne("livres");
-        //for (String col : columnNames) {System.out.println(col);}
+        //for (String col : getColumnNames()) {System.out.println(col);}
 
 
        /* addSomething("comptes");
