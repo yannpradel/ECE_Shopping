@@ -30,17 +30,17 @@ public class DatabaseModel {
 
     private int adminS=666;
 
-    List<Compte> comptes = new ArrayList<>();
+    private List<Compte> comptes = new ArrayList<>();
 
-    List<Accessoire> accessoires = new ArrayList<>();
+    private List<Accessoire> accessoires = new ArrayList<>();
 
-    List<Bijou> bijoux = new ArrayList<>();
-    List<Livre> livres= new ArrayList<>();
+    private List<Bijou> bijoux = new ArrayList<>();
+    private List<Livre> livres= new ArrayList<>();
 
-    List<Panier> paniers=new ArrayList<>();
-    List<Historique> historiques=new ArrayList<>();
+    private List<Panier> paniers=new ArrayList<>();
+    private List<Historique> historiques=new ArrayList<>();
 
-    List<String> columnNames = new ArrayList<>();
+    private List<String> columnNames = new ArrayList<>();
 
     public List<Compte> getComptes() {
         return comptes;
@@ -991,6 +991,25 @@ public class DatabaseModel {
         }
     }
 
+    public void afficherColonne(String nomTab){
+        columnNames.clear();
+        try (Connection conn= DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
+            stmt = conn.createStatement();
+            String query;
+            DatabaseMetaData metadata = conn.getMetaData();
+            ResultSet rsColumns = metadata.getColumns(null, null, nomTab, null);
+            System.out.println("Colonnes de la table " + nomTab + " : ");
+            while (rsColumns.next()) {
+                String columnName = rsColumns.getString("COLUMN_NAME");
+                columnNames.add(columnName);
+                System.out.println(columnName);
+            }
+            rsColumns.close();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     public void descriptiontab(String nomTab, int avecrecherche) {
         try (Connection conn= DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
             stmt = conn.createStatement();
@@ -1779,8 +1798,15 @@ public class DatabaseModel {
     }
     public void run() {
 
+
+
         createDatabase();
         graphvente("livres");
+
+        afficherColonne("livres");
+        //for (String col : getColumnNames()) {System.out.println(col);}
+
+
        /* addSomething("comptes");
 
         addSomething("bijous");
