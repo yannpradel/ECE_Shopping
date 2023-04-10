@@ -40,6 +40,8 @@ public class DatabaseModel {
     List<Panier> paniers=new ArrayList<>();
     List<Historique> historiques=new ArrayList<>();
 
+    List<String> columnNames = new ArrayList<>();
+
     public List<Compte> getComptes() {
         return comptes;
     }
@@ -62,6 +64,10 @@ public class DatabaseModel {
 
     public List<Historique> getHistoriques() {
         return historiques;
+    }
+
+    public List<String> getColumnNames() {
+        return columnNames;
     }
 
     public int getAdminS() {
@@ -1395,6 +1401,199 @@ public class DatabaseModel {
             e.printStackTrace();
         }
     }
+
+    public void descriptiontabbrutarray(String nomTab, int avecrecherche, int trie, String nomRecherche, String colonne,String ordre) {
+                //descriptiontabbrutarray("livres",1,1,"jdsq","trieselonquelid","DESC"/"ASC")
+        comptes.clear();
+        accessoires.clear();
+        bijoux.clear();
+        livres.clear();
+        columnNames.clear();
+
+        List<Panier> paniers=new ArrayList<>();
+        try (Connection conn= DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
+            stmt = conn.createStatement();
+            String query;
+            // Création de la requête SQL pour récupérer toutes les données du tableau "compte"
+            if (avecrecherche==1&&trie==1) {
+                System.out.println("-----------AVEC RECHERCHE ET AVEC TRIE-------------");
+                //Scanner scanner = new Scanner(System.in);
+                //System.out.print("Entrez le nom à rechercher : ");
+                //String nomRecherche = scanner.nextLine();
+
+                DatabaseMetaData metadata = conn.getMetaData();
+                ResultSet rsColumns = metadata.getColumns(null, null, nomTab, null);
+                //List<String> columnNames = new ArrayList<>();
+                System.out.println("Colonnes de la table " + nomTab + " : ");
+                while (rsColumns.next()) {
+                    String columnName = rsColumns.getString("COLUMN_NAME");
+                    columnNames.add(columnName);
+                    System.out.println(columnName);
+                }
+                rsColumns.close();
+
+                // construction dynamique de la clause WHERE
+                StringBuilder whereClause = new StringBuilder();
+                for (String columnName : columnNames) {
+                    whereClause.append(columnName).append(" LIKE '%").append(nomRecherche).append("%' OR ");
+                }
+                // suppression de la dernière occurrence de "OR" dans la clause WHERE
+                whereClause.delete(whereClause.length() - 4, whereClause.length());
+
+                // construction de la requête complète
+                query = "SELECT * FROM " + nomTab + " WHERE " + whereClause.toString();
+
+                //Scanner col= new Scanner(System.in);
+                //System.out.println("Quel colonne?");
+                //String colonne=col.nextLine();
+
+                System.out.println("Quel ordre?");
+                System.out.println("1:DESC");
+                System.out.println("2: ASC");
+                //int orderchoix=col.nextInt();String ordre;if (orderchoix==1){ordre="DESC";}else{ordre="ASC";}
+                // Ajout de l'ordre de tri
+                query += " ORDER BY " + colonne + " " + ordre;
+            } else if (avecrecherche==1) {
+                System.out.println("-----------AVEC RECHERCHE ET SANS TRIE-------------");
+                //Scanner scanner = new Scanner(System.in);
+                //System.out.print("Entrez le nom à rechercher : ");
+                //String nomRecherche = scanner.nextLine();
+
+                DatabaseMetaData metadata = conn.getMetaData();
+                ResultSet rsColumns = metadata.getColumns(null, null, nomTab, null);
+                //List<String> columnNames = new ArrayList<>();
+                while (rsColumns.next()) {
+                    String columnName = rsColumns.getString("COLUMN_NAME");
+                    columnNames.add(columnName);
+                }
+                rsColumns.close();
+
+                // construction dynamique de la clause WHERE
+                StringBuilder whereClause = new StringBuilder();
+                for (String columnName : columnNames) {
+                    whereClause.append(columnName).append(" LIKE '%").append(nomRecherche).append("%' OR ");
+                }
+                // suppression de la dernière occurrence de "OR" dans la clause WHERE
+                whereClause.delete(whereClause.length() - 4, whereClause.length());
+
+                // construction de la requête complète
+                query = "SELECT * FROM " + nomTab + " WHERE " + whereClause.toString();
+
+
+            } else if(avecrecherche==0&&trie==1) {
+                System.out.println("-----------SANS RECHERCHE ET AVEC TRIE-------------");
+
+                DatabaseMetaData metadata = conn.getMetaData();
+                ResultSet rsColumns = metadata.getColumns(null, null, nomTab, null);
+                //List<String> columnNames = new ArrayList<>();
+                columnNames.clear();
+                System.out.println("Colonnes de la table " + nomTab + " : ");
+                while (rsColumns.next()) {
+                    String columnName = rsColumns.getString("COLUMN_NAME");
+                    columnNames.add(columnName);
+                    System.out.println(columnName);
+                }
+                rsColumns.close();
+
+                //Scanner col= new Scanner(System.in);
+                //System.out.println("Quel colonne?");
+                //String colonne=col.nextLine();
+
+                System.out.println("Quel ordre?");
+                System.out.println("1:DESC");
+                System.out.println("2: ASC");
+                //int orderchoix=col.nextInt();
+                //String ordre;if (orderchoix==1){ordre="DESC";}else{ordre="ASC";}
+                query = "SELECT * FROM "+nomTab;
+                // Ajout de l'ordre de tri
+                query += " ORDER BY " + colonne + " " + ordre;
+
+            }
+            else {
+                System.out.println("-----------SANS RECHERCHE ET SANS TRIE-------------");
+                query = "SELECT * FROM "+nomTab;
+            }
+
+
+
+            // Exécution de la requête et récupération du résultat
+            ResultSet rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+
+                switch (nomTab) {
+                    case "comptes":
+                        String first_name = rs.getString("first_name");
+                        String last_name = rs.getString("last_name");
+                        String email = rs.getString("email");
+                        String password = rs.getString("password");
+                        double balance = rs.getDouble("balance");
+                        String address = rs.getString("adress");
+                        int admin = rs.getInt("admin");
+                        Compte compte = new Compte(id, first_name, last_name, email, password, balance, address, admin);
+                        comptes.add(compte);
+                        break;
+
+                    case "accessoires":
+                        String name = rs.getString("name");
+                        String description = rs.getString("description");
+                        int en_reduction = rs.getInt("en_reduction");
+                        double price = rs.getDouble("price");
+                        double price_reduc = rs.getDouble("price_reduc");
+                        int stock_quantity = rs.getInt("stock_quantity");
+                        int vendu_sans_reduc = rs.getInt("vendu_sans_reduc");
+                        int vendu_reduc = rs.getInt("vendu_reduc");
+                        String image = rs.getString("image");
+                        Accessoire accessoire = new Accessoire(id, name, description, en_reduction, price, price_reduc, stock_quantity, vendu_reduc, vendu_reduc, image);
+                        accessoires.add(accessoire);
+                        break;
+
+                    case "livres":
+                        String title = rs.getString("title");
+                        String author = rs.getString("author");
+                        String publisher = rs.getString("publisher");
+                        String publicationDate = rs.getString("publication_date");
+                        String isbn = rs.getString("isbn");
+                        int enReduction = rs.getInt("en_reduction");
+                        double pricel = rs.getDouble("price");
+                        double priceReduc = rs.getDouble("price_reduc");
+                        int stockQuantity = rs.getInt("stock_quantity");
+                        int venduSansReduc = rs.getInt("vendu_sans_reduc");
+                        int venduReduc = rs.getInt("vendu_reduc");
+                        String imagel = rs.getString("image");
+
+                        Livre livre = new Livre(id, title, author, publisher, publicationDate, isbn, enReduction, pricel, priceReduc, stockQuantity, venduSansReduc, venduReduc, imagel);
+                        livres.add(livre);
+                        break;
+
+                    case "bijoux":
+                        String nameb = rs.getString("name");
+                        String descriptionb = rs.getString("description");
+                        int en_reductionb = rs.getInt("en_reduction");
+                        double priceb = rs.getDouble("price");
+                        double price_reducb = rs.getDouble("price_reduc");
+                        int stock_quantityb = rs.getInt("stock_quantity");
+                        int vendu_sans_reducb = rs.getInt("vendu_sans_reduc");
+                        int vendu_reducb = rs.getInt("vendu_reduc");
+                        String imageb = rs.getString("image");
+                        Bijou bijou = new Bijou(id, nameb, descriptionb, en_reductionb, priceb, price_reducb, stock_quantityb, vendu_sans_reducb, vendu_reducb, imageb);
+                        bijoux.add(bijou);
+                        break;
+
+                    default:
+                        throw new IllegalArgumentException("Tableau inconnu : " + nomTab);
+                }
+            }
+
+            // Fermeture des ressources
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void supprimeligne(){
         System.out.println("-----------------SUPPRESSION LIGNE---------------");
         Scanner saisie=new Scanner(System.in);
