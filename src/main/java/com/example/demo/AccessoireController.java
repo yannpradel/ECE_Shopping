@@ -29,7 +29,78 @@ public class AccessoireController implements Initializable {
     public List<Accessoire> accessoires;
 
     @FXML
+    private TextField searchBar;
+
+    @FXML
     ScrollPane scrollpane = new ScrollPane();
+
+    @FXML
+    void search(ActionEvent event) {
+        DatabaseModel database = new DatabaseModel();
+        database.descriptiontabbrutarray("accessoires",1,0,searchBar.getText(),"name","ASC");
+        accessoires = database.getAccessoires();
+        gridpane.getChildren().clear();
+
+        int row = 0;
+        for (Accessoire objet : accessoires) {
+
+            // image = new Image(getClass().getResource("/com/example/demo/ab.png").toExternalForm());
+            //Image image = new Image("https://www.shutterstock.com/image-vector/open-book-vector-clipart-silhouette-600w-358417976.jpg");
+            Image image = new Image(objet.getImage());
+
+            // Créez un ImageView pour l'image de l'objet
+            ImageView imageView = new ImageView();
+            imageView.setImage(image);
+            imageView.setFitWidth(100);
+            imageView.setPreserveRatio(true);
+
+            // Créez un Label pour le nom de l'objet
+            Label nomLabel = new Label(objet.getName());
+
+            // Créez un Label pour la description de l'objet
+            Label authorLabel = new Label(objet.getDescription());
+            authorLabel.setWrapText(true);
+
+            Label priceLabel = new Label(String.valueOf(objet.getPrice()));
+            Button button2 = new Button();
+
+
+            button2.setText("Ajouter au panier");
+            button2.setStyle("-fx-background-color: #676767;");
+
+            Spinner spinner = new Spinner();
+            Spinner<Integer> spinner1 = (Spinner<Integer>) spinner;
+            spinner1.setValueFactory(
+                    new SpinnerValueFactory.IntegerSpinnerValueFactory(
+                            0,
+                            objet.getStock_quantity()
+                    )
+            );
+
+            // Ajoutez les éléments à la GridPane
+            //gridpane.add(imageView, 0, row);
+
+            gridpane.add(imageView,0,row);
+            gridpane.add(nomLabel, 1, row);
+            gridpane.add(authorLabel, 2, row);
+            gridpane.add(spinner1, 3, row);
+            gridpane.add(priceLabel,4,row);
+            gridpane.add(button2,5,row);
+            button2.setOnAction(new EventHandler<ActionEvent>() {
+                @Override public void handle(ActionEvent e) {
+                    database.addPanier(objet.getId(), "accessoires",spinner1.getValue());
+                    button2.setText("Accepted " + spinner1.getValue());
+                }
+            });
+
+
+
+            // Incrémentez le numéro de ligne
+            row++;
+        }
+        scrollpane.setContent(gridpane);
+
+    }
 
     @FXML
     void gotoBijoux(ActionEvent event) throws IOException {

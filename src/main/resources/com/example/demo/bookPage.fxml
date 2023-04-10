@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -60,6 +61,8 @@
                   <Text fill="#575757" layoutX="623.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Author" />
                   <Text fill="#575757" layoutX="851.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity" />
                   <Text fill="#575757" layoutX="1037.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix" />
+                  <Button layoutX="888.0" layoutY="27.0" mnemonicParsing="false" onAction="#search" text="Rechercher" />
+                  <TextField fx:id="searchBar" layoutX="658.0" layoutY="27.0" prefHeight="25.0" prefWidth="216.0" />
                </children>
             </Pane>
             <GridPane prefHeight="1080.0" prefWidth="469.0">
