@@ -45,6 +45,44 @@ public class BijouController implements Initializable {
     void search(ActionEvent event) {
         DatabaseModel database = new DatabaseModel();
         database.descriptiontabbrutarray("bijoux",1,0,searchBar.getText(),"name","ASC");
+        afficherTableau(database);
+    }
+
+    @FXML
+    void sortPriceAsc()
+    {
+        DatabaseModel database = new DatabaseModel();
+        database.descriptiontabbrutarray("bijoux",1,1,searchBar.getText(),"price","ASC");
+        afficherTableau(database);
+    }
+
+    @FXML
+    void sortPriceDesc()
+    {
+        DatabaseModel database = new DatabaseModel();
+        database.descriptiontabbrutarray("bijoux",1,1,searchBar.getText(),"price","DESC");
+        afficherTableau(database);
+    }
+
+    @FXML
+    void sortNameAsc()
+    {
+        DatabaseModel database = new DatabaseModel();
+        database.descriptiontabbrutarray("bijoux",1,1,searchBar.getText(),"name","ASC");
+        afficherTableau(database);
+    }
+
+    @FXML
+    void sortNameDesc()
+    {
+        DatabaseModel database = new DatabaseModel();
+        database.descriptiontabbrutarray("bijoux",1,1,searchBar.getText(),"name","DESC");
+        afficherTableau(database);
+    }
+
+    void afficherTableau(DatabaseModel database)
+    {
+
         bijoux = database.getBijoux();
         gridpane.getChildren().clear();
 
@@ -106,7 +144,6 @@ public class BijouController implements Initializable {
             row++;
         }
         scrollpane.setContent(gridpane);
-
     }
 
     @FXML

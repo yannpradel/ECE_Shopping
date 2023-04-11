@@ -39,6 +39,44 @@ public class LivreController implements Initializable {
     void search(ActionEvent event) {
         DatabaseModel database = new DatabaseModel();
         database.descriptiontabbrutarray("livres",1,0,searchBar.getText(),"name","ASC");
+        afficherTableau(database);
+    }
+
+    @FXML
+    void sortPriceAsc()
+    {
+        DatabaseModel database = new DatabaseModel();
+        database.descriptiontabbrutarray("livres",1,1,searchBar.getText(),"price","ASC");
+        afficherTableau(database);
+    }
+
+    @FXML
+    void sortPriceDesc()
+    {
+        DatabaseModel database = new DatabaseModel();
+        database.descriptiontabbrutarray("livres",1,1,searchBar.getText(),"price","DESC");
+        afficherTableau(database);
+    }
+
+    @FXML
+    void sortNameAsc()
+    {
+        DatabaseModel database = new DatabaseModel();
+        database.descriptiontabbrutarray("livres",1,1,searchBar.getText(),"title","ASC");
+        afficherTableau(database);
+    }
+
+    @FXML
+    void sortNameDesc()
+    {
+        DatabaseModel database = new DatabaseModel();
+        database.descriptiontabbrutarray("livres",1,1,searchBar.getText(),"title","DESC");
+        afficherTableau(database);
+    }
+
+    void afficherTableau(DatabaseModel database)
+    {
+
         livres = database.getLivres();
         gridpane.getChildren().clear();
 

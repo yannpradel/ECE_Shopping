@@ -34,10 +34,61 @@ public class AccessoireController implements Initializable {
     @FXML
     ScrollPane scrollpane = new ScrollPane();
 
+
+    @FXML
+    void gotoBijoux(ActionEvent event) throws IOException {
+        // System.out.println("aaaaa" + counter);
+        //welcomeText.setText("Button Clicked " + counter);
+        FXMLLoader load = new FXMLLoader(getClass().getResource("bijouPage.fxml"));
+        Parent root = load.load();
+
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
+
     @FXML
     void search(ActionEvent event) {
         DatabaseModel database = new DatabaseModel();
         database.descriptiontabbrutarray("accessoires",1,0,searchBar.getText(),"name","ASC");
+        afficherTableau(database);
+    }
+    @FXML
+    void sortPriceAsc()
+    {
+        DatabaseModel database = new DatabaseModel();
+        database.descriptiontabbrutarray("accessoires",1,1,searchBar.getText(),"price","ASC");
+        afficherTableau(database);
+    }
+
+    @FXML
+    void sortPriceDesc()
+    {
+        DatabaseModel database = new DatabaseModel();
+        database.descriptiontabbrutarray("accessoires",1,1,searchBar.getText(),"price","DESC");
+        afficherTableau(database);
+    }
+
+    @FXML
+    void sortNameAsc()
+    {
+        DatabaseModel database = new DatabaseModel();
+        database.descriptiontabbrutarray("accessoires",1,1,searchBar.getText(),"name","ASC");
+        afficherTableau(database);
+    }
+
+    @FXML
+    void sortNameDesc()
+    {
+        DatabaseModel database = new DatabaseModel();
+        database.descriptiontabbrutarray("accessoires",1,1,searchBar.getText(),"name","DESC");
+        afficherTableau(database);
+    }
+
+    void afficherTableau(DatabaseModel database)
+    {
+
         accessoires = database.getAccessoires();
         gridpane.getChildren().clear();
 
@@ -99,21 +150,6 @@ public class AccessoireController implements Initializable {
             row++;
         }
         scrollpane.setContent(gridpane);
-
-    }
-
-    @FXML
-    void gotoBijoux(ActionEvent event) throws IOException {
-        // System.out.println("aaaaa" + counter);
-        //welcomeText.setText("Button Clicked " + counter);
-        FXMLLoader load = new FXMLLoader(getClass().getResource("bijouPage.fxml"));
-        Parent root = load.load();
-
-        Scene scene = new Scene(root);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
-
     }
 
     @FXML
