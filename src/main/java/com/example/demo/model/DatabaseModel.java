@@ -38,6 +38,8 @@ public class DatabaseModel {
     private List<Livre> livres= new ArrayList<>();
 
     private List<Panier> paniers=new ArrayList<>();
+
+    private List<Historique> souhaits=new ArrayList<>();
     private List<Historique> historiques=new ArrayList<>();
 
     private List<String> columnNames = new ArrayList<>();
@@ -60,6 +62,10 @@ public class DatabaseModel {
 
     public List<Panier> getPaniers() {
         return paniers;
+    }
+
+    public List<Historique> getSouhaits() {
+        return souhaits;
     }
 
     public List<Historique> getHistoriques() {
@@ -215,6 +221,17 @@ public class DatabaseModel {
                     " PRIMARY KEY ( id ))";
             stmt.executeUpdate(createTable7Query);
             System.out.println("Table historique client created successfully...");
+
+            String createTable8Query = "CREATE TABLE souhait " +
+                    "(id INT not NULL AUTO_INCREMENT, " +
+                    " first_name VARCHAR(1000), " +
+                    " product_id INT, " +
+                    " table_nom VARCHAR(50), " +
+                    " quantity INT, " +
+                    " date_created DATETIME DEFAULT CURRENT_TIMESTAMP, " +
+                    " PRIMARY KEY ( id ))";
+            stmt.executeUpdate(createTable8Query);
+            System.out.println("Table souhait client created successfully...");
 
             //INITILISATION DES TABLEAUX
             Statement stmt = conn.createStatement();
@@ -378,6 +395,240 @@ public class DatabaseModel {
             ps.executeUpdate();
             if (rs != null) rs.close();
             if (conn != null) conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void effaceSouhaituniqueitem(int ID) {
+        int num = ID;
+        try (Connection conn = DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("DELETE FROM souhait WHERE id="+num);
+            System.out.println("souhait where id="+num+" cleared successfully");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void addSouhait(String first_name,int productId, String tableNom, int quantity){
+        try (Connection conn = DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
+            String sql = "INSERT INTO souhait (first_name, product_id, table_nom, quantity) VALUES (?, ?, ?, ?)";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,first_name);
+            pstmt.setInt(2, productId);
+            pstmt.setString(3, tableNom);
+            pstmt.setInt(4, quantity);
+            int rowsInserted = pstmt.executeUpdate();
+            if (rowsInserted > 0) {
+                System.out.println("L'article a été ajouté au souhait avec succès.");
+            }
+            pstmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void afficherSouhaittabbrutarray(String firstname){
+        String querylia = "SELECT * FROM souhait WHERE first_name= '"+firstname+"'";
+        souhaits.clear();
+        try (Connection conn= DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
+            Statement stmtlia = conn.createStatement();
+
+            ResultSet rslia = stmtlia.executeQuery(querylia);
+
+            while (rslia.next()) {
+                int id = rslia.getInt("id");
+                String first_name=rslia.getString("first_name");
+                String tableNom = rslia.getString("table_nom");
+                int quantity = rslia.getInt("quantity");
+                int productid = rslia.getInt("product_id");
+                Timestamp date = rslia.getTimestamp("date_created");
+
+                stmt= conn.createStatement();
+                String query="SELECT * FROM "+tableNom+" WHERE id="+productid;
+                ResultSet rs = stmt.executeQuery(query);
+
+
+                while (rs.next()) {
+                    //int id = rs.getInt("id");
+
+                    switch (tableNom) {
+
+                        case "accessoires":
+                            String name = rs.getString("name");
+                            String description = rs.getString("description");
+                            int en_reduction = rs.getInt("en_reduction");
+                            double price = rs.getDouble("price");
+                            double price_reduc = rs.getDouble("price_reduc");
+                            int stock_quantity = rs.getInt("stock_quantity");
+                            int vendu_sans_reduc = rs.getInt("vendu_sans_reduc");
+                            int vendu_reduc = rs.getInt("vendu_reduc");
+                            String image = rs.getString("image");
+                            Historique accessoire = new Historique(id, first_name,productid,tableNom, quantity,date,name, description, en_reduction, price, price_reduc, stock_quantity, vendu_reduc, vendu_reduc, image);
+
+                            souhaits.add(accessoire);
+                            break;
+
+                        case "livres":
+                            String title = rs.getString("title");
+                            String author = rs.getString("author");
+                            String publisher = rs.getString("publisher");
+                            String publicationDate = rs.getString("publication_date");
+                            String isbn = rs.getString("isbn");
+                            int enReduction = rs.getInt("en_reduction");
+                            double pricel = rs.getDouble("price");
+                            double priceReduc = rs.getDouble("price_reduc");
+                            int stockQuantity = rs.getInt("stock_quantity");
+                            int venduSansReduc = rs.getInt("vendu_sans_reduc");
+                            int venduReduc = rs.getInt("vendu_reduc");
+                            String imagel = rs.getString("image");
+
+                            Historique livre = new Historique(id,first_name,productid,tableNom, quantity,date, title, author, publisher, publicationDate, isbn, enReduction, pricel, priceReduc, stockQuantity, venduSansReduc, venduReduc, imagel);
+                            souhaits.add(livre);
+                            break;
+
+                        case "bijoux":
+                            String nameb = rs.getString("name");
+                            String descriptionb = rs.getString("description");
+                            int en_reductionb = rs.getInt("en_reduction");
+                            double priceb = rs.getDouble("price");
+                            double price_reducb = rs.getDouble("price_reduc");
+                            int stock_quantityb = rs.getInt("stock_quantity");
+                            int vendu_sans_reducb = rs.getInt("vendu_sans_reduc");
+                            int vendu_reducb = rs.getInt("vendu_reduc");
+                            String imageb = rs.getString("image");
+                            Historique bijou = new Historique(id,first_name,productid,tableNom, quantity,date, nameb, descriptionb, en_reductionb, priceb, price_reducb, stock_quantityb, vendu_sans_reducb, vendu_reducb, imageb);
+                            souhaits.add(bijou);
+                            break;
+
+                        default:
+                            throw new IllegalArgumentException("Tableau inconnu : " + tableNom);
+                    }
+                }
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void afficherSouhaittabbrutarray(){
+        String querylia = "SELECT * FROM souhait";
+
+        souhaits.clear();
+        try (Connection conn= DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
+            Statement stmtlia = conn.createStatement();
+
+            ResultSet rslia = stmtlia.executeQuery(querylia);
+
+            while (rslia.next()) {
+                int id = rslia.getInt("id");
+                String first_name=rslia.getString("first_name");
+                String tableNom = rslia.getString("table_nom");
+                int quantity = rslia.getInt("quantity");
+                int productid = rslia.getInt("product_id");
+                Timestamp date = rslia.getTimestamp("date_created");
+
+                stmt= conn.createStatement();
+                String query="SELECT * FROM "+tableNom+" WHERE id="+productid;
+                ResultSet rs = stmt.executeQuery(query);
+
+
+                while (rs.next()) {
+                    //int id = rs.getInt("id");
+
+                    switch (tableNom) {
+
+                        case "accessoires":
+                            String name = rs.getString("name");
+                            String description = rs.getString("description");
+                            int en_reduction = rs.getInt("en_reduction");
+                            double price = rs.getDouble("price");
+                            double price_reduc = rs.getDouble("price_reduc");
+                            int stock_quantity = rs.getInt("stock_quantity");
+                            int vendu_sans_reduc = rs.getInt("vendu_sans_reduc");
+                            int vendu_reduc = rs.getInt("vendu_reduc");
+                            String image = rs.getString("image");
+                            Historique accessoire = new Historique(id, first_name,productid,tableNom, quantity,date,name, description, en_reduction, price, price_reduc, stock_quantity, vendu_reduc, vendu_reduc, image);
+
+                            souhaits.add(accessoire);
+                            break;
+
+                        case "livres":
+                            String title = rs.getString("title");
+                            String author = rs.getString("author");
+                            String publisher = rs.getString("publisher");
+                            String publicationDate = rs.getString("publication_date");
+                            String isbn = rs.getString("isbn");
+                            int enReduction = rs.getInt("en_reduction");
+                            double pricel = rs.getDouble("price");
+                            double priceReduc = rs.getDouble("price_reduc");
+                            int stockQuantity = rs.getInt("stock_quantity");
+                            int venduSansReduc = rs.getInt("vendu_sans_reduc");
+                            int venduReduc = rs.getInt("vendu_reduc");
+                            String imagel = rs.getString("image");
+
+                            Historique livre = new Historique(id,first_name,productid,tableNom, quantity,date, title, author, publisher, publicationDate, isbn, enReduction, pricel, priceReduc, stockQuantity, venduSansReduc, venduReduc, imagel);
+                            souhaits.add(livre);
+                            break;
+
+                        case "bijoux":
+                            String nameb = rs.getString("name");
+                            String descriptionb = rs.getString("description");
+                            int en_reductionb = rs.getInt("en_reduction");
+                            double priceb = rs.getDouble("price");
+                            double price_reducb = rs.getDouble("price_reduc");
+                            int stock_quantityb = rs.getInt("stock_quantity");
+                            int vendu_sans_reducb = rs.getInt("vendu_sans_reduc");
+                            int vendu_reducb = rs.getInt("vendu_reduc");
+                            String imageb = rs.getString("image");
+                            Historique bijou = new Historique(id,first_name,productid,tableNom, quantity,date, nameb, descriptionb, en_reductionb, priceb, price_reducb, stock_quantityb, vendu_sans_reducb, vendu_reducb, imageb);
+                            souhaits.add(bijou);
+                            break;
+
+                        default:
+                            throw new IllegalArgumentException("Tableau inconnu : " + tableNom);
+                    }
+                }
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void addPanierviaSouhait(int ID){
+        //addPanierviaSouhait(getSouhait(i).getId()) en vif
+        try (Connection conn = DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
+
+            stmt = conn.createStatement();
+
+            String query="SELECT * FROM souhait WHERE id="+ID;
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()){
+                String tableNom = rs.getString("table_nom");
+                int quantity = rs.getInt("quantity");
+                int productId = rs.getInt("product_id");
+                String sql = "INSERT INTO panier (product_id, table_nom, quantity) VALUES (?, ?, ?)";
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                pstmt.setInt(1, productId);
+                pstmt.setString(2, tableNom);
+                pstmt.setInt(3, quantity);
+                int rowsInserted = pstmt.executeUpdate();
+                if (rowsInserted > 0) {
+                    System.out.println("L'article a été ajouté au panier avec succès.");
+                }
+                pstmt.close();
+            }
+
+
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
