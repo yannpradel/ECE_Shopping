@@ -34,8 +34,10 @@ public class ConnexionController {
         String password = passwordField.getText();
 
         DatabaseModel database = new DatabaseModel();
+
         if(database.Connexion(username,password) == true)
         {
+            //database.effacePanier();
             //Compte compte = new Compte(username,password,database.getAdminS());
             //email = SQL GET EMAIL FROM USERNAME AND PASSWORD
             Compte compte = new Compte(username,password);

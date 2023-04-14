@@ -634,6 +634,37 @@ public class DatabaseModel {
         }
     }
 
+    public void addPanierdansSouhaitdeco(String username){
+        //addPanierdansSouhaitdeco(getSouhait(i).getId()) en vif
+        try (Connection conn = DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
+
+            stmt = conn.createStatement();
+
+            String query="SELECT * FROM panier";
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()){
+                String tableNom = rs.getString("table_nom");
+                int quantity = rs.getInt("quantity");
+                int productId = rs.getInt("product_id");
+                String sql = "INSERT INTO souhait (first_name, product_id, table_nom, quantity) VALUES (?, ?, ?, ?)";
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                pstmt.setString(1,username);
+                pstmt.setInt(2, productId);
+                pstmt.setString(3, tableNom);
+                pstmt.setInt(4, quantity);
+                int rowsInserted = pstmt.executeUpdate();
+                if (rowsInserted > 0) {
+                    System.out.println("L'article a été ajouté au souhait avec succès.");
+                }
+                pstmt.close();
+            }
+
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     public void effacePanieruniqueitem(int ID) {
         int num = ID;
         try (Connection conn = DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
@@ -1224,7 +1255,6 @@ public class DatabaseModel {
         effacePanier();
 
     }
-
 
     public void afficherTableau(){
         Scanner saisie=new Scanner(System.in);
