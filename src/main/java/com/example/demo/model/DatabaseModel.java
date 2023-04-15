@@ -236,7 +236,7 @@ public class DatabaseModel {
             //INITILISATION DES TABLEAUX
             Statement stmt = conn.createStatement();
             String query = "INSERT INTO comptes (last_name, first_name, email, password, balance, admin) VALUES "
-                    + "('Dupont', 'Jean', 'jean.dupont@mail.com', '123456', 1000.0,0),"
+                    + "('Dupont', 'Jean', 'jean.dupont@mail.com', '123456', 1000.0,1),"
                     + "('Martin', 'Lucie', 'lucie.martin@mail.com', 'abcdef', 2000.0,0),"
                     + "('Garcia', 'Pedro', 'pedro.garcia@mail.com', 'ghijkl', 500.0,0),"
                     + "('Doe', 'John', 'john.doe@mail.com', 'mnopqr', 3000.0,0),"
@@ -1543,7 +1543,7 @@ public class DatabaseModel {
         bijoux.clear();
         livres.clear();
 
-        List<Panier> paniers=new ArrayList<>();
+
         try (Connection conn= DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
             stmt = conn.createStatement();
             String query;

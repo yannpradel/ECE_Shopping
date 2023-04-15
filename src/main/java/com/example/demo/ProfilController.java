@@ -9,9 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -31,6 +29,9 @@ public class ProfilController implements Initializable {
     public List<Historique> historiques;
 
     @FXML
+    TextField searchBar;
+
+    @FXML
     private Text firstname;
 
     @FXML
@@ -44,6 +45,12 @@ public class ProfilController implements Initializable {
 
     @FXML
     private Text adressePostale;
+
+    @FXML
+    public List<Compte> comptes;
+
+    @FXML
+    public SplitMenuButton splitmenu = new SplitMenuButton();
 
 
 
@@ -165,10 +172,139 @@ public class ProfilController implements Initializable {
         stage.show();
     }
 
+    private void afficherInfo(String name)
+    {
+        DatabaseModel database = new DatabaseModel();
+        database.descriptiontabbrutarray("comptes",0,0);
+        gridpane.getChildren().clear();
+        comptes = database.getComptes();
+        for (Compte compte : comptes) {
+            if (compte.getFirstName().equals(name)) {
+                firstname.setText(compte.getFirstName());
+                lastname.setText(compte.getLastName());
+                email.setText(compte.getEmail());
+                solde.setText(String.valueOf(compte.getBalance()));
+                adressePostale.setText(compte.getAddress());
+                database.afficherHistoriquetabbrutarray(compte.getFirstName());
+                historiques = database.getHistoriques();
+            }
+        }
+
+
+
+
+            int row = 0;
+            for (Historique objet : historiques) {
+
+                System.out.println(historiques.size());
+
+                if(objet.getTable_nom().equals("accessoires") || objet.getTable_nom().equals("bijoux"))
+                {
+                    System.out.println("L'objet : " + row + "est un accessoire ou un bijou");
+                    Image image = new Image(objet.getImage());
+
+                    // Créez un ImageView pour l'image de l'objet
+                    ImageView imageView = new ImageView();
+                    imageView.setImage(image);
+                    imageView.setFitWidth(100);
+                    imageView.setPreserveRatio(true);
+
+                    // Créez un Label pour le nom de l'objet
+                    Label nomLabel = new Label(objet.getName());
+
+                    // Créez un Label pour la description de l'objet
+                    Label authorLabel = new Label(objet.getDescription());
+                    authorLabel.setWrapText(true);
+
+                    // Créez un Label pour le nom de l'objet
+                    Label quantLabel = new Label(String.valueOf(objet.getQuantity()));
+
+                    Label priceLabel = new Label(String.valueOf(objet.getPrice()));
+                    Button button2 = new Button();
+
+
+                    button2.setText("Suprimmer");
+                    button2.setStyle("-fx-background-color: #676767;");
+
+                    // Ajoutez les éléments à la GridPane
+                    //gridpane.add(imageView, 0, row);
+
+                    gridpane.add(imageView,0,row);
+                    gridpane.add(nomLabel, 1, row);
+                    gridpane.add(authorLabel, 2, row);
+                    gridpane.add(priceLabel,3,row);
+                    gridpane.add(quantLabel,4,row);
+
+                }
+
+                if(objet.getTable_nom().equals("livres")) {
+                    System.out.println("L'objet : " + row + "est un livre");
+                    // image = new Image(getClass().getResource("/com/example/demo/ab.png").toExternalForm());
+                    //Image image = new Image("https://www.shutterstock.com/image-vector/open-book-vector-clipart-silhouette-600w-358417976.jpg");
+                    Image image = new Image(objet.getImage());
+
+                    // Créez un ImageView pour l'image de l'objet
+                    ImageView imageView = new ImageView();
+                    imageView.setImage(image);
+                    imageView.setFitWidth(100);
+                    imageView.setPreserveRatio(true);
+
+                    // Créez un Label pour le nom de l'objet
+                    Label nomLabel = new Label(objet.getTitle());
+
+                    // Créez un Label pour le nom de l'objet
+                    Label quantLabel = new Label(String.valueOf(objet.getQuantity()));
+
+                    // Créez un Label pour la description de l'objet
+                    Label authorLabel = new Label(objet.getAuthor());
+                    authorLabel.setWrapText(true);
+
+                    Label priceLabel = new Label(String.valueOf(objet.getPrice()));
+                    Button button2 = new Button();
+
+
+                    button2.setText("Suprimmer");
+                    button2.setStyle("-fx-background-color: #676767;");
+
+                    // Ajoutez les éléments à la GridPane
+                    //gridpane.add(imageView, 0, row);
+
+                    gridpane.add(imageView, 0, row);
+                    gridpane.add(nomLabel, 1, row);
+                    gridpane.add(authorLabel, 2, row);
+                    gridpane.add(priceLabel, 3, row);
+                    gridpane.add(quantLabel,4,row);
+                }
+
+
+
+                // Incrémentez le numéro de ligne
+                row++;
+            }
+            scrollpane.setContent(gridpane);
+
+
+        }
+
 
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        splitmenu.setVisible(false);
+        afficherInfo(SessionManager.getLoggedInUser().getFirstName());
+        if(SessionManager.getLoggedInUser().getIsAdmin()==1)
+        {
+            splitmenu.setVisible(true);
+            for (Compte compte : comptes)
+            {
+                MenuItem userNext = new MenuItem(compte.getFirstName());
+                userNext.setOnAction(e -> {
+                    afficherInfo(compte.getFirstName());
+                });
+                splitmenu.getItems().add(userNext);
+            }
+        }
+        /*
 
         firstname.setText(SessionManager.getLoggedInUser().getFirstName());
         lastname.setText(SessionManager.getLoggedInUser().getLastName());
@@ -277,7 +413,7 @@ public class ProfilController implements Initializable {
         }
         scrollpane.setContent(gridpane);
 
-
+*/
     }
 
 
