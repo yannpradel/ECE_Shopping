@@ -2027,6 +2027,11 @@ public class DatabaseModel {
             int rowsDeleted = ps.executeUpdate();
             // Affichage du résultat
             System.out.println(rowsDeleted + " ligne(s) ont été supprimées.");
+            query = "DELETE FROM panier WHERE id="+id;
+            ps = conn.prepareStatement(query);
+            rowsDeleted = ps.executeUpdate();
+            // Affichage du résultat
+            System.out.println(rowsDeleted + " ligne(s) ont été supprimées.");
     } catch (SQLException e) {
         e.printStackTrace();
     }
