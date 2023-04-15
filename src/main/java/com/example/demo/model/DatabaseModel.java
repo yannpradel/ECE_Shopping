@@ -1689,7 +1689,7 @@ public class DatabaseModel {
                         int vendu_sans_reduc = rs.getInt("vendu_sans_reduc");
                         int vendu_reduc = rs.getInt("vendu_reduc");
                         String image = rs.getString("image");
-                        Accessoire accessoire = new Accessoire(id, name, description, en_reduction, price, price_reduc, stock_quantity, vendu_reduc, vendu_reduc, image);
+                        Accessoire accessoire = new Accessoire(id, name, description, en_reduction, price, price_reduc, stock_quantity, vendu_sans_reduc, vendu_reduc, image);
                         accessoires.add(accessoire);
                         break;
 
@@ -2220,7 +2220,21 @@ public class DatabaseModel {
 
         afficherColonne("livres");
         //for (String col : getColumnNames()) {System.out.println(col);}
-
+        descriptiontabbrutarray("accessoires",0,0);
+        for (Accessoire accessoire : accessoires) {
+            System.out.println("Nom: " + accessoire.getName());
+            System.out.println("Description: " + accessoire.getDescription());
+            System.out.println("Prix: " + accessoire.getPrice() + "€");
+            if (accessoire.getEn_reduction() == 1) {
+                System.out.println("Prix réduit: " + accessoire.getPrice_reduc() + "€");
+            }
+            System.out.println("Stock: " + accessoire.getStock_quantity());
+            System.out.println("Vendus sans réduction: " + accessoire.getVendu_sans_reducl());
+            System.out.println("Vendus avec réduction: " + accessoire.getVendu_reduc());
+            System.out.println("Image: " + accessoire.getImage());
+            System.out.println("----------------------------------");
+        }
+        descriptiontabbrutarray("bijoux",1,1);
 
        /* addSomething("comptes");
 
@@ -2301,21 +2315,7 @@ public class DatabaseModel {
             System.out.println("Quantité en stock: " + livre.getStockQuantity());
             System.out.println("----------------------");
         }
-        descriptiontabbrutarray("accessoires",1,0);
-        for (Accessoire accessoire : accessoires) {
-            System.out.println("Nom: " + accessoire.getName());
-            System.out.println("Description: " + accessoire.getDescription());
-            System.out.println("Prix: " + accessoire.getPrice() + "€");
-            if (accessoire.getEn_reduction() == 1) {
-                System.out.println("Prix réduit: " + accessoire.getPrice_reduc() + "€");
-            }
-            System.out.println("Stock: " + accessoire.getStock_quantity());
-            System.out.println("Vendus sans réduction: " + accessoire.getVendu_sans_reducl());
-            System.out.println("Vendus avec réduction: " + accessoire.getVendu_reduc());
-            System.out.println("Image: " + accessoire.getImage());
-            System.out.println("----------------------------------");
-        }
-        descriptiontabbrutarray("bijoux",1,1);
+
         for (Bijou bijou : bijoux) {
             System.out.println("ID: " + bijou.getId());
             System.out.println("Nom: " + bijou.getName());
