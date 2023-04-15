@@ -1851,7 +1851,6 @@ public class DatabaseModel {
             }
 
 
-
             // Exécution de la requête et récupération du résultat
             ResultSet rs = stmt.executeQuery(query);
 
