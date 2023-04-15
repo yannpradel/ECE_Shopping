@@ -2212,8 +2212,6 @@ public class DatabaseModel {
     }
     public void run() {
 
-
-
         createDatabase();
         graphvente("livres");
         //descriptiontabbrutarray("livres",0,0);
