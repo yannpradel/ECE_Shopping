@@ -1,6 +1,5 @@
 package com.example.demo;
 
-import com.example.demo.Controller.Controller;
 import com.example.demo.View.View;
 import com.example.demo.model.DatabaseModel;
 
@@ -14,8 +13,6 @@ import java.io.IOException;
 public class Main extends Application{
     @Override
     public void start(Stage stage) throws IOException {
-
-        View view = new View();
 
         DatabaseModel database = new DatabaseModel();
         //Controller controller = new Controller(databasemodel, view); //il sert a r
