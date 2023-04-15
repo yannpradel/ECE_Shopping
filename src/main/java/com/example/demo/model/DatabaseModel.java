@@ -2216,19 +2216,19 @@ public class DatabaseModel {
 
         createDatabase();
         graphvente("livres");
-        descriptiontabbrutarray("livres",0,0);
-        mettreAJourLivresFX(livres.get(0).getId(), livres.get(2).getTitle(), livres.get(2).getAuthor(), livres.get(2).getPublisher(), livres.get(2).getPublicationDate(), livres.get(2).getIsbn(), livres.get(2).getEnReduction(),(float)livres.get(2).getPrice(), (float)livres.get(2).getPriceReduc(), livres.get(2).getStockQuantity(), livres.get(2).getVenduSansReduc(), livres.get(2).getVenduReduc(), livres.get(2).getImage());
+        //descriptiontabbrutarray("livres",0,0);
+        //mettreAJourLivresFX(livres.get(0).getId(), livres.get(2).getTitle(), livres.get(2).getAuthor(), livres.get(2).getPublisher(), livres.get(2).getPublicationDate(), livres.get(2).getIsbn(), livres.get(2).getEnReduction(),(float)livres.get(2).getPrice(), (float)livres.get(2).getPriceReduc(), livres.get(2).getStockQuantity(), livres.get(2).getVenduSansReduc(), livres.get(2).getVenduReduc(), livres.get(2).getImage());
         afficherColonne("livres");
         //for (String col : getColumnNames()) {System.out.println(col);}
 
-        int id = 1;
-        String name = "Nouveau nom";
-        String description = "Nouvelle description";
-        String image = "nouvelle_image.jpg";
+       // int id = 1;
+        //String name = "Nouveau nom";
+        //String description = "Nouvelle description";
+        //String image = "nouvelle_image.jpg";
 
 // Appel de la méthode pour mettre à jour l'accessoire dans la base de données
 
-        mettreAJourAccessoiresFX(id, name, description, 1, 29.99, 0.00, 10, 5, 0, image);
+        //mettreAJourAccessoiresFX(id, name, description, 1, 29.99, 0.00, 10, 5, 0, image);
 
         descriptiontabbrutarray("accessoires",0,0);
         for (Accessoire accessoire : accessoires) {
