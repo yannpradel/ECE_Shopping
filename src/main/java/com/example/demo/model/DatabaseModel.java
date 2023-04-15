@@ -1882,6 +1882,7 @@ public class DatabaseModel {
                         int vendu_reduc = rs.getInt("vendu_reduc");
                         String image = rs.getString("image");
                         Accessoire accessoire = new Accessoire(id, name, description, en_reduction, price, price_reduc, stock_quantity, vendu_sans_reduc, vendu_reduc, image);
+
                         accessoires.add(accessoire);
                         break;
 
