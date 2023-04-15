@@ -343,12 +343,12 @@ public class LivreController implements Initializable {
                     System.out.println("Nombre de livres vendus avec réduction : " + objet.getVenduReduc());
                     System.out.println("Image du livre : " + objet.getImage());
 
-                    database.mettreAJourLivresFX(objet.getId(),objet.getTitle(), objet.getAuthor(), objet.getPublisher(), objet.getPublicationDate(),objet.getIsbn(), objet.getEnReduction(),objet.getPrice(),objet.getPriceReduc(),objet.getStockQuantity(),objet.getVenduSansReduc(),objet.getVenduReduc(), objet.getImage());
-
+                    //database.mettreAJourLivresFX(objet.getId(),objet.getTitle(), objet.getAuthor(), objet.getPublisher(), objet.getPublicationDate(),objet.getIsbn(), 1,objet.getPrice(),objet.getPriceReduc(),objet.getStockQuantity(),objet.getVenduSansReduc(),objet.getVenduReduc(), objet.getImage());
+                    database.mettreAJourLivresFX(2, "Le Seigneur des Anneaux", "J.R.R. Tolkien", "Houghton Mifflin Harcourt", "1954-1955", "978-2-1234-5678-9", 1, 20.0f, 15.0f, 100, 50, 25, "seigneur_des_anneaux.jpg");
                 });
                 MenuItem non = new MenuItem("Sans réduction");
                 non.setOnAction(e -> {
-                    database.mettreAJourLivresFX(objet.getId(),objet.getTitle(), objet.getAuthor(), objet.getPublisher(), objet.getPublicationDate(),objet.getIsbn(), objet.getEnReduction(),objet.getPriceReduc(),objet.getPriceReduc(),objet.getStockQuantity(),objet.getVenduSansReduc(),objet.getVenduReduc(), objet.getImage());
+                    database.mettreAJourLivresFX(objet.getId(), objet.getTitle(), objet.getAuthor(), objet.getPublisher(), objet.getPublicationDate(), objet.getIsbn(), 0, objet.getPrice(), objet.getPriceReduc(), objet.getStockQuantity(), objet.getVenduSansReduc(), objet.getVenduReduc(), objet.getImage());
                 });
                 splitmenu.getItems().addAll(oui,non);
                 gridpane.add(splitmenu,8,row);
