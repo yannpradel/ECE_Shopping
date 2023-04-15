@@ -1,5 +1,9 @@
 package com.example.demo.model;
-
+/**
+ * Cette classe représente un livre vendu sur le site de vente en ligne.
+ * Elle contient toutes les informations relatives à ce livre, y compris son nom,
+ * sa description, son prix, sa quantité en stock et son image.
+ */
 public class Livre {
     private int id;
     private String title;
@@ -16,6 +20,23 @@ public class Livre {
     private String image;
 
     // Constructeur avec tous les paramètres
+    /**
+     * Crée une nouvelle instance de la classe Livre avec les informations fournies.
+     *
+     * @param id l'identifiant de ce livre
+     * @param title le titre du produit lié à ce livre
+     * @param author l'auteur du produit lié à ce livre
+     * @param publisher l'éditeur du produit lié à ce livre
+     * @param publicationDate la date de publication du produit lié à ce livre
+     * @param isbn l'ISBN du produit lié à ce livre
+     * @param enReduction la valeur booléenne indiquant si le produit lié à ce livre est en réduction
+     * @param price le prix initial du produit lié à ce livre
+     * @param priceReduc le prix réduit du produit lié à ce livre
+     * @param stockQuantity la quantité de stock du produit lié à ce livre
+     * @param venduSansReduc le nombre de fois où le produit lié à ce livre a été vendu sans réduction
+     * @param venduReduc le nombre de fois où le produit lié à ce livre a été vendu en réduction
+     * @param image l'URL de l'image du produit lié à ce livre
+     */
     public Livre(int id, String title, String author, String publisher, String publicationDate, String isbn, int enReduction,
                  double price, double priceReduc, int stockQuantity, int venduSansReduc, int venduReduc, String image) {
         this.id = id;

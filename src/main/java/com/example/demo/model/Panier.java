@@ -1,7 +1,14 @@
 package com.example.demo.model;
 
 import java.sql.Timestamp;
-
+/**
+ * Cette classe représente un élément du panier de l'utilisateur en ligne.
+ * Elle contient les informations suivantes :
+ * - l'identifiant du produit
+ * - le nom de la table de la base de données contenant les informations du produit
+ * - la quantité achetée
+ * - la date et l'heure de l'achat
+ */
 public class Panier {
 
     private int product_id;
@@ -40,6 +47,27 @@ public class Panier {
     private String image;
 
     // Constructeur avec tous les paramètres (livre)
+    /**
+     * Crée une nouvelle instance de la classe Panier avec les informations fournies.
+     *
+     * @param id l'identifiant de cet élément dans le panier
+     * @param product_id l'identifiant du produit lié cet élément dans le panier
+     * @param table_nom le nom de la table liée cet élément dans le panier
+     * @param quantity la quantité liée cet élément dans le panier
+     * @param created_date la date de création de cet élément dans le panier
+     * @param title le titre du produit lié à cet élément dans le panier
+     * @param author l'auteur du produit lié à cet élément dans le panier
+     * @param publisher l'éditeur du produit lié à cet élément dans le panier
+     * @param publicationDate la date de publication du produit lié à cet élément dans le panier
+     * @param isbn l'ISBN du produit lié à cet élément dans le panier
+     * @param enReduction la valeur booléenne indiquant si le produit lié à cet élément dans le panier est en réduction
+     * @param price le prix initial du produit lié à cet élément dans le panier
+     * @param priceReduc le prix réduit du produit lié à cet élément dans le panier
+     * @param stockQuantity la quantité de stock du produit lié à cet élément dans le panier
+     * @param venduSansReduc le nombre de fois où le produit lié à cet élément dans le panier a été vendu sans réduction
+     * @param venduReduc le nombre de fois où le produit lié à cet élément dans le panier a été vendu en réduction
+     * @param image l'URL de l'image du produit lié à cet élément dans le panier
+     */
     public Panier(int id, int product_id,String table_nom, int quantity, Timestamp created_date,String title, String author, String publisher, String publicationDate, String isbn, int enReduction,
                  double price, double priceReduc, int stockQuantity, int venduSansReduc, int venduReduc, String image) {
         this.id = id;
@@ -175,6 +203,24 @@ public class Panier {
     private String description;
 
     //constructeur accessoires et bijoux
+    /**
+     * Construit un objet Panier avec toutes ses informations.
+     *
+     * @param id L'identifiant de cet élément dans le panier
+     * @param product_id l'identifiant du produit lié cet élément dans le panier
+     * @param table_nom le nom de la table liée cet élément dans le panier
+     * @param quantity la quantité liée cet élément dans le panier
+     * @param created_date la date de création de cet élément dans le panier
+     * @param name Le nom de cet élément dans le panier
+     * @param description La description de cet élément dans le panier
+     * @param en_reduction L'état de réduction de cet élément dans le panier (0 = pas en réduction, 1 = en réduction).
+     * @param price Le prix de cet élément dans le panier
+     * @param price_reduc Le prix réduit de cet élément dans le panier
+     * @param stock_quantity La quantité en stock de cet élément dans le panier
+     * @param vendu_sans_reduc La quantité vendue sans réduction.
+     * @param vendu_reduc La quantité vendue avec réduction.
+     * @param image L'image de cet élément dans le panier
+     */
     public Panier(int id,int product_id,String table_nom, int quantity, Timestamp created_date, String name, String description, int en_reduction, double price, double price_reduc, int stock_quantity, int vendu_sans_reduc, int vendu_reduc, String image) {
         this.id = id;
 

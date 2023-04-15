@@ -1,7 +1,15 @@
 package com.example.demo.model;
 
 import java.sql.Timestamp;
-
+/**
+ * Cette classe représente un enregistrement d'historique de vente pour un produit.
+ * Elle contient les informations suivantes :
+ * - le prénom du client ayant acheté le produit
+ * - l'identifiant du produit
+ * - le nom de la table de la base de données contenant les informations du produit
+ * - la quantité achetée
+ * - la date et l'heure de l'achat
+ */
 public class Historique {
 
     private String first_name;
@@ -45,6 +53,28 @@ public class Historique {
     private String image;
 
     // Constructeur avec tous les paramètres
+    /**
+     * Crée une nouvelle instance de la classe Historique avec les informations fournies.
+     *
+     * @param id l'identifiant de l'historique
+     * @param first_name le nom de la personne liée à l'historique
+     * @param product_id l'identifiant du produit lié à l'historique
+     * @param table_nom le nom de la table liée à l'historique
+     * @param quantity la quantité liée à l'historique
+     * @param created_date la date de création de l'historique
+     * @param title le titre du produit lié à l'historique
+     * @param author l'auteur du produit lié à l'historique
+     * @param publisher l'éditeur du produit lié à l'historique
+     * @param publicationDate la date de publication du produit lié à l'historique
+     * @param isbn l'ISBN du produit lié à l'historique
+     * @param enReduction la valeur booléenne indiquant si le produit lié à l'historique est en réduction
+     * @param price le prix initial du produit lié à l'historique
+     * @param priceReduc le prix réduit du produit lié à l'historique
+     * @param stockQuantity la quantité de stock du produit lié à l'historique
+     * @param venduSansReduc le nombre de fois où le produit lié à l'historique a été vendu sans réduction
+     * @param venduReduc le nombre de fois où le produit lié à l'historique a été vendu en réduction
+     * @param image l'URL de l'image du produit lié à l'historique
+     */
     public Historique(int id, String first_name, int product_id,String table_nom, int quantity, Timestamp created_date,String title, String author, String publisher, String publicationDate, String isbn, int enReduction,
                   double price, double priceReduc, int stockQuantity, int venduSansReduc, int venduReduc, String image) {
         this.id = id;
@@ -180,6 +210,25 @@ public class Historique {
     private String name;
     private String description;
 
+    /**
+     * Crée une nouvelle instance de la classe Historique avec les informations fournies.
+     *
+     * @param id l'identifiant de l'historique
+     * @param first_name le nom de la personne liée à l'historique
+     * @param product_id l'identifiant du produit lié à l'historique
+     * @param table_nom le nom de la table liée à l'historique
+     * @param quantity la quantité liée à l'historique
+     * @param created_date la date de création de l'historique
+     * @param name le nom du produit
+     * @param description la description du produit
+     * @param en_reduction la valeur booléenne indiquant si le produit lié à l'historique est en réduction
+     * @param price le prix initial du produit lié à l'historique
+     * @param price_reduc le prix réduit du produit lié à l'historique
+     * @param stock_quantity la quantité de stock du produit lié à l'historique
+     * @param vendu_sans_reduc le nombre de fois où le produit lié à l'historique a été vendu sans réduction
+     * @param vendu_reduc le nombre de fois où le produit lié à l'historique a été vendu en réduction
+     * @param image l'URL de l'image du produit lié à l'historique
+     */
     public Historique(int id,String first_name,int product_id,String table_nom, int quantity, Timestamp created_date, String name, String description, int en_reduction, double price, double price_reduc, int stock_quantity, int vendu_sans_reduc, int vendu_reduc, String image) {
         this.id = id;
 
