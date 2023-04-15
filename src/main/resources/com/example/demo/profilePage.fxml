@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitMenuButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -205,6 +206,7 @@
                                     </ImageView>
                                  </children>
                               </VBox>
+                              <SplitMenuButton fx:id="splitmenu" layoutX="88.0" layoutY="121.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="136.0" text="Choisir utilisateur:" />
                            </children>
                         </Pane>
                      </content>
