@@ -131,6 +131,45 @@ public class BijouController implements Initializable {
             gridpane.add(spinner1, 3, row);
             gridpane.add(priceLabel,4,row);
             gridpane.add(button2,5,row);
+
+            if(SessionManager.getLoggedInUser().getIsAdmin()==1)
+            {
+                Spinner spinnerAdmin = new Spinner();
+                Spinner<Integer> spinner2 = (Spinner<Integer>) spinnerAdmin;
+                spinner2.setValueFactory(
+                        new SpinnerValueFactory.IntegerSpinnerValueFactory(
+                                0,
+                                100
+                        )
+                );
+                gridpane.add(spinnerAdmin,6,row);
+                CheckBox check = new CheckBox();
+                gridpane.add(check,7,row);
+                check.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override public void handle(ActionEvent e) {
+                        database.mettreAJourAccessoiresFX(objet.getId(),objet.getName(), objet.getDescription(), objet.getEn_reduction(), objet.getPrice(),objet.getPrice_reduc(), (Integer) spinnerAdmin.getValue(),objet.getVendu_sans_reduc(),objet.getVendu_reduc(),objet.getImage());
+                        database.descriptiontabbrutarray("bijoux",0,0);
+                        try {
+                            gotoBijoux(e);
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }
+                });
+                SplitMenuButton splitmenu = new SplitMenuButton();
+                MenuItem oui = new MenuItem("Avec réduction");
+
+                oui.setOnAction(e -> {
+                    database.mettreAJourBijouxFX(objet.getId(),objet.getName(), objet.getDescription(), 1, objet.getPrice(),objet.getPrice_reduc(), objet.getStock_quantity(),objet.getVendu_sans_reduc(),objet.getVendu_reduc(),objet.getImage());
+
+                });
+                MenuItem non = new MenuItem("Sans réduction");
+                non.setOnAction(e -> {
+                    database.mettreAJourBijouxFX(objet.getId(),objet.getName(), objet.getDescription(), 0, objet.getPrice(),objet.getPrice_reduc(), objet.getStock_quantity(),objet.getVendu_sans_reduc(),objet.getVendu_reduc(),objet.getImage());
+                });
+                splitmenu.getItems().addAll(oui,non);
+                gridpane.add(splitmenu,8,row);
+            }
             button2.setOnAction(new EventHandler<ActionEvent>() {
                 @Override public void handle(ActionEvent e) {
                     database.addPanier(objet.getId(), "bijoux",spinner1.getValue());
@@ -303,6 +342,45 @@ public class BijouController implements Initializable {
             gridpane.add(spinner1, 3, row);
             gridpane.add(priceLabel,4,row);
             gridpane.add(button2,5,row);
+
+            if(SessionManager.getLoggedInUser().getIsAdmin()==1)
+            {
+                Spinner spinnerAdmin = new Spinner();
+                Spinner<Integer> spinner2 = (Spinner<Integer>) spinnerAdmin;
+                spinner2.setValueFactory(
+                        new SpinnerValueFactory.IntegerSpinnerValueFactory(
+                                0,
+                                100
+                        )
+                );
+                gridpane.add(spinnerAdmin,6,row);
+                CheckBox check = new CheckBox();
+                gridpane.add(check,7,row);
+                check.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override public void handle(ActionEvent e) {
+                        database.mettreAJourBijouxFX(objet.getId(),objet.getName(), objet.getDescription(), objet.getEn_reduction(), objet.getPrice(),objet.getPrice_reduc(), (Integer) spinnerAdmin.getValue(),objet.getVendu_sans_reduc(),objet.getVendu_reduc(),objet.getImage());
+                        database.descriptiontabbrutarray("bijoux",0,0);
+                        try {
+                            gotoBijoux(e);
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }
+                });
+                SplitMenuButton splitmenu = new SplitMenuButton();
+                MenuItem oui = new MenuItem("Avec réduction");
+
+                oui.setOnAction(e -> {
+                    database.mettreAJourBijouxFX(objet.getId(),objet.getName(), objet.getDescription(), 1, objet.getPrice(),objet.getPrice_reduc(), objet.getStock_quantity(),objet.getVendu_sans_reduc(),objet.getVendu_reduc(),objet.getImage());
+
+                });
+                MenuItem non = new MenuItem("Sans réduction");
+                non.setOnAction(e -> {
+                    database.mettreAJourBijouxFX(objet.getId(),objet.getName(), objet.getDescription(), 0, objet.getPrice(),objet.getPrice_reduc(), objet.getStock_quantity(),objet.getVendu_sans_reduc(),objet.getVendu_reduc(),objet.getImage());
+                });
+                splitmenu.getItems().addAll(oui,non);
+                gridpane.add(splitmenu,8,row);
+            }
             button2.setOnAction(new EventHandler<ActionEvent>() {
                 @Override public void handle(ActionEvent e) {
                     database.addPanier(objet.getId(), "bijoux",spinner1.getValue());

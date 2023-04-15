@@ -2135,7 +2135,7 @@ public class DatabaseModel {
     }
     }
 
-    public void mettreAJourBijouxFX(int id,String name, String description, int en_reduction,float price,float price_reduc, int stock_quantity, int vendu_sans_reduc, int vendu_reduc, String image){
+    public void mettreAJourBijouxFX(int id,String name, String description, int en_reduction,double price,double price_reduc, int stock_quantity, int vendu_sans_reduc, int vendu_reduc, String image){
         try (Connection conn = DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
             String queryUpdate = "UPDATE bijoux SET name='"+name+"',description='"+description+"', en_reduction="+en_reduction+", price="+price+", price_reduc="+price_reduc+", stock_quantity="+stock_quantity+", vendu_sans_reduc="+vendu_sans_reduc+", vendu_reduc="+vendu_reduc+", image='"+image +"' WHERE id="+id;
             // exécution de la requête UPDATE pour mettre à jour les informations de la ligne
@@ -2147,7 +2147,7 @@ public class DatabaseModel {
             e.printStackTrace();
         }
     }
-    public void mettreAJourLivresFX(int id,String title, String author, String publisher, String publication_date,String isbn, int en_reduction,float price,float price_reduc, int stock_quantity, int vendu_sans_reduc, int vendu_reduc, String image){
+    public void mettreAJourLivresFX(int id,String title, String author, String publisher, String publication_date,String isbn, int en_reduction,double price,double price_reduc, int stock_quantity, int vendu_sans_reduc, int vendu_reduc, String image){
         try (Connection conn = DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
             String queryUpdate = "UPDATE livres SET title='"+title+"', author='"+author+"', publisher='"+publisher+"', publication_date='"+publication_date+"',isbn='"+isbn+"',  en_reduction="+en_reduction+", price="+price+", price_reduc="+price_reduc+", stock_quantity="+stock_quantity+", vendu_sans_reduc="+vendu_sans_reduc+", vendu_reduc="+vendu_reduc+", image='"+image +"' WHERE id="+id;
             // exécution de la requête UPDATE pour mettre à jour les informations de la ligne

@@ -32,7 +32,7 @@
                <children>
                   <ScrollPane layoutX="52.0" layoutY="109.0" prefHeight="726.0" prefWidth="1272.0">
                      <content>
-                        <GridPane fx:id="gridpane" alignment="CENTER_RIGHT" prefHeight="1515.0" prefWidth="1240.0" stylesheets="@../../../../../target/src/css/styles.css">
+                        <GridPane fx:id="gridpane" alignment="CENTER" prefHeight="1515.0" prefWidth="1240.0" stylesheets="@../../../../../target/src/css/styles.css">
                            <columnConstraints>
                               <ColumnConstraints fx:id="bijouPic" halignment="CENTER" hgrow="SOMETIMES" maxWidth="360.0" minWidth="10.0" prefWidth="223.0" />
                               <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="512.0" minWidth="10.0" prefWidth="222.0" />

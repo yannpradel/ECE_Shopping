@@ -300,6 +300,59 @@ public class LivreController implements Initializable {
             gridpane.add(spinner1, 3, row);
             gridpane.add(priceLabel,4,row);
             gridpane.add(button2,5,row);
+
+            if(SessionManager.getLoggedInUser().getIsAdmin()==1)
+            {
+                Spinner spinnerAdmin = new Spinner();
+                Spinner<Integer> spinner2 = (Spinner<Integer>) spinnerAdmin;
+                spinner2.setValueFactory(
+                        new SpinnerValueFactory.IntegerSpinnerValueFactory(
+                                0,
+                                100
+                        )
+                );
+                gridpane.add(spinnerAdmin,6,row);
+                CheckBox check = new CheckBox();
+                gridpane.add(check,7,row);
+                check.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override public void handle(ActionEvent e) {
+                        database.mettreAJourLivresFX(objet.getId(),objet.getTitle(), objet.getAuthor(), objet.getPublisher(), objet.getPublicationDate(),objet.getIsbn(), objet.getEnReduction(),objet.getPriceReduc(),objet.getPriceReduc(),(Integer) spinnerAdmin.getValue(),objet.getVenduSansReduc(),objet.getVenduReduc(), objet.getImage());
+                        database.descriptiontabbrutarray("livres",0,0);
+                        try {
+                            gotoBook(e);
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }
+                });
+                SplitMenuButton splitmenu = new SplitMenuButton();
+                MenuItem oui = new MenuItem("Avec réduction");
+
+                oui.setOnAction(e -> {
+                    System.out.println("ID du livre : " + objet.getId());
+                    System.out.println("Titre du livre : " + objet.getTitle());
+                    System.out.println("Auteur du livre : " + objet.getAuthor());
+                    System.out.println("Éditeur du livre : " + objet.getPublisher());
+                    System.out.println("Date de publication du livre : " + objet.getPublicationDate());
+                    System.out.println("ISBN du livre : " + objet.getIsbn());
+                    System.out.println("En réduction : " + objet.getEnReduction());
+                    System.out.println("Prix réduit du livre : " + objet.getPriceReduc());
+                    System.out.println("Prix non réduit du livre : " + objet.getPrice());
+                    System.out.println("Quantité en stock du livre : " + objet.getStockQuantity());
+                    System.out.println("Nombre de livres vendus sans réduction : " + objet.getVenduSansReduc());
+                    System.out.println("Nombre de livres vendus avec réduction : " + objet.getVenduReduc());
+                    System.out.println("Image du livre : " + objet.getImage());
+
+                    database.mettreAJourLivresFX(objet.getId(),objet.getTitle(), objet.getAuthor(), objet.getPublisher(), objet.getPublicationDate(),objet.getIsbn(), objet.getEnReduction(),objet.getPrice(),objet.getPriceReduc(),objet.getStockQuantity(),objet.getVenduSansReduc(),objet.getVenduReduc(), objet.getImage());
+
+                });
+                MenuItem non = new MenuItem("Sans réduction");
+                non.setOnAction(e -> {
+                    database.mettreAJourLivresFX(objet.getId(),objet.getTitle(), objet.getAuthor(), objet.getPublisher(), objet.getPublicationDate(),objet.getIsbn(), objet.getEnReduction(),objet.getPriceReduc(),objet.getPriceReduc(),objet.getStockQuantity(),objet.getVenduSansReduc(),objet.getVenduReduc(), objet.getImage());
+                });
+                splitmenu.getItems().addAll(oui,non);
+                gridpane.add(splitmenu,8,row);
+            }
             button2.setOnAction(new EventHandler<ActionEvent>() {
                 @Override public void handle(ActionEvent e) {
                     database.addPanier(objet.getId(), "livres",spinner1.getValue());

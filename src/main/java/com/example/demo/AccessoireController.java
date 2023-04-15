@@ -129,6 +129,8 @@ public class AccessoireController implements Initializable {
                     )
             );
 
+
+
             // Ajoutez les éléments à la GridPane
             //gridpane.add(imageView, 0, row);
 
@@ -138,6 +140,42 @@ public class AccessoireController implements Initializable {
             gridpane.add(spinner1, 3, row);
             gridpane.add(priceLabel,4,row);
             gridpane.add(button2,5,row);
+
+            if(SessionManager.getLoggedInUser().getIsAdmin()==1)
+            {
+                Spinner spinnerAdmin = new Spinner();
+                Spinner<Integer> spinner2 = (Spinner<Integer>) spinnerAdmin;
+                spinner2.setValueFactory(
+                        new SpinnerValueFactory.IntegerSpinnerValueFactory(
+                                0,
+                                100
+                        )
+                );
+                gridpane.add(spinnerAdmin,6,row);
+                CheckBox check = new CheckBox();
+                gridpane.add(check,7,row);
+                check.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override public void handle(ActionEvent e) {
+                        database.mettreAJourAccessoiresFX(objet.getId(),objet.getName(), objet.getDescription(), objet.getEn_reduction(), objet.getPrice(),objet.getPrice_reduc(), (Integer) spinnerAdmin.getValue(),objet.getVendu_sans_reducl(),objet.getVendu_reduc(),objet.getImage());
+                        try {
+                            gotoAccess(e);
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }
+                });
+                SplitMenuButton splitmenu = new SplitMenuButton();
+                MenuItem oui = new MenuItem("Avec réduction");
+                oui.setOnAction(e -> {
+                    database.mettreAJourAccessoiresFX(objet.getId(),objet.getName(), objet.getDescription(), 1, objet.getPrice(),objet.getPrice_reduc(), objet.getStock_quantity(),objet.getVendu_sans_reducl(),objet.getVendu_reduc(),objet.getImage());
+                });
+                MenuItem non = new MenuItem("Sans réduction");
+                oui.setOnAction(e -> {
+                    database.mettreAJourAccessoiresFX(objet.getId(),objet.getName(), objet.getDescription(), 0, objet.getPrice(),objet.getPrice_reduc(), objet.getStock_quantity(),objet.getVendu_sans_reducl(),objet.getVendu_reduc(),objet.getImage());
+                });
+                splitmenu.getItems().addAll(oui,non);
+                gridpane.add(splitmenu,8,row);
+            }
             button2.setOnAction(new EventHandler<ActionEvent>() {
                 @Override public void handle(ActionEvent e) {
                     database.addPanier(objet.getId(), "accessoires",spinner1.getValue());
@@ -151,6 +189,8 @@ public class AccessoireController implements Initializable {
             row++;
         }
         scrollpane.setContent(gridpane);
+
+
     }
 
     @FXML
@@ -316,6 +356,7 @@ public class AccessoireController implements Initializable {
                 check.setOnAction(new EventHandler<ActionEvent>() {
                     @Override public void handle(ActionEvent e) {
                         database.mettreAJourAccessoiresFX(objet.getId(),objet.getName(), objet.getDescription(), objet.getEn_reduction(), objet.getPrice(),objet.getPrice_reduc(), (Integer) spinnerAdmin.getValue(),objet.getVendu_sans_reducl(),objet.getVendu_reduc(),objet.getImage());
+                        database.descriptiontabbrutarray("accessoires",0,0);
                         try {
                             gotoAccess(e);
                         } catch (IOException ex) {
@@ -325,12 +366,14 @@ public class AccessoireController implements Initializable {
                 });
                 SplitMenuButton splitmenu = new SplitMenuButton();
                 MenuItem oui = new MenuItem("Avec réduction");
+
                 oui.setOnAction(e -> {
-                    database.mettreAJourAccessoiresFX(objet.getId(),objet.getName(), objet.getDescription(), 1, objet.getPrice(),objet.getPrice_reduc(), (Integer) spinnerAdmin.getValue(),objet.getVendu_sans_reducl(),objet.getVendu_reduc(),objet.getImage());
+                    database.mettreAJourAccessoiresFX(objet.getId(),objet.getName(), objet.getDescription(), 1, objet.getPrice(),objet.getPrice_reduc(), objet.getStock_quantity(),objet.getVendu_sans_reducl(),objet.getVendu_reduc(),objet.getImage());
+
                 });
                 MenuItem non = new MenuItem("Sans réduction");
-                oui.setOnAction(e -> {
-                    database.mettreAJourAccessoiresFX(objet.getId(),objet.getName(), objet.getDescription(), 0, objet.getPrice(),objet.getPrice_reduc(), (Integer) spinnerAdmin.getValue(),objet.getVendu_sans_reducl(),objet.getVendu_reduc(),objet.getImage());
+                non.setOnAction(e -> {
+                    database.mettreAJourAccessoiresFX(objet.getId(),objet.getName(), objet.getDescription(), 0, objet.getPrice(),objet.getPrice_reduc(), objet.getStock_quantity(),objet.getVendu_sans_reducl(),objet.getVendu_reduc(),objet.getImage());
                 });
                 splitmenu.getItems().addAll(oui,non);
                 gridpane.add(splitmenu,8,row);
