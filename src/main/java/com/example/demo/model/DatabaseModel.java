@@ -315,7 +315,7 @@ public class DatabaseModel {
             PreparedStatement ps = conn.prepareStatement("INSERT INTO livres (title, author, publisher, publication_date, isbn, en_reduction, price, price_reduc, stock_quantity, vendu_sans_reduc, vendu_reduc, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
             // Premier livre
-            ps.setString(1, "Le Seigneur des anneaux : La Communauté de l'anneau");
+            ps.setString(1, "Le Seigneur des anneaux");
             ps.setString(2, "J.R.R. Tolkien");
             ps.setString(3, "Christian Bourgois éditeur");
             ps.setString(4, "01/09/2003");
@@ -330,7 +330,7 @@ public class DatabaseModel {
             ps.executeUpdate();
 
             // Deuxième livre
-            ps.setString(1, "Harry Potter à l'école des sorciers");
+            ps.setString(1, "Harry Potter");
             ps.setString(2, "J.K. Rowling");
             ps.setString(3, "Gallimard Jeunesse");
             ps.setString(4, "12/10/1998");

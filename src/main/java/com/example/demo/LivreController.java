@@ -316,7 +316,7 @@ public class LivreController implements Initializable {
                 gridpane.add(check,7,row);
                 check.setOnAction(new EventHandler<ActionEvent>() {
                     @Override public void handle(ActionEvent e) {
-                        database.mettreAJourLivresFX(objet.getId(),objet.getTitle(), objet.getAuthor(), objet.getPublisher(), objet.getPublicationDate(),objet.getIsbn(), objet.getEnReduction(),objet.getPriceReduc(),objet.getPriceReduc(),(Integer) spinnerAdmin.getValue(),objet.getVenduSansReduc(),objet.getVenduReduc(), objet.getImage());
+                        database.mettreAJourLivresFX(objet.getId(),objet.getTitle(), objet.getAuthor(), objet.getPublisher(), objet.getPublicationDate(),objet.getIsbn(), objet.getEnReduction(),(float)objet.getPrice(),(float)objet.getPriceReduc(),(Integer) spinnerAdmin.getValue(),objet.getVenduSansReduc(),objet.getVenduReduc(), objet.getImage());
                         database.descriptiontabbrutarray("livres",0,0);
                         try {
                             gotoBook(e);
@@ -343,12 +343,14 @@ public class LivreController implements Initializable {
                     System.out.println("Nombre de livres vendus avec réduction : " + objet.getVenduReduc());
                     System.out.println("Image du livre : " + objet.getImage());
 
-                    //database.mettreAJourLivresFX(objet.getId(),objet.getTitle(), objet.getAuthor(), objet.getPublisher(), objet.getPublicationDate(),objet.getIsbn(), 1,objet.getPrice(),objet.getPriceReduc(),objet.getStockQuantity(),objet.getVenduSansReduc(),objet.getVenduReduc(), objet.getImage());
-                    database.mettreAJourLivresFX(2, "Le Seigneur des Anneaux", "J.R.R. Tolkien", "Houghton Mifflin Harcourt", "1954-1955", "978-2-1234-5678-9", 1, 20.0f, 15.0f, 100, 50, 25, "seigneur_des_anneaux.jpg");
+                    database.mettreAJourLivresFX(objet.getId(), objet.getTitle(), objet.getAuthor(), objet.getPublisher(), objet.getPublicationDate(),objet.getIsbn(), 1,(float)objet.getPrice(),(float)objet.getPriceReduc(),objet.getStockQuantity(),objet.getVenduSansReduc(),objet.getVenduReduc(), objet.getImage());
+                    //database.mettreAJourLivresFX(2, "Le Seigneur des Anneaux", "J.R.R. Tolkien", "Houghton Mifflin Harcourt", "1954-1955", "978-2-1234-5678-9", 1, 20.0f, 15.0f, 100, 50, 25, "seigneur_des_anneaux.jpg");
+                    //database.descriptiontabbrutarray("livres",0,0);
+                    //database.mettreAJourLivresFX(livres.get(0).getId(), livres.get(2).getTitle(), livres.get(2).getAuthor(), livres.get(2).getPublisher(), livres.get(2).getPublicationDate(), livres.get(2).getIsbn(), livres.get(2).getEnReduction(),(float)livres.get(2).getPrice(), (float)livres.get(2).getPriceReduc(), livres.get(2).getStockQuantity(), livres.get(2).getVenduSansReduc(), livres.get(2).getVenduReduc(), livres.get(2).getImage());
                 });
                 MenuItem non = new MenuItem("Sans réduction");
                 non.setOnAction(e -> {
-                    database.mettreAJourLivresFX(objet.getId(), objet.getTitle(), objet.getAuthor(), objet.getPublisher(), objet.getPublicationDate(), objet.getIsbn(), 0, objet.getPrice(), objet.getPriceReduc(), objet.getStockQuantity(), objet.getVenduSansReduc(), objet.getVenduReduc(), objet.getImage());
+                    database.mettreAJourLivresFX(objet.getId(),objet.getTitle(), objet.getAuthor(), objet.getPublisher(), objet.getPublicationDate(),objet.getIsbn(), 0,(float)objet.getPrice(),(float)objet.getPriceReduc(),objet.getStockQuantity(),objet.getVenduSansReduc(),objet.getVenduReduc(), objet.getImage());
                 });
                 splitmenu.getItems().addAll(oui,non);
                 gridpane.add(splitmenu,8,row);

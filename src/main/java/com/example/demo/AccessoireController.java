@@ -278,6 +278,20 @@ public class AccessoireController implements Initializable {
 
     }
 
+    @FXML
+    void launchStat1()
+    {
+        DatabaseModel db = new DatabaseModel();
+        db.graphvente("accessoires");
+    }
+
+    @FXML
+    void launchStat2()
+    {
+        DatabaseModel db = new DatabaseModel();
+        db.graphrevenu("accessoires");
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
