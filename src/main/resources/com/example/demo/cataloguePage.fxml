@@ -44,6 +44,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -51,6 +52,64 @@
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
+            <Pane layoutX="458.0" layoutY="-9.0" prefHeight="1080.0" prefWidth="1450.0">
+               <children>
+                  <HBox layoutX="201.0" layoutY="707.0" prefHeight="218.0" prefWidth="1065.0" spacing="180.0">
+                     <children>
+                        <VBox alignment="CENTER" onMouseClicked="#gotoAccess" prefHeight="218.0" prefWidth="252.0" style="-fx-background-color: #E0E0E0;">
+                           <children>
+                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@equipment.png" />
+                                 </image>
+                              </ImageView>
+                              <Button mnemonicParsing="false" onAction="#gotoAccess" style="-fx-background-color: #E0E0E0;" text="ACCESSOIRES">
+                                 <font>
+                                    <Font name="SimSun-ExtB" size="30.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="218.0" prefWidth="240.0" style="-fx-background-color: #E0E0E0;">
+                           <children>
+                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@bijoux%20(1).png" />
+                                 </image>
+                              </ImageView>
+                              <Button mnemonicParsing="false" onAction="#gotoBijoux" style="-fx-background-color: #E0E0E0;" text="BIJOUX">
+                                 <font>
+                                    <Font name="SimSun-ExtB" size="30.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="218.0" prefWidth="240.0" style="-fx-background-color: #E0E0E0;">
+                           <children>
+                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@pile-de-livres.png" />
+                                 </image>
+                              </ImageView>
+                              <Button mnemonicParsing="false" onAction="#gotoBook" style="-fx-background-color: #E0E0E0;" text="LIVRES">
+                                 <font>
+                                    <Font name="SimSun-ExtB" size="30.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <Label layoutX="569.0" layoutY="591.0" text="Acheter par catégories">
+                     <font>
+                        <Font name="System Bold" size="34.0" />
+                     </font>
+                  </Label>
+                  <Line endX="100.0" layoutX="452.0" layoutY="618.0" startX="70.0" stroke="#56a842" strokeWidth="2.0" />
+                  <Line endX="100.0" layoutX="875.0" layoutY="620.0" startX="70.0" stroke="#56a842" strokeWidth="2.0" />
+                  <Button layoutX="201.0" layoutY="682.0" mnemonicParsing="false" onAction="#gotoAccess" prefHeight="249.0" prefWidth="243.0" text="Button" visible="false" />
+               </children>
+            </Pane>
         <Label alignment="CENTER" layoutX="155.0" layoutY="177.0" style="&#10;" text="Drag components from Library here…" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
           <font>
             <Font size="18.0" />

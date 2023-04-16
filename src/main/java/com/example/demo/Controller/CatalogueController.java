@@ -5,6 +5,8 @@ import com.example.demo.SessionManager;
 import javafx.collections.FXCollections;
 
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -12,9 +14,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
 /**
  * Contrôleur de la vue cataloguePage.fxml.
  * Gère les interactions avec les éléments de l'interface graphique liés au catalogue.
@@ -24,6 +33,8 @@ public class CatalogueController{
     private Label welcomeText;
 
     int counter = 0;
+
+    VBox vbox1 = new VBox();
 
     @FXML
     private Button bijouxClick;
@@ -46,6 +57,7 @@ public class CatalogueController{
         stage.show();
 
     }
+
     /**
      * Change la scène courante vers la page du catalogue principal.
      * @param event L'événement de clic sur le bouton "Menu".
@@ -142,6 +154,7 @@ public class CatalogueController{
         stage.show();
 
     }
+
     /**
      * Méthode appelée lorsqu'on clique sur le bouton "Book" pour afficher la page de livres.
      * Charge la vue "bookPage.fxml" via FXMLLoader, la définit comme racine de la scène et affiche la scène dans la fenêtre actuelle.
@@ -163,7 +176,22 @@ public class CatalogueController{
 
     }
 
+    public void initialize(URL url, ResourceBundle rb) {
+        vbox1.setOnMouseClicked(new EventHandler<Event>() {
+            @Override
+            public void handle(Event event) {
+                try {
+                    gotoAccess((ActionEvent) event);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+    });
 
 
+
+
+
+}
 }
 
