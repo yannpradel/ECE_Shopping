@@ -74,6 +74,20 @@ public class LivreController implements Initializable {
         afficherTableau(database);
     }
 
+    @FXML
+    void launchStat1()
+    {
+        DatabaseModel db = new DatabaseModel();
+        db.graphvente("livres");
+    }
+
+    @FXML
+    void launchStat2()
+    {
+        DatabaseModel db = new DatabaseModel();
+        db.graphrevenubis("livres");
+    }
+
     void afficherTableau(DatabaseModel database)
     {
 

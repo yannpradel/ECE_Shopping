@@ -76,6 +76,34 @@
                         <MenuItem mnemonicParsing="false" onAction="#sortNameDesc" text="Nom : Ordre décroissant" />
                      </items>
                   </SplitMenuButton>
+                  <VBox alignment="CENTER" layoutX="1347.0" layoutY="-2.0" prefHeight="83.0" prefWidth="100.0">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="46.0" text="Revenus" textAlignment="CENTER">
+                           <font>
+                              <Font name="Corbel" size="12.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="50.0" fitWidth="53.0" onMouseClicked="#launchStat2" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@profit.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" layoutX="1248.0" layoutY="-2.0" prefHeight="83.0" prefWidth="100.0">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="46.0" text="Ventes" textAlignment="CENTER">
+                           <font>
+                              <Font name="Corbel" size="12.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="50.0" fitWidth="53.0" onMouseClicked="#launchStat1" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@profit.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </VBox>
                </children>
             </Pane>
             <GridPane prefHeight="1080.0" prefWidth="469.0">

@@ -282,14 +282,14 @@ public class AccessoireController implements Initializable {
     void launchStat1()
     {
         DatabaseModel db = new DatabaseModel();
-        db.graphvente("accessoires");
+        db.graphventebis("accessoires");
     }
 
     @FXML
     void launchStat2()
     {
         DatabaseModel db = new DatabaseModel();
-        db.graphrevenu("accessoires");
+        db.graphrevenubis("accessoires");
     }
 
     @Override

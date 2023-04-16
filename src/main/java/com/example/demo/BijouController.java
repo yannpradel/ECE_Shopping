@@ -80,6 +80,20 @@ public class BijouController implements Initializable {
         afficherTableau(database);
     }
 
+    @FXML
+    void launchStat1()
+    {
+        DatabaseModel db = new DatabaseModel();
+        db.graphventebis("bijoux");
+    }
+
+    @FXML
+    void launchStat2()
+    {
+        DatabaseModel db = new DatabaseModel();
+        db.graphrevenubis("bijoux");
+    }
+
     void afficherTableau(DatabaseModel database)
     {
 
