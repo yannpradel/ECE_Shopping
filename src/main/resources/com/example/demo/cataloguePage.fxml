@@ -108,6 +108,25 @@
                   <Line endX="100.0" layoutX="452.0" layoutY="618.0" startX="70.0" stroke="#56a842" strokeWidth="2.0" />
                   <Line endX="100.0" layoutX="875.0" layoutY="620.0" startX="70.0" stroke="#56a842" strokeWidth="2.0" />
                   <Button layoutX="201.0" layoutY="682.0" mnemonicParsing="false" onAction="#gotoAccess" prefHeight="249.0" prefWidth="243.0" text="Button" visible="false" />
+                  <Pane layoutX="201.0" layoutY="115.0" prefHeight="332.0" prefWidth="1070.0" style="-fx-background-color: #FAEBD7; -fx-background-radius: 20;">
+                     <children>
+                        <Label layoutX="59.0" layoutY="54.0" text="Achetez malin et économisez plus !" textFill="#104025">
+                           <font>
+                              <Font name="System Bold" size="34.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="59.0" layoutY="104.0" text="Obtenez une réduction en achetant 4 fois le même article chez nous !" textFill="#104025">
+                           <font>
+                              <Font name="System Bold" size="29.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="59.0" layoutY="217.0" mnemonicParsing="false" onAction="#gotoAccess" prefHeight="49.0" prefWidth="130.0" style="-fx-background-color: #104025; -fx-background-radius: 25;" text="Achetez !" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </Pane>
                </children>
             </Pane>
         <Label alignment="CENTER" layoutX="155.0" layoutY="177.0" style="&#10;" text="Drag components from Library here…" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
