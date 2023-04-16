@@ -76,7 +76,7 @@
                         <MenuItem mnemonicParsing="false" onAction="#sortNameDesc" text="Nom : Ordre décroissant" />
                      </items>
                   </SplitMenuButton>
-                  <VBox alignment="CENTER" layoutX="1347.0" layoutY="-2.0" prefHeight="83.0" prefWidth="100.0">
+                  <VBox fx:id="rev" alignment="CENTER" layoutX="1347.0" layoutY="-2.0" prefHeight="83.0" prefWidth="100.0" visible="false">
                      <children>
                         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="46.0" text="Revenus" textAlignment="CENTER">
                            <font>
@@ -90,7 +90,7 @@
                         </ImageView>
                      </children>
                   </VBox>
-                  <VBox alignment="CENTER" layoutX="1248.0" layoutY="-2.0" prefHeight="83.0" prefWidth="100.0">
+                  <VBox fx:id="ventes00" alignment="CENTER" layoutX="1248.0" layoutY="-2.0" prefHeight="83.0" prefWidth="100.0" visible="false">
                      <children>
                         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="46.0" text="Ventes" textAlignment="CENTER">
                            <font>

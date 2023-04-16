@@ -14,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.w3c.dom.Text;
 
@@ -32,6 +33,12 @@ public class LivreController implements Initializable {
 
     @FXML
     TextField searchBar;
+
+    @FXML
+    public VBox ventes00 = new VBox();
+
+    @FXML
+    public VBox rev = new VBox();
 
     @FXML
     ScrollPane scrollpane = new ScrollPane();
@@ -267,6 +274,16 @@ public class LivreController implements Initializable {
         database.descriptiontabbrutarray("livres",0,0);
         livres = database.getLivres();
         System.out.println(livres.get(0).getTitle());
+
+        ventes00.setVisible(false);
+        rev.setVisible(false);
+
+        if(SessionManager.getLoggedInUser().getIsAdmin()==1)
+        {
+            ventes00.setVisible(true);
+            rev.setVisible(true);
+            System.out.println("ça cahce");
+        }
 
 
 

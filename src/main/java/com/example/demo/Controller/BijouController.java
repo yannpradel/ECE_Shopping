@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import com.example.demo.model.DatabaseModel;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class BijouController implements Initializable {
@@ -38,6 +39,12 @@ public class BijouController implements Initializable {
     public List<Bijou> bijoux;
 
     @FXML TextField searchBar;
+
+    @FXML
+    public VBox ventes00 = new VBox();
+
+    @FXML
+    public VBox rev = new VBox();
 
     @FXML
     ScrollPane scrollpane = new ScrollPane();
@@ -309,6 +316,16 @@ public class BijouController implements Initializable {
         database.descriptiontabbrutarray("bijoux",0,0);
         bijoux = database.getBijoux();
         System.out.println(bijoux.get(0).getName());
+
+        ventes00.setVisible(false);
+        rev.setVisible(false);
+
+        if(SessionManager.getLoggedInUser().getIsAdmin()==1)
+        {
+            ventes00.setVisible(true);
+            rev.setVisible(true);
+            System.out.println("ça cahce");
+        }
 
 
 

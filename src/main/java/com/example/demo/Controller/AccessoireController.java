@@ -14,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -34,6 +35,13 @@ public class AccessoireController implements Initializable {
 
     @FXML
     ScrollPane scrollpane = new ScrollPane();
+
+    @FXML
+    public VBox ventes00 = new VBox();
+
+    @FXML
+    public VBox rev = new VBox();
+
 
 
 
@@ -141,6 +149,8 @@ public class AccessoireController implements Initializable {
             gridpane.add(spinner1, 3, row);
             gridpane.add(priceLabel,4,row);
             gridpane.add(button2,5,row);
+
+
 
             if(SessionManager.getLoggedInUser().getIsAdmin()==1)
             {
@@ -304,6 +314,15 @@ public class AccessoireController implements Initializable {
         database.descriptiontabbrutarray("accessoires",0,0);
         accessoires = database.getAccessoires();
         System.out.println(accessoires.get(0).getName());
+        ventes00.setVisible(false);
+        rev.setVisible(false);
+
+        if(SessionManager.getLoggedInUser().getIsAdmin()==1)
+        {
+            ventes00.setVisible(true);
+            rev.setVisible(true);
+            System.out.println("ça cahce");
+        }
 
 
 
