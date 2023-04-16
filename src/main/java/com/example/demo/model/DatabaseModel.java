@@ -2297,6 +2297,41 @@ public class DatabaseModel {
         frame.pack();
         frame.setVisible(true);
     }
+    public void graphventebis(String nombtab) {
+        // Création du jeu de données
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        try (Connection conn= DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
+            stmt = conn.createStatement();
+            String query="SELECT * FROM "+nombtab;
+            ResultSet resultSet = stmt.executeQuery(query);
+            String namepd;
+            while(resultSet.next()) {
+                    namepd=resultSet.getString("name");
+                dataset.setValue(resultSet.getInt("vendu_sans_reduc"), "vente sans reduction", namepd);
+                dataset.setValue(resultSet.getInt("vendu_reduc"), "vente avec reduction", namepd);
+                int tot=resultSet.getInt("vendu_sans_reduc")+resultSet.getInt("vendu_reduc");
+                dataset.setValue(tot, "Vente Total", namepd);
+                dataset.setValue(resultSet.getInt("stock_quantity"), "stock_quantity", namepd);
+            }
+            stmt.close();
+            resultSet.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        // Création du graphique en barres
+        JFreeChart chart = ChartFactory.createBarChart(
+                "Vente par produit", // Titre
+                "Produit", // Axe des abscisses
+                "Ventes", // Axe des ordonnées
+                dataset // Jeu de données
+        );
+
+        // Création de la fenêtre contenant le graphique
+        ChartFrame frame = new ChartFrame("Graphique en barres", chart);
+        frame.pack();
+        frame.setVisible(true);
+    }
     public void graphrevenu(String nombtab) {
         // Création du jeu de données
         DefaultPieDataset dataset = new DefaultPieDataset();
@@ -2330,12 +2365,44 @@ public class DatabaseModel {
         frame.setVisible(true);
     }
 
+    public void graphrevenubis(String nombtab) {
+        // Création du jeu de données
+        DefaultPieDataset dataset = new DefaultPieDataset();
+        try (Connection conn= DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
+            stmt = conn.createStatement();
+            String query="SELECT * FROM "+nombtab;
+            ResultSet resultSet = stmt.executeQuery(query);
+            String namepd;
+            while(resultSet.next()) {
+                    namepd=resultSet.getString("name");
+                double revenuSansReduction = resultSet.getDouble("price") * resultSet.getInt("vendu_sans_reduc");
+                double revenuAvecReduction = resultSet.getDouble("price_reduc") * resultSet.getInt("vendu_reduc");
+                dataset.setValue(namepd + " revenu sans reduction", revenuSansReduction);
+                dataset.setValue(namepd + " revenu avec reduction", revenuAvecReduction);
+            }
+            stmt.close();
+            resultSet.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        // Création du camembert et affichage
+        JFreeChart chart = ChartFactory.createPieChart("Revenus", dataset, true, true, false);
+        // Création de la fenêtre contenant le graphique
+        ChartFrame frame = new ChartFrame("Camembert", chart);
+        frame.pack();
+        frame.setVisible(true);
+    }
 
     public void run() {
 
         createDatabase();
         graphvente("livres");
         graphrevenu("livres");
+        graphventebis("accessoires");
+        graphrevenubis("accessoires");
+        graphrevenubis("bijoux");
+        graphventebis("bijoux");
         //descriptiontabbrutarray("livres",0,0);
         //mettreAJourLivresFX(livres.get(0).getId(), livres.get(2).getTitle(), livres.get(2).getAuthor(), livres.get(2).getPublisher(), livres.get(2).getPublicationDate(), livres.get(2).getIsbn(), livres.get(2).getEnReduction(),(float)livres.get(2).getPrice(), (float)livres.get(2).getPriceReduc(), livres.get(2).getStockQuantity(), livres.get(2).getVenduSansReduc(), livres.get(2).getVenduReduc(), livres.get(2).getImage());
         afficherColonne("livres");
