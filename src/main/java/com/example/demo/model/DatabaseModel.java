@@ -244,120 +244,205 @@ public class DatabaseModel {
                     + "('Doe', 'John', 'john.doe@mail.com', 'mnopqr', 3000.0,0),"
                     + "('Smith', 'Alice', 'alice.smith@mail.com', 'stuvwx', 1500.0,0)";
             stmt.executeUpdate(query);
-            query = "INSERT INTO accessoires (name, description, en_reduction, price, price_reduc, stock_quantity, vendu_sans_reduc, vendu_reduc, image) VALUES "
-                    + "('Souris sans fil', 'Souris optique sans fil avec 5 boutons', 0, 29.99, 0, 50, 0, 0, 'https://m.media-amazon.com/images/I/61AWLK29YrL._AC_SX679_.jpg'),"
-                    + "('Clavier filaire', 'Clavier filaire avec 105 touches', 0, 19.99, 0, 30, 0, 0, 'https://www.mdose.fr/image/cache/catalog/migrated/c/l/clav_med_ip65-500x500.jpg'),"
-                    + "('Casque audio', 'Casque audio stéréo avec micro', 0, 49.99, 0, 20, 0, 0, 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcTR8XcjJuehkVX3jUpO4mJMruYfrPDXY2p4XcbUM4itEeNBeNfcSBJ_DQvZfNDyoVU4IxT7kNlAW8k&usqp=CAc'),"
-                    + "('Webcam HD', 'Webcam HD 720p avec microphone intégré', 0, 39.99, 0, 15, 0, 0, 'https://m.media-amazon.com/images/I/71xjo0lERgL.__AC_SX300_SY300_QL70_ML2_.jpg'),"
-                    + "('Tapis de souris', 'Tapis de souris avec surface lisse', 0, 9.99, 0, 100, 0, 0, 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTT1ESt5FTBqbcsejdqyzbIed4-MMwhXR1tLNMTtZw04wrksvsKYk0fSUtwcSV0RhSmg8PU8o_Mdg&usqp=CAc')";
-            stmt.executeUpdate(query);
 
+            query = "INSERT INTO accessoires (name, description, en_reduction, price, price_reduc, stock_quantity, vendu_sans_reduc, vendu_reduc, image) VALUES " +
+                    "('Souris sans fil', 'Souris optique sans fil avec 5 boutons', 0, 29.99, 20.99, 70, 50, 25, 'https://m.media-amazon.com/images/I/61AWLK29YrL._AC_SX679_.jpg')," +
+                    "('Clavier filaire', 'Clavier filaire avec 105 touches', 0, 19.99, 10.99, 41, 25, 10, 'https://www.mdose.fr/image/cache/catalog/migrated/c/l/clav_med_ip65-500x500.jpg')," +
+                    "('Casque audio', 'Casque audio stéréo avec micro', 0, 49.99, 39.99, 90, 20, 6, 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcTR8XcjJuehkVX3jUpO4mJMruYfrPDXY2p4XcbUM4itEeNBeNfcSBJ_DQvZfNDyoVU4IxT7kNlAW8k&usqp=CAc')," +
+                    "('Webcam HD', 'Webcam HD 720p avec microphone intégré', 1, 39.99, 29.99, 150, 15, 4, 'https://m.media-amazon.com/images/I/71xjo0lERgL.__AC_SX300_SY300_QL70_ML2_.jpg')," +
+                    "('Tapis de souris', 'Tapis de souris avec surface lisse', 1, 9.99, 5.99, 100, 100, 3, 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTT1ESt5FTBqbcsejdqyzbIed4-MMwhXR1tLNMTtZw04wrksvsKYk0fSUtwcSV0RhSmg8PU8o_Mdg&usqp=CAc')," +
+                    "('NexiGo Camera ordi', 'Camera parfaite pour les Zoom, Skype, Teams et autres appels video, se branche en USB.', 0, 39.99, 29.99, 15, 20, 5, 'https://m.media-amazon.com/images/I/51GY0Dy3o7L._AC_SX425_.jpg')," +
+                    "('PreSonus Eris', 'Haut parleurs parfait pour la stereo, comporte des egaliseurs et des amplificateurs.', 0, 95.00, 93.00, 20, 15, 5, 'https://m.media-amazon.com/images/I/71rVldZn9OL._AC_SX679_.jpg')";
+            stmt.executeUpdate(query);
 
             String insertQuery = "INSERT INTO bijoux (name, description, en_reduction, price, price_reduc, stock_quantity, vendu_sans_reduc, vendu_reduc, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             PreparedStatement pstmt = conn.prepareStatement(insertQuery);
-            // Étape 3 : Ajout de 5 entrées uniques
-            pstmt.setString(1, "bijou 1");
-            pstmt.setString(2, "Description du bijou 1");
-            pstmt.setInt(3, 0);
-            pstmt.setBigDecimal(4, new BigDecimal("10.99"));
-            pstmt.setBigDecimal(5, new BigDecimal("0"));
+            // Étape 3 : Ajout de 7 entrées uniques
+            pstmt.setString(1, "Bague Princesse argentee");
+            pstmt.setString(2, "Bague taille unique et reglable avec un anneau en métal.");
+            pstmt.setInt(3, 1);
+            pstmt.setBigDecimal(4, new BigDecimal("18.00"));
+            pstmt.setBigDecimal(5, new BigDecimal("16.99"));
             pstmt.setInt(6, 50);
-            pstmt.setInt(7, 0);
-            pstmt.setInt(8, 0);
-            pstmt.setString(9,"https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSWyMYiVP5z4AgLpPbdAINjqA-8p2K-9kceO_iO6I91fjgwK2TsBnd6ioZ7yb8U9jizBr5W14NF92vcixwzyrVn21C_sYiT-08u_y7_SxWG8zhDYA3Wtgntd0Mt&usqp=CAc");
+            pstmt.setInt(7, 25);
+            pstmt.setInt(8, 25);
+            pstmt.setString(9,"https://www.luzaka.com/media/catalog/product/cache/07155abda0f160b54f88bbc3c8fc1ae9/_/5/_55296.jpg");
             pstmt.executeUpdate();
 
-            pstmt.setString(1, "bijou 2");
-            pstmt.setString(2, "Description du bijou 2");
+            pstmt.setString(1, "Glamira Bague Efrata");
+            pstmt.setString(2, "Bague en or rouge 375 avec des pierres de cristal Swarovski AAAAAA.");
             pstmt.setInt(3, 1);
-            pstmt.setBigDecimal(4, new BigDecimal("20.99"));
-            pstmt.setBigDecimal(5, new BigDecimal("15.99"));
+            pstmt.setBigDecimal(4, new BigDecimal("295.00"));
+            pstmt.setBigDecimal(5, new BigDecimal("279.99"));
             pstmt.setInt(6, 30);
-            pstmt.setInt(7, 10);
-            pstmt.setInt(8, 5);
-            pstmt.setString(9,"https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTrCrXS5UGIpDgHMAxfmPgqwOi9AkVzpxUcTtkqjx0SaWQJcS5-lNrAEfVG25NTFXg8JRriv9f2HGcn&usqp=CAc");
+            pstmt.setInt(7, 15);
+            pstmt.setInt(8, 15);
+            pstmt.setString(9,"https://cdn-media.glamira.com/media/product/newgeneration/view/1/sku/efrata/diamond/ruby-Swarovsky_AAAAA/stone2/diamond-Swarovsky_AAAAA/alloycolour/red.jpg?width=800&height=800");
             pstmt.executeUpdate();
 
-            pstmt.setString(1, "bijou 3");
-            pstmt.setString(2, "Description du bijou 3");
+            pstmt.setString(1, "Bague Trois Grains d'Amour");
+            pstmt.setString(2, "Trio de diamants qui plaira à toutes celles qui aiment l'originalité avec ce solitaire à 3 têtes.");
             pstmt.setInt(3, 1);
-            pstmt.setBigDecimal(4, new BigDecimal("15.99"));
-            pstmt.setBigDecimal(5, new BigDecimal("12.99"));
+            pstmt.setBigDecimal(4, new BigDecimal("792.00"));
+            pstmt.setBigDecimal(5, new BigDecimal("785.99"));
             pstmt.setInt(6, 20);
-            pstmt.setInt(7, 5);
-            pstmt.setInt(8, 2);
-            pstmt.setString(9,"https://example.com/tapis.jpg");
+            pstmt.setInt(7, 10);
+            pstmt.setInt(8, 10);
+            pstmt.setString(9,"https://static.mauboussin.fr/pub/media/catalog/product/cache/8a51a7c718bce6fcfb3a50a8116c660e/b/a/bague_3gr_d_amour_or_blanc_internet.png");
             pstmt.executeUpdate();
 
-            pstmt.setString(1, "bijou 4");
-            pstmt.setString(2, "Description du bijou 4");
+            pstmt.setString(1, "Bague Tourmaline vert menthe et Diamant poires");
+            pstmt.setString(2, "Anneau en or rose 18 carats, la couleur douce et fraîche de la tourmaline menthe se marie avec l'or dans une composition delicate.");
             pstmt.setInt(3, 0);
-            pstmt.setBigDecimal(4, new BigDecimal("5.99"));
-            pstmt.setBigDecimal(5, new BigDecimal("0"));
-            pstmt.setInt(6, 100);
-            pstmt.setInt(7, 20);
+            pstmt.setBigDecimal(4, new BigDecimal("2500.00"));
+            pstmt.setBigDecimal(5, new BigDecimal("2500.00"));
+            pstmt.setInt(6, 5);
+            pstmt.setInt(7, 5);
             pstmt.setInt(8, 0);
-            pstmt.setString(9,"https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcTDT6qNqw5ehD-aM1mLkwbx3Z2WCvNqwMAIgv6OhnE-TlncsffMD7YdPtY9ZToCHm5QIGjM4KmnOK3B&usqp=CAc");
+            pstmt.setString(9,"https://loiseau-aycardi.com/wp-content/uploads/2022/10/BJLA3253-500x500.png");
             pstmt.executeUpdate();
 
-            pstmt.setString(1, "bijou 5");
-            pstmt.setString(2, "Description du bijou 5");
+            pstmt.setString(1, "Collier Pendant Halo Spectaculaire Scintillant");
+            pstmt.setString(2, "Ce bijou au design subtil et à la forme delicate ne manquera pas de faire parler de lui avec ses somptueux détails.");
             pstmt.setInt(3, 1);
-            pstmt.setBigDecimal(4, new BigDecimal("25.99"));
-            pstmt.setBigDecimal(5, new BigDecimal("18.99"));
+            pstmt.setBigDecimal(4, new BigDecimal("89.00"));
+            pstmt.setBigDecimal(5, new BigDecimal("79.99"));
             pstmt.setInt(6, 10);
-            pstmt.setInt(7, 2);
-            pstmt.setInt(8, 1);
-            pstmt.setString(9,"https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRgPUYXZfYpd49pfRvW50vlCg8yFzsLUV8VHRNBBRDk2NlgwAKPc0huy7Glr_C60SASLRWtjYbhow&usqp=CAc");
+            pstmt.setInt(7, 5);
+            pstmt.setInt(8, 5);
+            pstmt.setString(9,"https://cdn-fsly.yottaa.net/60a2795ad93140a5dc7453d7/fr.pandora.net/v~4b.f/dw/image/v2/BFCR_PRD/on/demandware.static/-/Sites-pandora-master-catalog/default/dw69e9ff1c/productimages/main/390055C01_RGB.jpg?sw=900&sh=900&sm=fit&sfrm=png&bgcolor=F5F5F5&yocs=8_d_");
+            pstmt.executeUpdate();
+
+            pstmt.setString(1, "Bracelet sur cordon Menottes dinh van R8");
+            pstmt.setString(2, "Le bracelet icone de dinh van.");
+            pstmt.setInt(3, 0);
+            pstmt.setBigDecimal(4, new BigDecimal("570.00"));
+            pstmt.setBigDecimal(5, new BigDecimal("570.00"));
+            pstmt.setInt(6, 5);
+            pstmt.setInt(7, 5);
+            pstmt.setInt(8, 0);
+            pstmt.setString(9,"https://media.dinhvan.com/media/catalog/product/cache/58265684fe9891cc55c77f2ab678b6e0/3/1/319101-bracelet-sur-cordon-menottes-dinh-van-r8-small_4.png");
+            pstmt.executeUpdate();
+
+            pstmt.setString(1, "Puces Move Uno");
+            pstmt.setString(2, "Faciles à porter au quotidien, ces boucles d'oreilles en or rose s'associeront à tous les styles, du plus simple au plus sophistique.");
+            pstmt.setInt(3, 0);
+            pstmt.setBigDecimal(4, new BigDecimal("280.00"));
+            pstmt.setBigDecimal(5, new BigDecimal("280.00"));
+            pstmt.setInt(6, 10);
+            pstmt.setInt(7, 10);
+            pstmt.setInt(8, 0);
+            pstmt.setString(9,"https://messika.cdn-tech.io/media/catalog/product/cache/f68e9136285bb96b85e5514f4abecbaf/b/o/boucles-oreilles-puces-diamant-or-rose-move-uno-05634_1.jpg");
             pstmt.executeUpdate();
 
             PreparedStatement ps = conn.prepareStatement("INSERT INTO livres (title, author, publisher, publication_date, isbn, en_reduction, price, price_reduc, stock_quantity, vendu_sans_reduc, vendu_reduc, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
             // Premier livre
-            ps.setString(1, "Le Seigneur des anneaux");
+            ps.setString(1, "Le Seigneur des anneaux Tome Un");
             ps.setString(2, "J.R.R. Tolkien");
             ps.setString(3, "Christian Bourgois éditeur");
-            ps.setString(4, "01/09/2003");
-            ps.setString(5, "978-2266121018");
+            ps.setString(4, "01/09/2022");
+            ps.setString(5, "2267027003");
             ps.setInt(6, 1);
-            ps.setBigDecimal(7, new BigDecimal("12.99"));
-            ps.setBigDecimal(8, new BigDecimal("10.99"));
+            ps.setBigDecimal(7, new BigDecimal("20.00"));
+            ps.setBigDecimal(8, new BigDecimal("18.99"));
             ps.setInt(9, 50);
-            ps.setInt(10, 0);
-            ps.setInt(11, 0);
-            ps.setString(12, "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRq4SSTvwCmhdm4eYclVM6XTPFSQ1DdK2ngXfMKRobd1qNhNGRv0Zm6YpkoQaeZ84Sxhhr14wBpLNh_1ihrT0U18OV539FApNmGwn-BagBBtFXS_bP-vs_7GQ&usqp=CAc");
+            ps.setInt(10, 10);
+            ps.setInt(11, 40);
+            ps.setString(12, "https://static.fnac-static.com/multimedia/Images/FR/NR/fb/87/01/100347/1540-1/tsp20221022061611/Le-seigneur-des-anneaux-T1-La-fraternite-de-l-anneau.jpg");
             ps.executeUpdate();
 
             // Deuxième livre
-            ps.setString(1, "Harry Potter");
+            ps.setString(1, "Harry Potter à l'école des sorciers");
             ps.setString(2, "J.K. Rowling");
             ps.setString(3, "Gallimard Jeunesse");
-            ps.setString(4, "12/10/1998");
+            ps.setString(4, "12/10/2017");
             ps.setString(5, "2070543025");
             ps.setInt(6, 1);
-            ps.setBigDecimal(7, new BigDecimal("8.50"));
+            ps.setBigDecimal(7, new BigDecimal("9.30"));
             ps.setBigDecimal(8, new BigDecimal("7.99"));
             ps.setInt(9, 20);
-            ps.setInt(10, 0);
-            ps.setInt(11, 0);
-            ps.setString(12, "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRp716eeg3_XiLAO3M4ofKCX1iDmixULhXAjBnCdXErTbq9hizZDVUq6dkvZctEDTJo9Jq_umiKSz50BvonbGPsqm4VJI7iV4l8a22SwK8&usqp=CAc");
+            ps.setInt(10, 10);
+            ps.setInt(11, 10);
+            ps.setString(12, "https://static.fnac-static.com/multimedia/Images/FR/NR/ba/d8/1d/1956026/1540-1/tsp20230104085420/Harry-Potter-a-l-ecole-des-sorciers.jpg");
             ps.executeUpdate();
 
             // Troisième livre
             ps.setString(1, "1984");
             ps.setString(2, "George Orwell");
             ps.setString(3, "Gallimard");
-            ps.setString(4, "01/01/1950");
-            ps.setString(5, "2070368229");
-            ps.setInt(6, 0);
-            ps.setBigDecimal(7, new BigDecimal("7.20"));
-            ps.setBigDecimal(8, new BigDecimal("0.00"));
+            ps.setString(4, "28/05/2020");
+            ps.setString(5, "207036822X");
+            ps.setInt(6, 1);
+            ps.setBigDecimal(7, new BigDecimal("9.20"));
+            ps.setBigDecimal(8, new BigDecimal("8.50"));
             ps.setInt(9, 10);
-            ps.setInt(10, 0);
-            ps.setInt(11, 0);
-            ps.setString(12, "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRTUr4i3iCtjUtG-9dvDd_Z7-Mesd3RrIwpBAzPJy0Dt1zstG_p");
+            ps.setInt(10, 5);
+            ps.setInt(11, 5);
+            ps.setString(12, "https://static.fnac-static.com/multimedia/Images/FR/NR/10/35/01/79120/1540-1/tsp20230104085223/1984.jpg");
             ps.executeUpdate();
+
+            // Quatrième livre
+            ps.setString(1, "Made in Abyss Tome Un");
+            ps.setString(2, "Akhito Tsukushi");
+            ps.setString(3, "Ototo");
+            ps.setString(4, "18/05/2018");
+            ps.setString(5, "2377171176");
+            ps.setInt(6, 1);
+            ps.setBigDecimal(7, new BigDecimal("9.35"));
+            ps.setBigDecimal(8, new BigDecimal("8.99"));
+            ps.setInt(9, 15);
+            ps.setInt(10, 10);
+            ps.setInt(11, 5);
+            ps.setString(12, "https://static.fnac-static.com/multimedia/Images/FR/NR/92/48/90/9455762/1540-1/tsp20230102071834/Made-in-aby.jpg");
+            ps.executeUpdate();
+
+            // Cinquième livre
+            ps.setString(1, "Programmer en Java");
+            ps.setString(2, "Claude Delannoy");
+            ps.setString(3, "EYrolles");
+            ps.setString(4, "01/10/2020");
+            ps.setString(5, "2212675364");
+            ps.setInt(6, 1);
+            ps.setBigDecimal(7, new BigDecimal("38.00"));
+            ps.setBigDecimal(8, new BigDecimal("31.99"));
+            ps.setInt(9, 20);
+            ps.setInt(10, 10);
+            ps.setInt(11, 10);
+            ps.setString(12, "https://static.fnac-static.com/multimedia/Images/FR/NR/dc/30/1b/1781980/1540-1/tsp20230315090641/Programmer-en-Java.jpg");
+            ps.executeUpdate();
+
+            // Sixième livre
+            ps.setString(1, "Tu mourras moins bete Tome Un");
+            ps.setString(2, "Marion Montaigne");
+            ps.setString(3, "Ankama");
+            ps.setString(4, "24/09/2021");
+            ps.setString(5, "2359102206");
+            ps.setInt(6, 0);
+            ps.setBigDecimal(7, new BigDecimal("17.90"));
+            ps.setBigDecimal(8, new BigDecimal("17.90"));
+            ps.setInt(9, 10);
+            ps.setInt(10, 10);
+            ps.setInt(11, 0);
+            ps.setString(12, "https://static.fnac-static.com/multimedia/Images/FR/NR/1c/35/33/3355932/1540-1/tsp20220418071430/Tu-mourras-moins-bete-tome-1-Nouvelle-edition.jpg");
+            ps.executeUpdate();
+
+            // Septième livre
+            ps.setString(1, "Vivre le Japon");
+            ps.setString(2, "Yukata Yazawa");
+            ps.setString(3, "Voyages Gallimard");
+            ps.setString(4, "07/03/2019");
+            ps.setString(5, "2742457933");
+            ps.setInt(6, 1);
+            ps.setBigDecimal(7, new BigDecimal("25.00"));
+            ps.setBigDecimal(8, new BigDecimal("23.75"));
+            ps.setInt(9, 15);
+            ps.setInt(10, 5);
+            ps.setInt(11, 10);
+            ps.setString(12, "https://static.fnac-static.com/multimedia/Images/FR/NR/85/fb/a4/10812293/1540-1/tsp20230315092304/Vivre-le-Japon.jpg");
+            ps.executeUpdate();
+
 
             if(stmt!=null) stmt.close();
             if(conn!=null) conn.close();
