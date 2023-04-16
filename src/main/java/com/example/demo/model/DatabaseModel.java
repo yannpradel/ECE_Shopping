@@ -272,6 +272,9 @@ public class DatabaseModel {
                     "('PreSonus Eris', 'Haut parleurs parfait pour la stereo, comporte des egaliseurs et des amplificateurs.', 0, 95.00, 93.00, 20, 15, 5, 'https://m.media-amazon.com/images/I/71rVldZn9OL._AC_SX679_.jpg')";
             stmt.executeUpdate(query);
 
+            query="INSERT INTO `historique` (`id`, `first_name`, `product_id`, `table_nom`, `quantity`, `date_created`) VALUES (NULL, 'Lucie', '4', 'livres', '2', '2023-04-16 21:45:23'), (NULL, 'Lucie', '3', 'livres', '3', '2023-04-16 21:45:23'), (NULL, 'Lucie', '2', 'accessoires', '1', '2023-04-16 21:45:23'), (NULL, 'Pedro', '6', 'accessoires', '1', '2023-04-16 21:46:52'), (NULL, 'Pedro', '5', 'accessoires', '1', '2023-04-16 21:46:52'), (NULL, 'Pedro', '4', 'accessoires', '5', '2023-04-16 21:46:52'), (NULL, 'Jean', '2', 'accessoires', '2', '2023-04-16 21:47:47'), (NULL, 'Jean', '1', 'accessoires', '2', '2023-04-16 21:47:47'), (NULL, 'Jean', '3', 'bijoux', '1', '2023-04-16 21:47:47'), (NULL, 'Jean', '2', 'bijoux', '1', '2023-04-16 21:47:47')";
+            stmt.executeUpdate(query);
+
             String insertQuery = "INSERT INTO bijoux (name, description, en_reduction, price, price_reduc, stock_quantity, vendu_sans_reduc, vendu_reduc, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             PreparedStatement pstmt = conn.prepareStatement(insertQuery);
