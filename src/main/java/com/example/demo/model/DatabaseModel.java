@@ -14,6 +14,10 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 
+/**
+ * La classe DatabaseModel représente le modèle de la base de données de l'application. Elle permet d'interagir avec la base de données pour récupérer des comptes, des accessoires, des bijoux, des livres, des paniers, des historiques de souhaits et des historiques de commandes.
+ */
+
 public class DatabaseModel {
     private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     private static final String DB_URL = "jdbc:mysql://localhost/";
@@ -46,30 +50,58 @@ public class DatabaseModel {
 
     private List<String> columnNames = new ArrayList<>();
 
+    /**
+     * Getter pour la liste de comptes de la base de données.
+     * @return la liste des comptes de la base de données
+     */
     public List<Compte> getComptes() {
         return comptes;
     }
 
+    /**
+     * Getter pour la liste d'accessoires de la base de données.
+     * @return la liste des accessoires de la base de données
+     */
     public List<Accessoire> getAccessoires() {
         return accessoires;
     }
 
+    /**
+     * Getter pour la liste de bijoux de la base de données.
+     * @return la liste des bijoux de la base de données
+     */
     public List<Bijou> getBijoux() {
         return bijoux;
     }
 
+    /**
+     * Getter pour la liste de livres de la base de données.
+     * @return la liste des livres de la base de données
+     */
     public List<Livre> getLivres() {
         return livres;
     }
 
+    /**
+     * Getter pour la liste de paniers de la base de données.
+     * @return la liste des paniers de la base de données
+     */
     public List<Panier> getPaniers() {
         return paniers;
     }
 
+    /**
+     * Getter pour la liste des historiques de souhaits de la base de données.
+     * @return la liste des historiques de souhaits de la base de données
+     */
     public List<Historique> getSouhaits() {
         return souhaits;
     }
 
+    /**
+     * Getter pour la liste des historiques de commandes de la base de données.
+     * @return la liste des historiques de commandes de la base de données
+     */
     public List<Historique> getHistoriques() {
         return historiques;
     }
@@ -95,7 +127,10 @@ public class DatabaseModel {
     }
 
 
-
+    /**
+     * Crée une instance de la classe DatabaseModel qui se connecte à la base de données en utilisant les paramètres DB_URL, USER et PASS.
+     * Initialise également une instance Statement pour l'exécution de requêtes SQL.
+     */
     public DatabaseModel() {
         try {
             //Class.forName(JDBC_DRIVER);
@@ -108,6 +143,10 @@ public class DatabaseModel {
         }
     }
 
+    /**
+     * Cette méthode permet de créer la base de données ainsi que les tables nécessaires.
+     * Si la base de données ou les tables existent déjà, cette méthode ne fait rien.
+     */
     public void createDatabase() {
         try {
             // Execute a query to check if database exists
@@ -788,6 +827,12 @@ public class DatabaseModel {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Efface un élément unique dans le panier identifié par son ID.
+     *
+     * @param ID l'ID de l'élément à effacer
+     */
     public void effacePanieruniqueitem(int ID) {
         int num = ID;
         try (Connection conn = DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
@@ -798,6 +843,10 @@ public class DatabaseModel {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Efface tous les enregistrements de la table panier de la base de données.
+     */
     public void effacePanier() {
         try (Connection conn = DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
             Statement stmt = conn.createStatement();
@@ -808,10 +857,7 @@ public class DatabaseModel {
         }
     }
     public void addPanier(){
-
-
         Scanner scan=new Scanner(System.in);
-
 
         afficherTableau();
         System.out.print("Entrez le nom de la table : ");
@@ -843,6 +889,14 @@ public class DatabaseModel {
 
         addPanier(productId, tableNom, quantity);
     }
+
+    /**
+     * Ajoute un article au panier.
+     *
+     * @param productId l'ID du produit à ajouter au panier
+     * @param tableNom le nom de la table où se trouve le produit dans la base de données
+     * @param quantity la quantité du produit à ajouter au panier
+     */
     public void addPanier(int productId, String tableNom, int quantity){
         try (Connection conn = DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
             String sql = "INSERT INTO panier (product_id, table_nom, quantity) VALUES (?, ?, ?)";
@@ -859,6 +913,10 @@ public class DatabaseModel {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Affiche tous les éléments présents dans la table "panier" de la base de données.
+     */
     public void afficherPanier(){
        String query = "SELECT * FROM panier";
 
@@ -906,8 +964,13 @@ public class DatabaseModel {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
+
+    /**
+     * Récupère tous les éléments de la table "panier" de la base de données, et pour chaque élément,
+     * Récupère les informations produit correspondantes dans la table spécifiée dans la colonne "nom_table".
+     * Crée un nouvel objet `Panier` pour chaque élément et l'ajoute à une liste d'objets `Panier` appelés `paniers`.
+     */
     public void afficherPaniertabbrutarray(){
         String querylia = "SELECT * FROM panier";
 
@@ -991,8 +1054,13 @@ public class DatabaseModel {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
+
+    /**
+     * Affiche l'historique des commandes passées dans la base de données. Pour chaque commande, affiche
+     *
+     * @throws SQLException si une erreur survient lors de la connexion à la base de données ou de l'exécution de la requête
+     */
     public void afficherHistorique(){
         System.out.println("--------------------------afficherHistorique-----------------------");
         String query = "SELECT * FROM historique";
@@ -1042,10 +1110,13 @@ public class DatabaseModel {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
     }
 
+    /**
+     * Récupère l'historique des commandes de la base de donnees, les affiche ainsi que les details de chaque commande
+     *
+     * @param firstname
+     */
     public void afficherHistoriquetabbrutarray(String firstname){
         String querylia = "SELECT * FROM historique WHERE first_name= '"+firstname+"'";
         historiques.clear();
@@ -1129,9 +1200,11 @@ public class DatabaseModel {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
+    /**
+     * Récupère toutes les données de la table "historique" de la base de données et les stocke dans une liste d'objets "Historique".
+     */
     public void afficherHistoriquetabbrutarray(){
         String querylia = "SELECT * FROM historique";
 
@@ -1216,8 +1289,14 @@ public class DatabaseModel {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
+
+    /**
+     * Confirme l'achat de tous les produits dans le panier et met à jour les informations de stock et de vente dans la base de données.
+     *
+     * @param firstname Le prénom de l'utilisateur effectuant l'achat.
+     * @return La nouvelle balance du compte utilisateur après l'achat.
+     */
     public int ConfirmationAchatpage(String firstname) {
         int newbalance=0;
         //if(this.identifiantS==null){Connexion("Jean","123456");} String firstname=this.identifiantS;
@@ -1306,6 +1385,14 @@ public class DatabaseModel {
         return newbalance;
     }
 
+    /**
+     * Effectue une confirmation d'achat en soustrayant le prix total de la commande de la balance du compte associé au prénom donné.
+     * Met à jour la quantité en stock et le nombre de ventes pour chaque produit acheté dans la base de données.
+     * Ajoute la commande à l'historique des achats dans la base de données.
+     * Efface le contenu du panier après confirmation d'achat.
+     * Récupere le prénom associé au compte à partir duquel la commande est effectuée.
+     * Retourne la nouvelle balance du compte après soustraction du prix total de la commande.
+     */
     public void ConfirmationAchat() {
         if(this.identifiantS==null){
             Connexion("Jean","123456");
@@ -1374,9 +1461,7 @@ public class DatabaseModel {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         effacePanier();
-
     }
 
     public void afficherTableau(){
@@ -1395,6 +1480,11 @@ public class DatabaseModel {
         }
     }
 
+    /**
+     * Affiche la liste des tables présentes dans la base de données.
+     *
+     * @param nomTab
+     */
     public void afficherColonne(String nomTab){
         columnNames.clear();
         try (Connection conn= DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
@@ -1414,6 +1504,13 @@ public class DatabaseModel {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Cette méthode permet d'afficher la description d'un tableau de la base de données.
+     *
+     * @param nomTab Le nom du tableau dont on souhaite afficher la description.
+     * @param avecrecherche Un entier qui indique si on souhaite faire une recherche dans le tableau (1) ou non (0).
+     */
     public void descriptiontab(String nomTab, int avecrecherche) {
         try (Connection conn= DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
             stmt = conn.createStatement();
@@ -1479,6 +1576,13 @@ public class DatabaseModel {
         }
     }
 
+    /**
+     * Récupère les données d'une table donnée en entrée de la méthode, en option avec ou sans recherche et/ou tri, et affiche les résultats sur la console.
+     *
+     * @param nomTab le nom de la table dont on veut récupérer les données.
+     * @param avecrecherche une valeur entière indiquant si on veut inclure une recherche ou non : 1 pour inclure une recherche ou 0 pour ne pas inclure de recherche
+     * @param trie une valeur entière indiquant si on veut inclure un tri ou non : 1 pour inclure un tri ou 0 pour ne pas inclure de tri
+     */
     public void descriptiontab(String nomTab, int avecrecherche, int trie) {
 
         try (Connection conn= DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
@@ -1623,6 +1727,14 @@ public class DatabaseModel {
         }
     }
 
+    /**
+     * Cette méthode permet de récupérer les données d'un tableau de la base de données, en fonction des paramètres nomTab, avecrecherche et trie.
+     *
+     * @param nomTab nom du tableau à récupérer
+     * @param avecrecherche 1 si une recherche est demandée, 0 sinon
+     * @param trie 1 si un tri est demandé, 0 sinon
+     * @throws SQLException en cas d'erreur lors de l'exécution de la requête SQL
+     */
     public void descriptiontabbrutarray(String nomTab, int avecrecherche, int trie) {
 
         comptes.clear();
@@ -1825,6 +1937,16 @@ public class DatabaseModel {
         }
     }
 
+    /**
+     * Récupère toutes les données de la table spécifiée par nomTab et les affiche à la console.
+     *
+     * @param nomTab Le nom de la table à récupérer
+     * @param avecrecherche 1 si une recherche doit être effectuée, 0 sinon
+     * @param trie 1 si les résultats doivent être triés, 0 sinon
+     * @param nomRecherche Le nom à chercher dans la table
+     * @param colonne La colonne selon laquelle trier les résultats
+     * @param ordre L'ordre de tri (ASC ou DESC)
+     */
     public void descriptiontabbrutarray(String nomTab, int avecrecherche, int trie, String nomRecherche, String colonne,String ordre) {
                 //descriptiontabbrutarray("livres",1,1,"jdsq","trieselonquelid","DESC"/"ASC")
         comptes.clear();
@@ -2067,6 +2189,13 @@ public class DatabaseModel {
         String nomTable= saisie.nextLine();
         supprimeLigne(nomTable);
     }
+
+    /**
+     * Supprime toutes les lignes de la table spécifiée qui contiennent une valeur entrée par l'utilisateur.
+     *
+     * @param nomTable le nom de la table à modifier
+     * @throws SQLException si une erreur SQL survient pendant la suppression des lignes
+     */
     public void supprimeLigne(String nomTable) {
         try (Connection conn = DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
             Scanner scanner = new Scanner(System.in);
@@ -2208,6 +2337,20 @@ public class DatabaseModel {
         }
     }
 
+    /**
+     * Met à jour une ligne d'une table accessoir dans la base de données en fonction d'un nom de recherche.
+     *
+     * @param id L'id de l'accessoir
+     * @param name Le nom de l'accessoir
+     * @param description La description de l'accessoir
+     * @param en_reduction Si il est en reduction oui (1) non (0)
+     * @param price Le prix de l'accessoir sans reduction
+     * @param price_reduc Le prix de l'accessoir avec reduction
+     * @param stock_quantity La quantite restante en stock
+     * @param vendu_sans_reduc La quantite vendu sans reduction
+     * @param vendu_reduc La quantite vendu avec reduction
+     * @param image L'image de l'accessoir
+     */
     public void mettreAJourAccessoiresFX(int id,String name, String description, int en_reduction,double price,double price_reduc, int stock_quantity, int vendu_sans_reduc, int vendu_reduc, String image){
         try (Connection conn = DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
         String queryUpdate = "UPDATE accessoires SET name='"+name+"',description='"+description+"', en_reduction="+en_reduction+", price="+price+", price_reduc="+price_reduc+", stock_quantity="+stock_quantity+", vendu_sans_reduc="+vendu_sans_reduc+", vendu_reduc="+vendu_reduc+", image='"+image +"' WHERE id="+id;
@@ -2221,6 +2364,20 @@ public class DatabaseModel {
     }
     }
 
+    /**
+     * Met à jour une ligne de la table bijoux dans la base de données en fonction d'un nom de recherche.
+     *
+     * @param id L'id de l'accessoir
+     * @param name Le nom de l'accessoir
+     * @param description La description de l'accessoir
+     * @param en_reduction Si il est en reduction oui (1) non (0)
+     * @param price Le prix de l'accessoir sans reduction
+     * @param price_reduc Le prix de l'accessoir avec reduction
+     * @param stock_quantity La quantite restante en stock
+     * @param vendu_sans_reduc La quantite vendu sans reduction
+     *  @param vendu_reduc La quantite vendu avec reduction
+     *  @param image L'image de l'accessoir
+     */
     public void mettreAJourBijouxFX(int id,String name, String description, int en_reduction,double price,double price_reduc, int stock_quantity, int vendu_sans_reduc, int vendu_reduc, String image){
         try (Connection conn = DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
             String queryUpdate = "UPDATE bijoux SET name='"+name+"',description='"+description+"', en_reduction="+en_reduction+", price="+price+", price_reduc="+price_reduc+", stock_quantity="+stock_quantity+", vendu_sans_reduc="+vendu_sans_reduc+", vendu_reduc="+vendu_reduc+", image='"+image +"' WHERE id="+id;
@@ -2233,6 +2390,24 @@ public class DatabaseModel {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Met à jour une ligne de la table livre dans la base de données en fonction d'un nom de recherche.
+     *
+     * @param id ID du livre
+     * @param title Titre du livre
+     * @param author Nom de l'auteur
+     * @param publisher Non de la maison de publication
+     * @param publication_date Date de publication du livre
+     * @param isbn ISBN du livre
+     * @param en_reduction Si le livre est en reduction ou non
+     * @param price Prix du livre sans reduction
+     * @param price_reduc Prix du livre avec reduction
+     * @param stock_quantity Quantite stockee
+     * @param vendu_sans_reduc Quantite de livres vendu sans reduction
+     * @param vendu_reduc Quantite de livres vendu avec reduction
+     * @param image Image du livre
+     */
     public void mettreAJourLivresFX(int id,String title, String author, String publisher, String publication_date,String isbn, int en_reduction,double price,double price_reduc, int stock_quantity, int vendu_sans_reduc, int vendu_reduc, String image){
         try (Connection conn = DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
             String queryUpdate = "UPDATE livres SET title='"+title+"', author='"+author+"', publisher='"+publisher+"', publication_date='"+publication_date+"',isbn='"+isbn+"',  en_reduction="+en_reduction+", price="+price+", price_reduc="+price_reduc+", stock_quantity="+stock_quantity+", vendu_sans_reduc="+vendu_sans_reduc+", vendu_reduc="+vendu_reduc+", image='"+image +"' WHERE id="+id;
@@ -2258,6 +2433,12 @@ public class DatabaseModel {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Crée un graphique à partir des données de vente et de stock d'une table de la base de données.
+     *
+     * @param nombtab Le nom de la table contenant les données de vente et de stock
+     */
     public void graphvente(String nombtab) {
         // Création du jeu de données
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
@@ -2297,6 +2478,12 @@ public class DatabaseModel {
         frame.pack();
         frame.setVisible(true);
     }
+
+    /**
+     * Cette méthode récupère les données de vente depuis la table spécifiée par le paramètre "nombtab" dans la base de données,
+     *
+     * @param nombtab Le nom de la table contenant les données de vente
+     */
     public void graphventebis(String nombtab) {
         // Création du jeu de données
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
@@ -2332,6 +2519,12 @@ public class DatabaseModel {
         frame.pack();
         frame.setVisible(true);
     }
+
+    /**
+     * Crée et affiche un graphique à secteurs montrant les revenus générés par chaque produit dans le tableau donné.
+     *
+     * @param nombtab Le nom de la table contenant les données de vente
+     */
     public void graphrevenu(String nombtab) {
         // Création du jeu de données
         DefaultPieDataset dataset = new DefaultPieDataset();
@@ -2365,6 +2558,11 @@ public class DatabaseModel {
         frame.setVisible(true);
     }
 
+    /**
+     * Crée un graphique à secteurs pour afficher les revenus générés par chaque produit dans un tableau donné de la base de données.
+     *
+     * @param nombtab Le nom de la table contenant les données de vente
+     */
     public void graphrevenubis(String nombtab) {
         // Création du jeu de données
         DefaultPieDataset dataset = new DefaultPieDataset();
@@ -2554,6 +2752,13 @@ public class DatabaseModel {
         //descriptiontab(nomTable,0);
     }
 
+    /**
+     * Permet de se connecter à la base de données en vérifiant les informations de connexion fournies par l'utilisateur.
+     *
+     * @param username Le nom d'utilisateur à vérifier
+     * @param mdp Le mot de passe à vérifier
+     * @return true si la connexion est établie avec succès, false sinon
+     */
     public boolean Connexion(String username, String mdp) {
         try (Connection conn= DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
             stmt = conn.createStatement();
@@ -2589,6 +2794,11 @@ public class DatabaseModel {
         System.out.println("error username or password");
         return false;
 }
+
+    /**
+     * Déconnecte l'utilisateur courant en réinitialisant ses informations de connexion.
+     * Efface également le panier de l'utilisateur.
+     */
     public void Deconnexion() {
         effacePanier();
         System.out.println("Au revoir "+this.identifiantS);
@@ -2597,8 +2807,5 @@ public class DatabaseModel {
        this.adminS=666;
        System.out.println("deconnection");
     }
-
-
-
 
 }

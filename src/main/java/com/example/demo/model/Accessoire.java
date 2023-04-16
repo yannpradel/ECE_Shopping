@@ -74,42 +74,92 @@ public class Accessoire {
         this.image = image;
     }
 
+    /**
+     * Retourne l'identifiant de l'accessoire.
+     *
+     * @return l'identifiant de l'accessoire
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Retourne l'identifiant de Name.
+     *
+     * @return le nom de l'accessoir
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Retourne l'identifiant de Description.
+     *
+     * @return la description de l'accessoir
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Retourne l'identifiant de En_reduction.
+     *
+     * @return si l'accessoir est en reduction
+     */
     public int getEn_reduction() {
         return en_reduction;
     }
 
+    /**
+     * Retourne l'identifiant de Price.
+     *
+     * @return le prix sans reduction de l'accessoir
+     */
     public double getPrice() {
         return price;
     }
 
+    /**
+     * Retourne l'identifiant de Price_reduc.
+     *
+     * @return le prix avec reduction de l'accessoir
+     */
     public double getPrice_reduc() {
         return price_reduc;
     }
 
+    /**
+     * Retourne l'identifiant de Stock_quantity.
+     *
+     * @return la quantite restante en stock
+     */
     public int getStock_quantity() {
         return stock_quantity;
     }
 
+    /**
+     * Retourne l'identifiant de Vendu_sans_reducl.
+     *
+     * @return le nombre d'accessoirs vendu sans reduction
+     */
     public int getVendu_sans_reducl() {
         return vendu_sans_reduc;
     }
 
+    /**
+     * Retourne l'identifiant de Vendu_reduc.
+     *
+     * @return le nombre d'accessoirs vendu avec reduction
+     */
     public int getVendu_reduc() {
         return vendu_reduc;
     }
 
+    /**
+     * Retourne l'identifiant de Image.
+     *
+     * @return l'image de l'accessoir
+     */
     public String getImage() {
         return image;
     }
