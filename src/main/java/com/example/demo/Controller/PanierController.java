@@ -23,7 +23,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-
+/**
+ * Contrôleur de la vue panierPage.fxml.
+ * Gère les interactions avec les éléments de l'interface graphique liés au panier.
+ */
 public class PanierController implements Initializable {
     private Bijou bijou;
     @FXML
@@ -41,7 +44,11 @@ public class PanierController implements Initializable {
 
     @FXML
     ScrollPane scrollpane = new ScrollPane();
-
+    /**
+     *Méthode appelée lors du clic sur le bouton qui dirige l'utilisateur vers la page des bijoux.
+     *@param event Événement du clic sur le bouton
+     *@throws IOException Si une erreur se produit lors du chargement de la page
+     */
     @FXML
     void gotoBijoux(ActionEvent event) throws IOException {
         // System.out.println("aaaaa" + counter);
@@ -55,7 +62,11 @@ public class PanierController implements Initializable {
         stage.show();
 
     }
-
+    /**
+     * Méthode appelée lorsqu'on clique sur le bouton "Déconnexion". Elle permet de déconnecter l'utilisateur en vidant la session en cours, puis de rediriger l'utilisateur vers la page de connexion.
+     * @param event un événement ActionEvent
+     * @throws IOException si une erreur d'entrée/sortie se produit
+     */
     @FXML
     void gotoDisconnect(ActionEvent event) throws IOException {
         SessionManager.clearSession();
@@ -70,7 +81,11 @@ public class PanierController implements Initializable {
         stage.show();
 
     }
-
+    /**
+     * Change la scène courante vers la page du catalogue principal.
+     * @param event L'événement de clic sur le bouton "Menu".
+     * @throws IOException Si une erreur se produit lors du chargement de la page.
+     */
     @FXML
     void gotoMenu(ActionEvent event) throws IOException {
         // System.out.println("aaaaa" + counter);
@@ -84,7 +99,11 @@ public class PanierController implements Initializable {
         stage.show();
 
     }
-
+    /**
+     * Loads the "accessPage.fxml" file and displays it in the scene
+     * @param event The ActionEvent triggered by clicking the "Accessoires" button
+     * @throws IOException if the file "accessPage.fxml" cannot be loaded
+     */
     @FXML
     void gotoAccess(ActionEvent event) throws IOException {
         // System.out.println("aaaaa" + counter);
@@ -98,7 +117,12 @@ public class PanierController implements Initializable {
         stage.show();
 
     }
-
+    /**
+     * Méthode appelée lorsqu'on clique sur le bouton "Book" pour afficher la page de livres.
+     * Charge la vue "bookPage.fxml" via FXMLLoader, la définit comme racine de la scène et affiche la scène dans la fenêtre actuelle.
+     * @param event L'événement déclencheur de l'action.
+     * @throws IOException Si une erreur se produit lors du chargement de la vue "bookPage.fxml".
+     */
     @FXML
     void gotoBook(ActionEvent event) throws IOException {
         // System.out.println("aaaaa" + counter);
@@ -112,7 +136,13 @@ public class PanierController implements Initializable {
         stage.show();
 
     }
-
+    /**
+     * Cette méthode est appelée lorsque l'utilisateur clique sur un bouton pour accéder à la page de profil.
+     * Elle charge le fichier profilePage.fxml à l'aide de la classe FXMLLoader et le définit comme racine de la scène.
+     * Ensuite, elle définit la scène sur la scène actuelle de la fenêtre et l'affiche à l'utilisateur.
+     * @param event l'événement déclenché par le clic de l'utilisateur sur le bouton
+     * @throws IOException si le fichier profilePage.fxml ne peut pas être chargé
+     */
     @FXML
     void gotoProfile(ActionEvent event) throws IOException {
         // System.out.println("aaaaa" + counter);
@@ -127,6 +157,12 @@ public class PanierController implements Initializable {
 
     }
 
+    /**
+     * Méthode appelée lorsqu'on clique sur le bouton "Panier".
+     * Charge la page de panier et l'affiche dans la fenêtre en cours.
+     * @param event L'événement de clic sur le bouton.
+     * @throws IOException Si une erreur survient lors du chargement de la page.
+     */
 
 
     @FXML
@@ -142,7 +178,14 @@ public class PanierController implements Initializable {
         stage.show();
 
     }
-
+    /**
+     * Cette méthode est appelée lorsque l'utilisateur clique sur le bouton "Confirmer" pour finaliser un achat.
+     * Elle met à jour la balance de l'utilisateur connecté dans la base de données et dans la session courante.
+     * Elle charge la page du panier (panierPage.fxml) à l'aide de la classe FXMLLoader et la définit comme racine de la scène.
+     * Ensuite, elle définit la scène sur la fenêtre principale de l'application et l'affiche à l'utilisateur.
+     * @param event l'événement déclenché par le clic de l'utilisateur sur le bouton "Confirmer"
+     * @throws IOException si la page panierPage.fxml ne peut pas être chargée
+     */
     @FXML
     private void onConfirmButtonClicked(ActionEvent event) throws IOException{
         DatabaseModel database = new DatabaseModel();
@@ -157,7 +200,14 @@ public class PanierController implements Initializable {
         stage.show();
     }
 
-
+    /**
+     * Initialise la vue du panier. Cette méthode récupère le compte de l'utilisateur connecté, affiche le nom et le solde de l'utilisateur,
+     * et récupère les articles du panier de la base de données. Ensuite, elle affiche les articles dans une grille avec leur image, nom, description,
+     * quantité, prix et un bouton de suppression pour chaque article. Si l'article est un accessoire ou un bijou, l'image affichée est l'image de l'article.
+     * Si l'article est un livre, l'image affichée est une image par défaut pour les livres.
+     * @param url L'URL de la vue du panier.
+     * @param rb Les ressources pour la vue du panier.
+     */
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

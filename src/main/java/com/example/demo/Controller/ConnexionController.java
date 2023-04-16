@@ -18,7 +18,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.EventObject;
 import java.util.ResourceBundle;
-
+/**
+ * Contrôleur de la vue connexionPage.fxml.
+ * Gère les interactions avec les éléments de l'interface graphique liés à la connexion.
+ */
 public class ConnexionController {
     @FXML
     private TextField usernameField;
@@ -28,7 +31,13 @@ public class ConnexionController {
 
     @FXML
     private Button connexionButton;
-
+    /**
+     * Gère l'événement du clic sur le bouton de connexion.
+     * Récupère les valeurs des champs nom d'utilisateur et mot de passe et les utilise pour se connecter à la base de données.
+     * Si la connexion est réussie, initialise un objet Compte avec les informations de connexion, stocke l'utilisateur connecté dans la session et affiche la page du catalogue.
+     * @param event l'événement du clic sur le bouton de connexion.
+     * @throws IOException si la ressource FXML du cataloguePage.fxml n'a pas pu être chargée.
+     */
     @FXML
     void connnexionButton(ActionEvent event) throws IOException {
         String username = usernameField.getText();
