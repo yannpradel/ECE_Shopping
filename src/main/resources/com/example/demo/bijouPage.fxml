@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -24,18 +23,18 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox minHeight="1080.0" minWidth="1920.0" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Controller.BijouController">
+<VBox minHeight="1080.0" minWidth="1920.0" prefHeight="1080.0" prefWidth="1920.0" style="-fx-font-size: 14;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Controller.BijouController">
    <children>
       <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <Pane layoutX="469.0" layoutY="134.0" prefHeight="932.0" prefWidth="1435.0">
+            <Pane layoutX="470.0" layoutY="124.0" prefHeight="932.0" prefWidth="1451.0">
                <children>
-                  <ScrollPane layoutX="52.0" layoutY="109.0" prefHeight="726.0" prefWidth="1272.0">
+                  <ScrollPane layoutX="52.0" layoutY="109.0" prefHeight="766.0" prefWidth="1354.0" style="-fx-background-radius: 3;">
                      <content>
-                        <GridPane fx:id="gridpane" alignment="CENTER" prefHeight="725.0" prefWidth="1275.0" stylesheets="@../../../../../target/src/css/styles.css">
+                        <GridPane fx:id="gridpane" alignment="TOP_CENTER" prefHeight="1081.0" prefWidth="1329.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-padding: 10; -fx-hgap: 20; -fx-vgap: 30; -fx-grid-row-gap: 10; -fx-background-insets: 0 5 0 5; -fx-font-size: 15;">
                            <columnConstraints>
                               <ColumnConstraints fx:id="bijouPic" halignment="CENTER" hgrow="SOMETIMES" maxWidth="130.0" minWidth="100.0" />
-                              <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="200.0" minWidth="200.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="200.0" minWidth="200.0" />
                               <ColumnConstraints fx:id="bijouPrice" halignment="CENTER" hgrow="SOMETIMES" maxWidth="250.0" minWidth="250.0" />
                               <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="125.0" minWidth="125.0" />
                               <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="75.0" minWidth="75.0" />
@@ -46,14 +45,7 @@
                            </columnConstraints>
                            <rowConstraints>
                               <RowConstraints maxHeight="175.0" minHeight="100.0" valignment="CENTER" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="175.0" minHeight="100.0" valignment="CENTER" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="175.0" minHeight="100.0" valignment="CENTER" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="175.0" minHeight="100.0" valignment="CENTER" vgrow="SOMETIMES" />
                            </rowConstraints>
-                           <styleClass>
-                              <String fx:value="maclasse" />
-                              <String fx:value="onHover" />
-                           </styleClass>
                         </GridPane>
                      </content>
                   </ScrollPane>
@@ -63,11 +55,13 @@
                      </font>
                   </Label>
                   <Text fill="#575757" layoutX="52.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bijoux" wrappingWidth="137.13671875" />
-                  <Text fill="#575757" layoutX="611.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantité" />
-                  <Text fill="#575757" layoutX="756.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix" />
-                  <Text fill="#575757" layoutX="822.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter" />
+                  <Text fill="#575757" layoutX="702.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantité" />
+                  <Text fill="#575757" layoutX="839.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix" />
+                  <Text fill="#575757" layoutX="952.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter" />
                   <Button layoutX="888.0" layoutY="25.0" mnemonicParsing="false" onAction="#search" text="Rechercher" />
                   <TextField fx:id="searchBar" layoutX="658.0" layoutY="25.0" prefHeight="25.0" prefWidth="216.0" />
+                  <Text fill="#575757" layoutX="1096.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modifier la quantité" />
+                  <Text fill="#575757" layoutX="1260.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Avec/sans réduction" />
                   <SplitMenuButton layoutX="1127.0" layoutY="25.0" mnemonicParsing="false" text="Trier par:">
                      <items>
                         <MenuItem mnemonicParsing="false" onAction="#sortPriceAsc" text="Prix : Ordre croissant" />
@@ -76,7 +70,7 @@
                         <MenuItem mnemonicParsing="false" onAction="#sortNameDesc" text="Nom : Ordre décroissant" />
                      </items>
                   </SplitMenuButton>
-                  <VBox fx:id="rev" alignment="CENTER" layoutX="1347.0" layoutY="-2.0" prefHeight="83.0" prefWidth="100.0" visible="false">
+                  <VBox fx:id="rev" alignment="CENTER" layoutX="1348.0" layoutY="-2.0" prefHeight="83.0" prefWidth="100.0" visible="false">
                      <children>
                         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="46.0" text="Revenus" textAlignment="CENTER">
                            <font>

@@ -45,6 +45,7 @@ public class AccessoireController implements Initializable {
 
 
 
+
     @FXML
     void gotoBijoux(ActionEvent event) throws IOException {
         // System.out.println("aaaaa" + counter);
@@ -127,7 +128,8 @@ public class AccessoireController implements Initializable {
 
 
             button2.setText("Ajouter au panier");
-            button2.setStyle("-fx-background-color: #676767;");
+            button2.setStyle("-fx-background-color: #808080;");
+            button2.setStyle("-fx-font-size:12;");
 
             Spinner spinner = new Spinner();
             Spinner<Integer> spinner1 = (Spinner<Integer>) spinner;
@@ -150,8 +152,6 @@ public class AccessoireController implements Initializable {
             gridpane.add(priceLabel,4,row);
             gridpane.add(button2,5,row);
 
-
-
             if(SessionManager.getLoggedInUser().getIsAdmin()==1)
             {
                 Spinner spinnerAdmin = new Spinner();
@@ -168,6 +168,7 @@ public class AccessoireController implements Initializable {
                 check.setOnAction(new EventHandler<ActionEvent>() {
                     @Override public void handle(ActionEvent e) {
                         database.mettreAJourAccessoiresFX(objet.getId(),objet.getName(), objet.getDescription(), objet.getEn_reduction(), objet.getPrice(),objet.getPrice_reduc(), (Integer) spinnerAdmin.getValue(),objet.getVendu_sans_reducl(),objet.getVendu_reduc(),objet.getImage());
+                        database.descriptiontabbrutarray("accessoires",0,0);
                         try {
                             gotoAccess(e);
                         } catch (IOException ex) {
@@ -176,13 +177,28 @@ public class AccessoireController implements Initializable {
                     }
                 });
                 SplitMenuButton splitmenu = new SplitMenuButton();
+                splitmenu.setText("R");
+                splitmenu.setStyle("-fx-font-size:12;");
                 MenuItem oui = new MenuItem("Avec réduction");
+
                 oui.setOnAction(e -> {
                     database.mettreAJourAccessoiresFX(objet.getId(),objet.getName(), objet.getDescription(), 1, objet.getPrice(),objet.getPrice_reduc(), objet.getStock_quantity(),objet.getVendu_sans_reducl(),objet.getVendu_reduc(),objet.getImage());
+                    Alert alerte = new Alert(Alert.AlertType.INFORMATION);
+                    alerte.setTitle("Ajout de la réduction");
+                    alerte.setHeaderText("Réduction !");
+                    alerte.setContentText("La réduction a bien été appliquée (lorsqu'un utilisateur achète plus de 4 éléments)");
+
+                    alerte.showAndWait();
                 });
                 MenuItem non = new MenuItem("Sans réduction");
-                oui.setOnAction(e -> {
+                non.setOnAction(e -> {
                     database.mettreAJourAccessoiresFX(objet.getId(),objet.getName(), objet.getDescription(), 0, objet.getPrice(),objet.getPrice_reduc(), objet.getStock_quantity(),objet.getVendu_sans_reducl(),objet.getVendu_reduc(),objet.getImage());
+                    Alert alerte = new Alert(Alert.AlertType.INFORMATION);
+                    alerte.setTitle("Retrait de la réduction");
+                    alerte.setHeaderText("Réduction !");
+                    alerte.setContentText("La réduction a bien été supprimé !");
+
+                    alerte.showAndWait();
                 });
                 splitmenu.getItems().addAll(oui,non);
                 gridpane.add(splitmenu,8,row);
@@ -306,7 +322,6 @@ public class AccessoireController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-
         Compte compte = SessionManager.getLoggedInUser();
         System.out.println("compte.getEmail() : ");
         System.out.println(compte.getFirstName());
@@ -351,7 +366,8 @@ public class AccessoireController implements Initializable {
 
 
             button2.setText("Ajouter au panier");
-            button2.setStyle("-fx-background-color: #676767;");
+            button2.setStyle("-fx-background-color: #808080;");
+            button2.setStyle("-fx-font-size:12;");
 
             Spinner spinner = new Spinner();
             Spinner<Integer> spinner1 = (Spinner<Integer>) spinner;
@@ -399,15 +415,28 @@ public class AccessoireController implements Initializable {
                     }
                 });
                 SplitMenuButton splitmenu = new SplitMenuButton();
+                splitmenu.setText("R");
+                splitmenu.setStyle("-fx-font-size:12;");
                 MenuItem oui = new MenuItem("Avec réduction");
 
                 oui.setOnAction(e -> {
                     database.mettreAJourAccessoiresFX(objet.getId(),objet.getName(), objet.getDescription(), 1, objet.getPrice(),objet.getPrice_reduc(), objet.getStock_quantity(),objet.getVendu_sans_reducl(),objet.getVendu_reduc(),objet.getImage());
+                    Alert alerte = new Alert(Alert.AlertType.INFORMATION);
+                    alerte.setTitle("Ajout de la réduction");
+                    alerte.setHeaderText("Réduction !");
+                    alerte.setContentText("La réduction a bien été appliquée (lorsqu'un utilisateur achète plus de 4 éléments)");
 
+                    alerte.showAndWait();
                 });
                 MenuItem non = new MenuItem("Sans réduction");
                 non.setOnAction(e -> {
                     database.mettreAJourAccessoiresFX(objet.getId(),objet.getName(), objet.getDescription(), 0, objet.getPrice(),objet.getPrice_reduc(), objet.getStock_quantity(),objet.getVendu_sans_reducl(),objet.getVendu_reduc(),objet.getImage());
+                    Alert alerte = new Alert(Alert.AlertType.INFORMATION);
+                    alerte.setTitle("Retrait de la réduction");
+                    alerte.setHeaderText("Réduction !");
+                    alerte.setContentText("La réduction a bien été supprimé !");
+
+                    alerte.showAndWait();
                 });
                 splitmenu.getItems().addAll(oui,non);
                 gridpane.add(splitmenu,8,row);
