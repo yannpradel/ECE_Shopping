@@ -208,6 +208,8 @@ public class LivreController implements Initializable {
                     alerte.setContentText("La réduction a bien été appliquée (lorsqu'un utilisateur achète plus de 4 éléments)");//database.mettreAJourLivresFX(2, "Le Seigneur des Anneaux", "J.R.R. Tolkien", "Houghton Mifflin Harcourt", "1954-1955", "978-2-1234-5678-9", 1, 20.0f, 15.0f, 100, 50, 25, "seigneur_des_anneaux.jpg");
                     //database.descriptiontabbrutarray("livres",0,0);
                     //database.mettreAJourLivresFX(livres.get(0).getId(), livres.get(2).getTitle(), livres.get(2).getAuthor(), livres.get(2).getPublisher(), livres.get(2).getPublicationDate(), livres.get(2).getIsbn(), livres.get(2).getEnReduction(),(float)livres.get(2).getPrice(), (float)livres.get(2).getPriceReduc(), livres.get(2).getStockQuantity(), livres.get(2).getVenduSansReduc(), livres.get(2).getVenduReduc(), livres.get(2).getImage());
+
+                    alerte.showAndWait();
                 });
                 MenuItem non = new MenuItem("Sans réduction");
                 non.setOnAction(e -> {
@@ -216,6 +218,8 @@ public class LivreController implements Initializable {
                     alerte.setTitle("Retrait de la réduction");
                     alerte.setHeaderText("Réduction !");
                     alerte.setContentText("La réduction a bien été supprimé !");
+
+                    alerte.showAndWait();
                 });
                 splitmenu.getItems().addAll(oui,non);
                 gridpane.add(splitmenu,8,row);

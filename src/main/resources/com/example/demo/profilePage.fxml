@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -32,26 +31,22 @@
                      <content>
                         <Pane prefHeight="1588.0" prefWidth="1488.0">
                            <children>
-                              <ScrollPane layoutX="88.0" layoutY="471.0" prefHeight="1005.0" prefWidth="1272.0">
+                              <ScrollPane layoutX="88.0" layoutY="471.0" prefHeight="1005.0" prefWidth="1320.0">
                                  <content>
-                                    <GridPane fx:id="gridpane" alignment="CENTER" prefHeight="718.0" prefWidth="1222.0" stylesheets="@../../../../../target/src/css/styles.css">
+                                    <GridPane fx:id="gridpane" alignment="TOP_CENTER" prefHeight="1081.0" prefWidth="1251.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-padding: 10; -fx-hgap: 40; -fx-vgap: 30; -fx-grid-row-gap: 10; -fx-background-insets: 0 5 0 5; -fx-font-size: 15;">
                                        <columnConstraints>
-                                          <ColumnConstraints fx:id="bijouPic" halignment="CENTER" hgrow="SOMETIMES" maxWidth="300.0" minWidth="300.0" />
-                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="300.0" minWidth="300.0" />
-                                          <ColumnConstraints fx:id="bijouPrice" halignment="CENTER" hgrow="SOMETIMES" maxWidth="375.0" minWidth="375.0" />
+                                          <ColumnConstraints fx:id="bijouPic1" halignment="CENTER" hgrow="SOMETIMES" maxWidth="130.0" minWidth="100.0" />
                                           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="200.0" minWidth="200.0" />
-                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="100.0" minWidth="100.0" />
+                                          <ColumnConstraints fx:id="bijouPrice1" halignment="CENTER" hgrow="SOMETIMES" maxWidth="250.0" minWidth="250.0" />
+                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="125.0" minWidth="125.0" />
+                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="75.0" minWidth="75.0" />
                                        </columnConstraints>
                                        <rowConstraints>
                                           <RowConstraints maxHeight="175.0" minHeight="100.0" valignment="CENTER" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="175.0" minHeight="100.0" valignment="CENTER" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="175.0" minHeight="100.0" valignment="CENTER" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="175.0" minHeight="100.0" valignment="CENTER" vgrow="SOMETIMES" />
                                        </rowConstraints>
-                                       <styleClass>
-                                          <String fx:value="maclasse" />
-                                          <String fx:value="onHover" />
-                                       </styleClass>
+                                       <padding>
+                                          <Insets right="20.0" />
+                                       </padding>
                                     </GridPane>
                                  </content>
                               </ScrollPane>
@@ -206,9 +201,18 @@
                                  </children>
                               </VBox>
                               <SplitMenuButton fx:id="splitmenu" layoutX="88.0" layoutY="121.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="136.0" text="Choisir utilisateur:" />
-                              <Text fill="#575757" layoutX="87.0" layoutY="467.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Item" wrappingWidth="137.13671875" />
-                              <Text fill="#575757" layoutX="1152.0" layoutY="466.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix" wrappingWidth="22.13671875" />
-                              <Text fill="#575757" layoutX="1291.0" layoutY="466.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantité" wrappingWidth="53.000000000000114" />
+                              <Text fill="#575757" layoutX="87.0" layoutY="467.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Item" wrappingWidth="137.13671875">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></Text>
+                              <Text fill="#575757" layoutX="995.0" layoutY="466.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix" wrappingWidth="61.13671875">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></Text>
+                              <Text fill="#575757" layoutX="1126.0" layoutY="466.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantité" wrappingWidth="87.00000000000011">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></Text>
                            </children>
                         </Pane>
                      </content>

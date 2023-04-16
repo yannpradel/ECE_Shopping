@@ -212,6 +212,8 @@ public class BijouController implements Initializable {
                     alerte.setTitle("Ajout de la réduction");
                     alerte.setHeaderText("Réduction !");
                     alerte.setContentText("La réduction a bien été appliquée (lorsqu'un utilisateur achète plus de 4 éléments)");
+
+                    alerte.showAndWait();
                 });
                 MenuItem non = new MenuItem("Sans réduction");
                 non.setOnAction(e -> {
@@ -220,6 +222,8 @@ public class BijouController implements Initializable {
                     alerte.setTitle("Retrait de la réduction");
                     alerte.setHeaderText("Réduction !");
                     alerte.setContentText("La réduction a bien été supprimé !");
+
+                    alerte.showAndWait();
                 });
                 splitmenu.getItems().addAll(oui,non);
                 gridpane.add(splitmenu,8,row);

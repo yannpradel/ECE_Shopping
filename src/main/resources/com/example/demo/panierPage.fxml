@@ -33,7 +33,7 @@
                   </Label>
                   <ScrollPane layoutX="52.0" layoutY="109.0" prefHeight="726.0" prefWidth="1272.0">
                      <content>
-                        <GridPane fx:id="gridpane" alignment="TOP_CENTER" prefHeight="1081.0" prefWidth="1329.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-padding: 10; -fx-hgap: 40; -fx-vgap: 30; -fx-grid-row-gap: 10; -fx-background-insets: 0 5 0 5; -fx-font-size: 18;">
+                        <GridPane fx:id="gridpane" alignment="TOP_CENTER" prefHeight="1081.0" prefWidth="1251.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-padding: 10; -fx-hgap: 40; -fx-vgap: 30; -fx-grid-row-gap: 10; -fx-background-insets: 0 5 0 5; -fx-font-size: 18;">
                            <columnConstraints>
                               <ColumnConstraints fx:id="bijouPic" halignment="CENTER" hgrow="SOMETIMES" maxWidth="130.0" minWidth="100.0" />
                               <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="200.0" minWidth="200.0" />
