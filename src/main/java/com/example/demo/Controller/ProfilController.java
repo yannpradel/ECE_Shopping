@@ -35,6 +35,7 @@ public class ProfilController implements Initializable {
     @FXML
     TextField searchBar;
 
+
     @FXML
     private Text firstname;
 
