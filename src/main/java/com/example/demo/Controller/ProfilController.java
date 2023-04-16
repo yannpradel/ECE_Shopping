@@ -1,5 +1,6 @@
-package com.example.demo;
+package com.example.demo.Controller;
 
+import com.example.demo.SessionManager;
 import com.example.demo.model.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -61,7 +62,7 @@ public class ProfilController implements Initializable {
     void gotoBijoux(ActionEvent event) throws IOException {
         // System.out.println("aaaaa" + counter);
         //welcomeText.setText("Button Clicked " + counter);
-        FXMLLoader load = new FXMLLoader(getClass().getResource("bijouPage.fxml"));
+        FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/bijouPage.fxml"));
         Parent root = load.load();
 
         Scene scene = new Scene(root);
@@ -75,7 +76,7 @@ public class ProfilController implements Initializable {
     void gotoMenu(ActionEvent event) throws IOException {
         // System.out.println("aaaaa" + counter);
         //welcomeText.setText("Button Clicked " + counter);
-        FXMLLoader load = new FXMLLoader(getClass().getResource("cataloguePage.fxml"));
+        FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/cataloguePage.fxml"));
         Parent root = load.load();
 
         Scene scene = new Scene(root);
@@ -89,7 +90,7 @@ public class ProfilController implements Initializable {
     void gotoAccess(ActionEvent event) throws IOException {
         // System.out.println("aaaaa" + counter);
         //welcomeText.setText("Button Clicked " + counter);
-        FXMLLoader load = new FXMLLoader(getClass().getResource("accessPage.fxml"));
+        FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/accessPage.fxml"));
         Parent root = load.load();
 
         Scene scene = new Scene(root);
@@ -103,7 +104,7 @@ public class ProfilController implements Initializable {
     void gotoBook(ActionEvent event) throws IOException {
         // System.out.println("aaaaa" + counter);
         //welcomeText.setText("Button Clicked " + counter);
-        FXMLLoader load = new FXMLLoader(getClass().getResource("bookPage.fxml"));
+        FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/bookPage.fxml"));
         Parent root = load.load();
 
         Scene scene = new Scene(root);
@@ -119,7 +120,7 @@ public class ProfilController implements Initializable {
     void gotoPanier(ActionEvent event) throws IOException {
         // System.out.println("aaaaa" + counter);
         //welcomeText.setText("Button Clicked " + counter);
-        FXMLLoader load = new FXMLLoader(getClass().getResource("panierPage.fxml"));
+        FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/panierPage.fxml"));
         Parent root = load.load();
 
         Scene scene = new Scene(root);
@@ -133,7 +134,7 @@ public class ProfilController implements Initializable {
     void gotoProfile(ActionEvent event) throws IOException {
         // System.out.println("aaaaa" + counter);
         //welcomeText.setText("Button Clicked " + counter);
-        FXMLLoader load = new FXMLLoader(getClass().getResource("profilePage.fxml"));
+        FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/profilePage.fxml"));
         Parent root = load.load();
 
         Scene scene = new Scene(root);
@@ -148,7 +149,7 @@ public class ProfilController implements Initializable {
         SessionManager.clearSession();
         // System.out.println("aaaaa" + counter);
         //welcomeText.setText("Button Clicked " + counter);
-        FXMLLoader load = new FXMLLoader(getClass().getResource("ConnexionPage.fxml"));
+        FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/ConnexionPage.fxml"));
         Parent root = load.load();
 
         Scene scene = new Scene(root);
@@ -163,7 +164,7 @@ public class ProfilController implements Initializable {
         DatabaseModel database = new DatabaseModel();
         int balance = database.ConfirmationAchatpage(SessionManager.getLoggedInUser().getFirstName());
         SessionManager.getLoggedInUser().setBalance(balance);
-        FXMLLoader load = new FXMLLoader(getClass().getResource("panierPage.fxml"));
+        FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/panierPage.fxml"));
         Parent root = load.load();
 
         Scene scene = new Scene(root);
@@ -304,116 +305,7 @@ public class ProfilController implements Initializable {
                 splitmenu.getItems().add(userNext);
             }
         }
-        /*
 
-        firstname.setText(SessionManager.getLoggedInUser().getFirstName());
-        lastname.setText(SessionManager.getLoggedInUser().getLastName());
-        email.setText(SessionManager.getLoggedInUser().getEmail());
-        solde.setText(String.valueOf(SessionManager.getLoggedInUser().getBalance()));
-        adressePostale.setText(SessionManager.getLoggedInUser().getAddress());
-
-        Compte compte = SessionManager.getLoggedInUser();
-        System.out.println("ON EST DANS LE PANIER : ");
-        System.out.println(compte.getFirstName());
-        DatabaseModel database = new DatabaseModel();
-        database.afficherHistoriquetabbrutarray(SessionManager.getLoggedInUser().getFirstName());
-        historiques = database.getHistoriques();
-        System.out.println(historiques.size());
-
-
-
-
-        int row = 0;
-        for (Historique objet : historiques) {
-
-            System.out.println(historiques.size());
-
-            if(objet.getTable_nom().equals("accessoires") || objet.getTable_nom().equals("bijoux"))
-            {
-                System.out.println("L'objet : " + row + "est un accessoire ou un bijou");
-                Image image = new Image(objet.getImage());
-
-                // Créez un ImageView pour l'image de l'objet
-                ImageView imageView = new ImageView();
-                imageView.setImage(image);
-                imageView.setFitWidth(100);
-                imageView.setPreserveRatio(true);
-
-                // Créez un Label pour le nom de l'objet
-                Label nomLabel = new Label(objet.getName());
-
-                // Créez un Label pour la description de l'objet
-                Label authorLabel = new Label(objet.getDescription());
-                authorLabel.setWrapText(true);
-
-                // Créez un Label pour le nom de l'objet
-                Label quantLabel = new Label(String.valueOf(objet.getQuantity()));
-
-                Label priceLabel = new Label(String.valueOf(objet.getPrice()));
-                Button button2 = new Button();
-
-
-                button2.setText("Suprimmer");
-                button2.setStyle("-fx-background-color: #676767;");
-
-                // Ajoutez les éléments à la GridPane
-                //gridpane.add(imageView, 0, row);
-
-                gridpane.add(imageView,0,row);
-                gridpane.add(nomLabel, 1, row);
-                gridpane.add(authorLabel, 2, row);
-                gridpane.add(priceLabel,3,row);
-                gridpane.add(quantLabel,4,row);
-
-            }
-
-            if(objet.getTable_nom().equals("livres")) {
-                System.out.println("L'objet : " + row + "est un livre");
-                // image = new Image(getClass().getResource("/com/example/demo/ab.png").toExternalForm());
-                //Image image = new Image("https://www.shutterstock.com/image-vector/open-book-vector-clipart-silhouette-600w-358417976.jpg");
-                Image image = new Image(objet.getImage());
-
-                // Créez un ImageView pour l'image de l'objet
-                ImageView imageView = new ImageView();
-                imageView.setImage(image);
-                imageView.setFitWidth(100);
-                imageView.setPreserveRatio(true);
-
-                // Créez un Label pour le nom de l'objet
-                Label nomLabel = new Label(objet.getTitle());
-
-                // Créez un Label pour le nom de l'objet
-                Label quantLabel = new Label(String.valueOf(objet.getQuantity()));
-
-                // Créez un Label pour la description de l'objet
-                Label authorLabel = new Label(objet.getAuthor());
-                authorLabel.setWrapText(true);
-
-                Label priceLabel = new Label(String.valueOf(objet.getPrice()));
-                Button button2 = new Button();
-
-
-                button2.setText("Suprimmer");
-                button2.setStyle("-fx-background-color: #676767;");
-
-                // Ajoutez les éléments à la GridPane
-                //gridpane.add(imageView, 0, row);
-
-                gridpane.add(imageView, 0, row);
-                gridpane.add(nomLabel, 1, row);
-                gridpane.add(authorLabel, 2, row);
-                gridpane.add(priceLabel, 3, row);
-                gridpane.add(quantLabel,4,row);
-            }
-
-
-
-            // Incrémentez le numéro de ligne
-            row++;
-        }
-        scrollpane.setContent(gridpane);
-
-*/
     }
 
 

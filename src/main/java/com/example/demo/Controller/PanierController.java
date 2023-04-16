@@ -1,5 +1,6 @@
-package com.example.demo;
+package com.example.demo.Controller;
 
+import com.example.demo.SessionManager;
 import com.example.demo.model.*;
 import javafx.beans.value.ObservableStringValue;
 import javafx.event.ActionEvent;
@@ -45,7 +46,7 @@ public class PanierController implements Initializable {
     void gotoBijoux(ActionEvent event) throws IOException {
         // System.out.println("aaaaa" + counter);
         //welcomeText.setText("Button Clicked " + counter);
-        FXMLLoader load = new FXMLLoader(getClass().getResource("bijouPage.fxml"));
+        FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/bijouPage.fxml"));
         Parent root = load.load();
 
         Scene scene = new Scene(root);
@@ -60,7 +61,7 @@ public class PanierController implements Initializable {
         SessionManager.clearSession();
         // System.out.println("aaaaa" + counter);
         //welcomeText.setText("Button Clicked " + counter);
-        FXMLLoader load = new FXMLLoader(getClass().getResource("ConnexionPage.fxml"));
+        FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/ConnexionPage.fxml"));
         Parent root = load.load();
 
         Scene scene = new Scene(root);
@@ -74,7 +75,7 @@ public class PanierController implements Initializable {
     void gotoMenu(ActionEvent event) throws IOException {
         // System.out.println("aaaaa" + counter);
         //welcomeText.setText("Button Clicked " + counter);
-        FXMLLoader load = new FXMLLoader(getClass().getResource("cataloguePage.fxml"));
+        FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/cataloguePage.fxml"));
         Parent root = load.load();
 
         Scene scene = new Scene(root);
@@ -88,7 +89,7 @@ public class PanierController implements Initializable {
     void gotoAccess(ActionEvent event) throws IOException {
         // System.out.println("aaaaa" + counter);
         //welcomeText.setText("Button Clicked " + counter);
-        FXMLLoader load = new FXMLLoader(getClass().getResource("accessPage.fxml"));
+        FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/accessPage.fxml"));
         Parent root = load.load();
 
         Scene scene = new Scene(root);
@@ -102,7 +103,7 @@ public class PanierController implements Initializable {
     void gotoBook(ActionEvent event) throws IOException {
         // System.out.println("aaaaa" + counter);
         //welcomeText.setText("Button Clicked " + counter);
-        FXMLLoader load = new FXMLLoader(getClass().getResource("bookPage.fxml"));
+        FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/bookPage.fxml"));
         Parent root = load.load();
 
         Scene scene = new Scene(root);
@@ -116,7 +117,7 @@ public class PanierController implements Initializable {
     void gotoProfile(ActionEvent event) throws IOException {
         // System.out.println("aaaaa" + counter);
         //welcomeText.setText("Button Clicked " + counter);
-        FXMLLoader load = new FXMLLoader(getClass().getResource("profilePage.fxml"));
+        FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/profilePage.fxml"));
         Parent root = load.load();
 
         Scene scene = new Scene(root);
@@ -132,7 +133,7 @@ public class PanierController implements Initializable {
     void gotoPanier(ActionEvent event) throws IOException {
         // System.out.println("aaaaa" + counter);
         //welcomeText.setText("Button Clicked " + counter);
-        FXMLLoader load = new FXMLLoader(getClass().getResource("panierPage.fxml"));
+        FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/panierPage.fxml"));
         Parent root = load.load();
 
         Scene scene = new Scene(root);
@@ -147,7 +148,7 @@ public class PanierController implements Initializable {
         DatabaseModel database = new DatabaseModel();
         int balance = database.ConfirmationAchatpage(SessionManager.getLoggedInUser().getFirstName());
         SessionManager.getLoggedInUser().setBalance(balance);
-        FXMLLoader load = new FXMLLoader(getClass().getResource("panierPage.fxml"));
+        FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/panierPage.fxml"));
         Parent root = load.load();
 
         Scene scene = new Scene(root);
@@ -218,7 +219,7 @@ public class PanierController implements Initializable {
                 button2.setOnAction(new EventHandler<ActionEvent>() {
                     @Override public void handle(ActionEvent e) {
                         database.effacePanieruniqueitem(objet.getId());
-                        FXMLLoader load = new FXMLLoader(getClass().getResource("panierPage.fxml"));
+                        FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/panierPage.fxml"));
                         Parent root = null;
                         try {
                             root = load.load();
@@ -276,7 +277,7 @@ public class PanierController implements Initializable {
                 button2.setOnAction(new EventHandler<ActionEvent>() {
                     @Override public void handle(ActionEvent e) {
                         database.effacePanieruniqueitem(objet.getId());
-                        FXMLLoader load = new FXMLLoader(getClass().getResource("panierPage.fxml"));
+                        FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/panierPage.fxml"));
                         Parent root = null;
                         try {
                             root = load.load();

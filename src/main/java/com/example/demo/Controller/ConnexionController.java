@@ -1,5 +1,6 @@
-package com.example.demo;
+package com.example.demo.Controller;
 
+import com.example.demo.SessionManager;
 import com.example.demo.model.Compte;
 import com.example.demo.model.DatabaseModel;
 import javafx.event.ActionEvent;
@@ -43,7 +44,7 @@ public class ConnexionController {
             Compte compte = new Compte(username,password);
             SessionManager.setLoggedInUser(compte);
             System.out.println(SessionManager.getLoggedInUser().getEmail());
-            FXMLLoader load = new FXMLLoader(getClass().getResource("cataloguePage.fxml"));
+            FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/cataloguePage.fxml"));
             Parent root = load.load();
 
             Scene scene = new Scene(root);

@@ -1,5 +1,6 @@
-package com.example.demo;
+package com.example.demo.Controller;
 
+import com.example.demo.SessionManager;
 import com.example.demo.model.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -14,6 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,45 +23,31 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class AccessoireController implements Initializable {
+public class LivreController implements Initializable {
     private Bijou bijou;
     @FXML
     private GridPane gridpane;
 
-    public List<Accessoire> accessoires;
+    public List<Livre> livres;
 
     @FXML
-    private TextField searchBar;
+    TextField searchBar;
 
     @FXML
     ScrollPane scrollpane = new ScrollPane();
 
-
-
-    @FXML
-    void gotoBijoux(ActionEvent event) throws IOException {
-        // System.out.println("aaaaa" + counter);
-        //welcomeText.setText("Button Clicked " + counter);
-        FXMLLoader load = new FXMLLoader(getClass().getResource("bijouPage.fxml"));
-        Parent root = load.load();
-
-        Scene scene = new Scene(root);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
-    }
-
     @FXML
     void search(ActionEvent event) {
         DatabaseModel database = new DatabaseModel();
-        database.descriptiontabbrutarray("accessoires",1,0,searchBar.getText(),"name","ASC");
+        database.descriptiontabbrutarray("livres",1,0,searchBar.getText(),"name","ASC");
         afficherTableau(database);
     }
+
     @FXML
     void sortPriceAsc()
     {
         DatabaseModel database = new DatabaseModel();
-        database.descriptiontabbrutarray("accessoires",1,1,searchBar.getText(),"price","ASC");
+        database.descriptiontabbrutarray("livres",1,1,searchBar.getText(),"price","ASC");
         afficherTableau(database);
     }
 
@@ -67,7 +55,7 @@ public class AccessoireController implements Initializable {
     void sortPriceDesc()
     {
         DatabaseModel database = new DatabaseModel();
-        database.descriptiontabbrutarray("accessoires",1,1,searchBar.getText(),"price","DESC");
+        database.descriptiontabbrutarray("livres",1,1,searchBar.getText(),"price","DESC");
         afficherTableau(database);
     }
 
@@ -75,7 +63,7 @@ public class AccessoireController implements Initializable {
     void sortNameAsc()
     {
         DatabaseModel database = new DatabaseModel();
-        database.descriptiontabbrutarray("accessoires",1,1,searchBar.getText(),"name","ASC");
+        database.descriptiontabbrutarray("livres",1,1,searchBar.getText(),"title","ASC");
         afficherTableau(database);
     }
 
@@ -83,18 +71,32 @@ public class AccessoireController implements Initializable {
     void sortNameDesc()
     {
         DatabaseModel database = new DatabaseModel();
-        database.descriptiontabbrutarray("accessoires",1,1,searchBar.getText(),"name","DESC");
+        database.descriptiontabbrutarray("livres",1,1,searchBar.getText(),"title","DESC");
         afficherTableau(database);
+    }
+
+    @FXML
+    void launchStat1()
+    {
+        DatabaseModel db = new DatabaseModel();
+        db.graphvente("livres");
+    }
+
+    @FXML
+    void launchStat2()
+    {
+        DatabaseModel db = new DatabaseModel();
+        db.graphrevenubis("livres");
     }
 
     void afficherTableau(DatabaseModel database)
     {
 
-        accessoires = database.getAccessoires();
+        livres = database.getLivres();
         gridpane.getChildren().clear();
 
         int row = 0;
-        for (Accessoire objet : accessoires) {
+        for (Livre objet : livres) {
 
             // image = new Image(getClass().getResource("/com/example/demo/ab.png").toExternalForm());
             //Image image = new Image("https://www.shutterstock.com/image-vector/open-book-vector-clipart-silhouette-600w-358417976.jpg");
@@ -107,10 +109,10 @@ public class AccessoireController implements Initializable {
             imageView.setPreserveRatio(true);
 
             // Créez un Label pour le nom de l'objet
-            Label nomLabel = new Label(objet.getName());
+            Label nomLabel = new Label(objet.getTitle());
 
             // Créez un Label pour la description de l'objet
-            Label authorLabel = new Label(objet.getDescription());
+            Label authorLabel = new Label(objet.getAuthor());
             authorLabel.setWrapText(true);
 
             Label priceLabel = new Label(String.valueOf(objet.getPrice()));
@@ -125,11 +127,9 @@ public class AccessoireController implements Initializable {
             spinner1.setValueFactory(
                     new SpinnerValueFactory.IntegerSpinnerValueFactory(
                             0,
-                            objet.getStock_quantity()
+                            objet.getStockQuantity()
                     )
             );
-
-
 
             // Ajoutez les éléments à la GridPane
             //gridpane.add(imageView, 0, row);
@@ -140,45 +140,9 @@ public class AccessoireController implements Initializable {
             gridpane.add(spinner1, 3, row);
             gridpane.add(priceLabel,4,row);
             gridpane.add(button2,5,row);
-
-            if(SessionManager.getLoggedInUser().getIsAdmin()==1)
-            {
-                Spinner spinnerAdmin = new Spinner();
-                Spinner<Integer> spinner2 = (Spinner<Integer>) spinnerAdmin;
-                spinner2.setValueFactory(
-                        new SpinnerValueFactory.IntegerSpinnerValueFactory(
-                                0,
-                                100
-                        )
-                );
-                gridpane.add(spinnerAdmin,6,row);
-                CheckBox check = new CheckBox();
-                gridpane.add(check,7,row);
-                check.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override public void handle(ActionEvent e) {
-                        database.mettreAJourAccessoiresFX(objet.getId(),objet.getName(), objet.getDescription(), objet.getEn_reduction(), objet.getPrice(),objet.getPrice_reduc(), (Integer) spinnerAdmin.getValue(),objet.getVendu_sans_reducl(),objet.getVendu_reduc(),objet.getImage());
-                        try {
-                            gotoAccess(e);
-                        } catch (IOException ex) {
-                            throw new RuntimeException(ex);
-                        }
-                    }
-                });
-                SplitMenuButton splitmenu = new SplitMenuButton();
-                MenuItem oui = new MenuItem("Avec réduction");
-                oui.setOnAction(e -> {
-                    database.mettreAJourAccessoiresFX(objet.getId(),objet.getName(), objet.getDescription(), 1, objet.getPrice(),objet.getPrice_reduc(), objet.getStock_quantity(),objet.getVendu_sans_reducl(),objet.getVendu_reduc(),objet.getImage());
-                });
-                MenuItem non = new MenuItem("Sans réduction");
-                oui.setOnAction(e -> {
-                    database.mettreAJourAccessoiresFX(objet.getId(),objet.getName(), objet.getDescription(), 0, objet.getPrice(),objet.getPrice_reduc(), objet.getStock_quantity(),objet.getVendu_sans_reducl(),objet.getVendu_reduc(),objet.getImage());
-                });
-                splitmenu.getItems().addAll(oui,non);
-                gridpane.add(splitmenu,8,row);
-            }
             button2.setOnAction(new EventHandler<ActionEvent>() {
                 @Override public void handle(ActionEvent e) {
-                    database.addPanier(objet.getId(), "accessoires",spinner1.getValue());
+                    database.addPanier(objet.getId(), "livres",spinner1.getValue());
                     button2.setText("Accepted " + spinner1.getValue());
                 }
             });
@@ -189,57 +153,14 @@ public class AccessoireController implements Initializable {
             row++;
         }
         scrollpane.setContent(gridpane);
-
-
     }
 
-    @FXML
-    void gotoMenu(ActionEvent event) throws IOException {
-        // System.out.println("aaaaa" + counter);
-        //welcomeText.setText("Button Clicked " + counter);
-        FXMLLoader load = new FXMLLoader(getClass().getResource("cataloguePage.fxml"));
-        Parent root = load.load();
-
-        Scene scene = new Scene(root);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
-
-    }
 
     @FXML
-    void gotoAccess(ActionEvent event) throws IOException {
+    void gotoBijoux(ActionEvent event) throws IOException {
         // System.out.println("aaaaa" + counter);
         //welcomeText.setText("Button Clicked " + counter);
-        FXMLLoader load = new FXMLLoader(getClass().getResource("accessPage.fxml"));
-        Parent root = load.load();
-
-        Scene scene = new Scene(root);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
-
-    }
-
-    @FXML
-    void gotoBook(ActionEvent event) throws IOException {
-        // System.out.println("aaaaa" + counter);
-        //welcomeText.setText("Button Clicked " + counter);
-        FXMLLoader load = new FXMLLoader(getClass().getResource("bookPage.fxml"));
-        Parent root = load.load();
-
-        Scene scene = new Scene(root);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
-
-    }
-
-    @FXML
-    void gotoProfile(ActionEvent event) throws IOException {
-        // System.out.println("aaaaa" + counter);
-        //welcomeText.setText("Button Clicked " + counter);
-        FXMLLoader load = new FXMLLoader(getClass().getResource("profilePage.fxml"));
+        FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/bijouPage.fxml"));
         Parent root = load.load();
 
         Scene scene = new Scene(root);
@@ -254,7 +175,62 @@ public class AccessoireController implements Initializable {
         SessionManager.clearSession();
         // System.out.println("aaaaa" + counter);
         //welcomeText.setText("Button Clicked " + counter);
-        FXMLLoader load = new FXMLLoader(getClass().getResource("ConnexionPage.fxml"));
+        FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/ConnexionPage.fxml"));
+        Parent root = load.load();
+
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+
+    }
+    @FXML
+    void gotoProfile(ActionEvent event) throws IOException {
+        // System.out.println("aaaaa" + counter);
+        //welcomeText.setText("Button Clicked " + counter);
+        FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/profilePage.fxml"));
+        Parent root = load.load();
+
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+    @FXML
+    void gotoMenu(ActionEvent event) throws IOException {
+        // System.out.println("aaaaa" + counter);
+        //welcomeText.setText("Button Clicked " + counter);
+        FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/cataloguePage.fxml"));
+        Parent root = load.load();
+
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+    @FXML
+    void gotoAccess(ActionEvent event) throws IOException {
+        // System.out.println("aaaaa" + counter);
+        //welcomeText.setText("Button Clicked " + counter);
+        FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/accessPage.fxml"));
+        Parent root = load.load();
+
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+    @FXML
+    void gotoBook(ActionEvent event) throws IOException {
+        // System.out.println("aaaaa" + counter);
+        //welcomeText.setText("Button Clicked " + counter);
+        FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/bookPage.fxml"));
         Parent root = load.load();
 
         Scene scene = new Scene(root);
@@ -268,7 +244,7 @@ public class AccessoireController implements Initializable {
     void gotoPanier(ActionEvent event) throws IOException {
         // System.out.println("aaaaa" + counter);
         //welcomeText.setText("Button Clicked " + counter);
-        FXMLLoader load = new FXMLLoader(getClass().getResource("panierPage.fxml"));
+        FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/panierPage.fxml"));
         Parent root = load.load();
 
         Scene scene = new Scene(root);
@@ -278,36 +254,24 @@ public class AccessoireController implements Initializable {
 
     }
 
-    @FXML
-    void launchStat1()
-    {
-        DatabaseModel db = new DatabaseModel();
-        db.graphventebis("accessoires");
-    }
 
-    @FXML
-    void launchStat2()
-    {
-        DatabaseModel db = new DatabaseModel();
-        db.graphrevenubis("accessoires");
-    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
 
         Compte compte = SessionManager.getLoggedInUser();
         System.out.println("compte.getEmail() : ");
         System.out.println(compte.getFirstName());
         DatabaseModel database = new DatabaseModel();
-        database.descriptiontabbrutarray("accessoires",0,0);
-        accessoires = database.getAccessoires();
-        System.out.println(accessoires.get(0).getName());
+        database.descriptiontabbrutarray("livres",0,0);
+        livres = database.getLivres();
+        System.out.println(livres.get(0).getTitle());
 
 
 
         int row = 0;
-        for (Accessoire objet : accessoires) {
+        for (Livre objet : livres) {
 
             // image = new Image(getClass().getResource("/com/example/demo/ab.png").toExternalForm());
             //Image image = new Image("https://www.shutterstock.com/image-vector/open-book-vector-clipart-silhouette-600w-358417976.jpg");
@@ -320,10 +284,10 @@ public class AccessoireController implements Initializable {
             imageView.setPreserveRatio(true);
 
             // Créez un Label pour le nom de l'objet
-            Label nomLabel = new Label(objet.getName());
+            Label nomLabel = new Label(objet.getTitle());
 
             // Créez un Label pour la description de l'objet
-            Label authorLabel = new Label(objet.getDescription());
+            Label authorLabel = new Label(objet.getAuthor());
             authorLabel.setWrapText(true);
 
             Label priceLabel = new Label(String.valueOf(objet.getPrice()));
@@ -338,11 +302,9 @@ public class AccessoireController implements Initializable {
             spinner1.setValueFactory(
                     new SpinnerValueFactory.IntegerSpinnerValueFactory(
                             0,
-                            objet.getStock_quantity()
+                            objet.getStockQuantity()
                     )
             );
-
-
 
             // Ajoutez les éléments à la GridPane
             //gridpane.add(imageView, 0, row);
@@ -369,10 +331,10 @@ public class AccessoireController implements Initializable {
                 gridpane.add(check,7,row);
                 check.setOnAction(new EventHandler<ActionEvent>() {
                     @Override public void handle(ActionEvent e) {
-                        database.mettreAJourAccessoiresFX(objet.getId(),objet.getName(), objet.getDescription(), objet.getEn_reduction(), objet.getPrice(),objet.getPrice_reduc(), (Integer) spinnerAdmin.getValue(),objet.getVendu_sans_reducl(),objet.getVendu_reduc(),objet.getImage());
-                        database.descriptiontabbrutarray("accessoires",0,0);
+                        database.mettreAJourLivresFX(objet.getId(),objet.getTitle(), objet.getAuthor(), objet.getPublisher(), objet.getPublicationDate(),objet.getIsbn(), objet.getEnReduction(),(float)objet.getPrice(),(float)objet.getPriceReduc(),(Integer) spinnerAdmin.getValue(),objet.getVenduSansReduc(),objet.getVenduReduc(), objet.getImage());
+                        database.descriptiontabbrutarray("livres",0,0);
                         try {
-                            gotoAccess(e);
+                            gotoBook(e);
                         } catch (IOException ex) {
                             throw new RuntimeException(ex);
                         }
@@ -382,19 +344,23 @@ public class AccessoireController implements Initializable {
                 MenuItem oui = new MenuItem("Avec réduction");
 
                 oui.setOnAction(e -> {
-                    database.mettreAJourAccessoiresFX(objet.getId(),objet.getName(), objet.getDescription(), 1, objet.getPrice(),objet.getPrice_reduc(), objet.getStock_quantity(),objet.getVendu_sans_reducl(),objet.getVendu_reduc(),objet.getImage());
 
+
+                    database.mettreAJourLivresFX(objet.getId(), objet.getTitle(), objet.getAuthor(), objet.getPublisher(), objet.getPublicationDate(),objet.getIsbn(), 1,(float)objet.getPrice(),(float)objet.getPriceReduc(),objet.getStockQuantity(),objet.getVenduSansReduc(),objet.getVenduReduc(), objet.getImage());
+                    //database.mettreAJourLivresFX(2, "Le Seigneur des Anneaux", "J.R.R. Tolkien", "Houghton Mifflin Harcourt", "1954-1955", "978-2-1234-5678-9", 1, 20.0f, 15.0f, 100, 50, 25, "seigneur_des_anneaux.jpg");
+                    //database.descriptiontabbrutarray("livres",0,0);
+                    //database.mettreAJourLivresFX(livres.get(0).getId(), livres.get(2).getTitle(), livres.get(2).getAuthor(), livres.get(2).getPublisher(), livres.get(2).getPublicationDate(), livres.get(2).getIsbn(), livres.get(2).getEnReduction(),(float)livres.get(2).getPrice(), (float)livres.get(2).getPriceReduc(), livres.get(2).getStockQuantity(), livres.get(2).getVenduSansReduc(), livres.get(2).getVenduReduc(), livres.get(2).getImage());
                 });
                 MenuItem non = new MenuItem("Sans réduction");
                 non.setOnAction(e -> {
-                    database.mettreAJourAccessoiresFX(objet.getId(),objet.getName(), objet.getDescription(), 0, objet.getPrice(),objet.getPrice_reduc(), objet.getStock_quantity(),objet.getVendu_sans_reducl(),objet.getVendu_reduc(),objet.getImage());
+                    database.mettreAJourLivresFX(objet.getId(),objet.getTitle(), objet.getAuthor(), objet.getPublisher(), objet.getPublicationDate(),objet.getIsbn(), 0,(float)objet.getPrice(),(float)objet.getPriceReduc(),objet.getStockQuantity(),objet.getVenduSansReduc(),objet.getVenduReduc(), objet.getImage());
                 });
                 splitmenu.getItems().addAll(oui,non);
                 gridpane.add(splitmenu,8,row);
             }
             button2.setOnAction(new EventHandler<ActionEvent>() {
                 @Override public void handle(ActionEvent e) {
-                    database.addPanier(objet.getId(), "accessoires",spinner1.getValue());
+                    database.addPanier(objet.getId(), "livres",spinner1.getValue());
                     button2.setText("Accepted " + spinner1.getValue());
                 }
             });
