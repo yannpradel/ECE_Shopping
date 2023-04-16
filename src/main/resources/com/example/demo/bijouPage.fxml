@@ -28,27 +28,27 @@
    <children>
       <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <Pane layoutX="470.0" layoutY="124.0" prefHeight="932.0" prefWidth="1451.0">
+            <Pane layoutX="469.0" layoutY="134.0" prefHeight="932.0" prefWidth="1435.0">
                <children>
                   <ScrollPane layoutX="52.0" layoutY="109.0" prefHeight="726.0" prefWidth="1272.0">
                      <content>
-                        <GridPane fx:id="gridpane" alignment="CENTER" prefHeight="1515.0" prefWidth="1240.0" stylesheets="@../../../../../target/src/css/styles.css">
+                        <GridPane fx:id="gridpane" alignment="CENTER" prefHeight="725.0" prefWidth="1275.0" stylesheets="@../../../../../target/src/css/styles.css">
                            <columnConstraints>
-                              <ColumnConstraints fx:id="bijouPic" hgrow="SOMETIMES" maxWidth="360.0" minWidth="10.0" prefWidth="223.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="512.0" minWidth="10.0" prefWidth="222.0" />
-                              <ColumnConstraints fx:id="bijouPrice" hgrow="SOMETIMES" maxWidth="441.0" minWidth="10.0" prefWidth="264.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="315.0" minWidth="10.0" prefWidth="172.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="272.0" minWidth="10.0" prefWidth="272.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="272.0" minWidth="10.0" prefWidth="272.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="272.0" minWidth="10.0" prefWidth="138.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="272.0" minWidth="10.0" prefWidth="150.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="272.0" minWidth="10.0" prefWidth="134.0" />
+                              <ColumnConstraints fx:id="bijouPic" halignment="CENTER" hgrow="SOMETIMES" maxWidth="130.0" minWidth="100.0" />
+                              <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="200.0" minWidth="200.0" />
+                              <ColumnConstraints fx:id="bijouPrice" halignment="CENTER" hgrow="SOMETIMES" maxWidth="250.0" minWidth="250.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="125.0" minWidth="125.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="75.0" minWidth="75.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="125.0" minWidth="125.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="159.37" minWidth="100.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="159.37" minWidth="100.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="272.0" minWidth="10.0" prefWidth="134.0" />
                            </columnConstraints>
                            <rowConstraints>
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="175.0" minHeight="100.0" valignment="CENTER" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="175.0" minHeight="100.0" valignment="CENTER" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="175.0" minHeight="100.0" valignment="CENTER" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="175.0" minHeight="100.0" valignment="CENTER" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <styleClass>
                               <String fx:value="maclasse" />
@@ -62,10 +62,10 @@
                         <Font name="Cambria" size="24.0" />
                      </font>
                   </Label>
-                  <Text fill="#575757" layoutX="52.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Item" wrappingWidth="137.13671875" />
-                  <Text fill="#575757" layoutX="623.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Author" />
-                  <Text fill="#575757" layoutX="851.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity" />
-                  <Text fill="#575757" layoutX="1037.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix" />
+                  <Text fill="#575757" layoutX="52.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bijoux" wrappingWidth="137.13671875" />
+                  <Text fill="#575757" layoutX="611.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantité" />
+                  <Text fill="#575757" layoutX="756.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix" />
+                  <Text fill="#575757" layoutX="822.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter" />
                   <Button layoutX="888.0" layoutY="25.0" mnemonicParsing="false" onAction="#search" text="Rechercher" />
                   <TextField fx:id="searchBar" layoutX="658.0" layoutY="25.0" prefHeight="25.0" prefWidth="216.0" />
                   <SplitMenuButton layoutX="1127.0" layoutY="25.0" mnemonicParsing="false" text="Trier par:">
@@ -302,7 +302,7 @@
                   </Pane>
                </children>
             </GridPane>
-            <Text layoutX="1119.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bijou" wrappingWidth="384.13673400878906">
+            <Text layoutX="1119.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bijoux" wrappingWidth="384.13673400878906">
                <font>
                   <Font name="Tw Cen MT Condensed" size="36.0" />
                </font>

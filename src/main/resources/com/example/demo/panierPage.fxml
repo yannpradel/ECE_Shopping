@@ -25,7 +25,7 @@
    <children>
       <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <Pane layoutX="449.0" layoutY="133.0" prefHeight="932.0" prefWidth="1451.0">
+            <Pane layoutX="470.0" layoutY="130.0" prefHeight="932.0" prefWidth="1432.0">
                <children>
                   <Label layoutX="52.0" layoutY="21.0" prefHeight="36.0" prefWidth="570.0" text="Voici tout les objets de votre panier ! ">
                      <font>
@@ -34,20 +34,20 @@
                   </Label>
                   <ScrollPane layoutX="52.0" layoutY="109.0" prefHeight="726.0" prefWidth="1272.0">
                      <content>
-                        <GridPane fx:id="gridpane" alignment="CENTER_RIGHT" prefHeight="1515.0" prefWidth="1240.0" stylesheets="@../../../../../target/src/css/styles.css">
+                        <GridPane fx:id="gridpane" alignment="CENTER" prefHeight="725.0" prefWidth="1275.0" stylesheets="@../../../../../target/src/css/styles.css">
                            <columnConstraints>
-                              <ColumnConstraints fx:id="bijouPic" hgrow="SOMETIMES" maxWidth="360.0" minWidth="10.0" prefWidth="223.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="512.0" minWidth="10.0" prefWidth="222.0" />
-                              <ColumnConstraints fx:id="bijouPrice" hgrow="SOMETIMES" maxWidth="441.0" minWidth="10.0" prefWidth="264.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="315.0" minWidth="10.0" prefWidth="172.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="272.0" minWidth="10.0" prefWidth="272.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="272.0" minWidth="10.0" prefWidth="272.0" />
+                              <ColumnConstraints fx:id="bijouPic" halignment="CENTER" hgrow="SOMETIMES" maxWidth="250.0" minWidth="250.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="250.0" minWidth="250.0" />
+                              <ColumnConstraints fx:id="bijouPrice" halignment="CENTER" hgrow="SOMETIMES" maxWidth="325.0" minWidth="325.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="150.0" minWidth="150.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="100.0" minWidth="100.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="200.0" minWidth="200.0" />
                            </columnConstraints>
                            <rowConstraints>
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="175.0" minHeight="100.0" valignment="CENTER" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="175.0" minHeight="100.0" valignment="CENTER" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="175.0" minHeight="100.0" valignment="CENTER" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="175.0" minHeight="100.0" valignment="CENTER" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <styleClass>
                               <String fx:value="maclasse" />
@@ -57,14 +57,15 @@
                      </content>
                   </ScrollPane>
                   <Text fill="#575757" layoutX="52.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Item" wrappingWidth="137.13671875" />
-                  <Text fill="#575757" layoutX="623.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Author" />
-                  <Text fill="#575757" layoutX="851.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity" />
-                  <Text fill="#575757" layoutX="1037.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix" />
+                  <Text fill="#575757" layoutX="623.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+                  <Text fill="#575757" layoutX="1057.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantité" />
+                  <Text fill="#575757" layoutX="940.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix" />
                   <Button layoutX="50.0" layoutY="859.0" mnemonicParsing="false" onAction="#onConfirmButtonClicked" prefHeight="40.0" prefWidth="208.0" style="-fx-background-color: #909090;" text="Confirmer l'achat" textAlignment="CENTER">
                      <font>
                         <Font name="Cambria" size="21.0" />
                      </font>
                   </Button>
+                  <Text fill="#575757" layoutX="1197.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Supprimer" />
                </children>
             </Pane>
             <GridPane prefHeight="1080.0" prefWidth="469.0">

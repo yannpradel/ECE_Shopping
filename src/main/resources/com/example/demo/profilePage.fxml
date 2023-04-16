@@ -30,24 +30,23 @@
                <children>
                   <ScrollPane prefHeight="1092.0" prefWidth="1460.0">
                      <content>
-                        <Pane prefHeight="1626.0" prefWidth="1480.0">
+                        <Pane prefHeight="1588.0" prefWidth="1488.0">
                            <children>
-                              <ScrollPane layoutX="88.0" layoutY="750.0" prefHeight="726.0" prefWidth="1272.0">
+                              <ScrollPane layoutX="88.0" layoutY="471.0" prefHeight="1005.0" prefWidth="1272.0">
                                  <content>
-                                    <GridPane fx:id="gridpane" alignment="CENTER_RIGHT" prefHeight="1515.0" prefWidth="1240.0" stylesheets="@../../../../../target/src/css/styles.css">
+                                    <GridPane fx:id="gridpane" alignment="CENTER" prefHeight="718.0" prefWidth="1222.0" stylesheets="@../../../../../target/src/css/styles.css">
                                        <columnConstraints>
-                                          <ColumnConstraints fx:id="bijouPic" hgrow="SOMETIMES" maxWidth="360.0" minWidth="10.0" prefWidth="223.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="512.0" minWidth="10.0" prefWidth="222.0" />
-                                          <ColumnConstraints fx:id="bijouPrice" hgrow="SOMETIMES" maxWidth="441.0" minWidth="10.0" prefWidth="264.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="315.0" minWidth="10.0" prefWidth="172.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="272.0" minWidth="10.0" prefWidth="272.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="272.0" minWidth="10.0" prefWidth="272.0" />
+                                          <ColumnConstraints fx:id="bijouPic" halignment="CENTER" hgrow="SOMETIMES" maxWidth="300.0" minWidth="300.0" />
+                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="300.0" minWidth="300.0" />
+                                          <ColumnConstraints fx:id="bijouPrice" halignment="CENTER" hgrow="SOMETIMES" maxWidth="375.0" minWidth="375.0" />
+                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="200.0" minWidth="200.0" />
+                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="100.0" minWidth="100.0" />
                                        </columnConstraints>
                                        <rowConstraints>
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="175.0" minHeight="100.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="175.0" minHeight="100.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="175.0" minHeight="100.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="175.0" minHeight="100.0" valignment="CENTER" vgrow="SOMETIMES" />
                                        </rowConstraints>
                                        <styleClass>
                                           <String fx:value="maclasse" />
@@ -56,7 +55,7 @@
                                     </GridPane>
                                  </content>
                               </ScrollPane>
-                              <VBox layoutX="343.0" layoutY="78.0" prefHeight="558.0" prefWidth="767.0" style="-fx-background-color: #F2F2F2; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-width: 1; -fx-border-color: #CDCDCD;">
+                              <VBox layoutX="343.0" layoutY="78.0" maxHeight="300.0" minHeight="300.0" prefHeight="290.0" prefWidth="809.0" style="-fx-background-color: #F2F2F2; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-width: 1; -fx-border-color: #CDCDCD;">
                                  <children>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Informations personnelles">
                                        <font>
@@ -207,6 +206,9 @@
                                  </children>
                               </VBox>
                               <SplitMenuButton fx:id="splitmenu" layoutX="88.0" layoutY="121.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="136.0" text="Choisir utilisateur:" />
+                              <Text fill="#575757" layoutX="87.0" layoutY="467.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Item" wrappingWidth="137.13671875" />
+                              <Text fill="#575757" layoutX="1152.0" layoutY="466.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix" wrappingWidth="22.13671875" />
+                              <Text fill="#575757" layoutX="1291.0" layoutY="466.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantité" wrappingWidth="53.000000000000114" />
                            </children>
                         </Pane>
                      </content>
