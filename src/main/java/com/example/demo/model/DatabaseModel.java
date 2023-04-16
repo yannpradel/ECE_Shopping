@@ -9,7 +9,6 @@ import java.util.Scanner;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
-import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
@@ -94,9 +93,7 @@ public class DatabaseModel {
      * Getter pour la liste des historiques de souhaits de la base de données.
      * @return la liste des historiques de souhaits de la base de données
      */
-    public List<Historique> getSouhaits() {
-        return souhaits;
-    }
+
 
     /**
      * Getter pour la liste des historiques de commandes de la base de données.
@@ -106,25 +103,6 @@ public class DatabaseModel {
         return historiques;
     }
 
-    public List<String> getColumnNames() {
-        return columnNames;
-    }
-
-    public int getAdminS() {
-        return adminS;
-    }
-
-    public void setAdminS(int adminS) {
-        this.adminS = adminS;
-    }
-
-    public String getIdentifiantS() {
-        return identifiantS;
-    }
-
-    public String getMotdepasseS() {
-        return motdepasseS;
-    }
 
 
     /**
@@ -526,43 +504,6 @@ public class DatabaseModel {
         }
     }
 
-    public void addIntoCompte(String last_name, String first_name, String email, String password,float balance,int admin) {
-        try (Connection conn= DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
-            Statement stmt = conn.createStatement();
-            String query = "INSERT INTO comptes (last_name, first_name, email, password, balance, admin) VALUES "
-                    + "('"+last_name+"', '"+first_name+"', '"+email+"', '"+password+"', "+balance+","+admin+")";
-            stmt.executeUpdate(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-    public void addIntoAccessoires(String name, String description, int en_reduction,float price,float price_reduc, int stock_quantity, int vendu_sans_reduc, int vendu_reduc, String image) {
-        try (Connection conn= DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
-            String query = "INSERT INTO accessoires (name, description, en_reduction, price, price_reduc, stock_quantity, vendu_sans_reduc, vendu_reduc, image) VALUES "
-                    + "('"+name+"', '"+description+"', "+en_reduction+", "+price+", "+price_reduc+", "+stock_quantity+", "+vendu_sans_reduc+", "+vendu_reduc+", '"+image+"')";
-            stmt.executeUpdate(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-    public void addIntoBijoux(String name, String description, int en_reduction,float price,float price_reduc, int stock_quantity, int vendu_sans_reduc, int vendu_reduc, String image) {
-        try (Connection conn= DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
-            String query = "INSERT INTO bijoux (name, description, en_reduction, price, price_reduc, stock_quantity, vendu_sans_reduc, vendu_reduc, image) VALUES "
-                    + "('"+name+"', '"+description+"', "+en_reduction+", "+price+", "+price_reduc+", "+stock_quantity+", "+vendu_sans_reduc+", "+vendu_reduc+", '"+image+"')";
-            stmt.executeUpdate(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-    public void addIntoLivres(String title, String author, String publisher, String publication_date,String isbn,int en_reduction,float price,float price_reduc, int stock_quantity, int vendu_sans_reduc, int vendu_reduc, String image) {
-        try (Connection conn= DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
-            String query = "INSERT INTO livres (title, author, publisher, publication_date, isbn, en_reduction, price, price_reduc, stock_quantity, vendu_sans_reduc, vendu_reduc, image) VALUES "
-                    + "('"+title+"', '"+author+"', '"+publisher+"',  '"+publication_date+"', '"+isbn+"',"+en_reduction+", "+price+", "+price_reduc+", "+stock_quantity+", "+vendu_sans_reduc+", "+vendu_reduc+", '"+image+"')";
-            stmt.executeUpdate(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
     public void effaceSouhaituniqueitem(int ID) {
         int num = ID;
         try (Connection conn = DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
@@ -1955,7 +1896,7 @@ public class DatabaseModel {
         livres.clear();
         columnNames.clear();
 
-        List<Panier> paniers=new ArrayList<>();
+
         try (Connection conn= DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
             stmt = conn.createStatement();
             String query;
@@ -2421,18 +2362,7 @@ public class DatabaseModel {
         }
     }
 
-    public void mettreAJourCompteFX(int id,String last_name, String first_name, String email, String password,float balance,int admin){
-        try (Connection conn = DriverManager.getConnection(DB_URL + DATABASE_NAME, USER, PASS)) {
-            String queryUpdate = "UPDATE comptes SET last_name='"+last_name+"', first_name='"+first_name+"', email='"+email+"', password='"+password+"', balance="+balance+", admin="+admin+" WHERE id="+id;
-            // exécution de la requête UPDATE pour mettre à jour les informations de la ligne
-            PreparedStatement psUpdate = conn.prepareStatement(queryUpdate);
-            int rowsUpdated = psUpdate.executeUpdate();
-            // affichage du résultat
-            System.out.println(rowsUpdated + " ligne(s) ont été mises à jour.");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+
 
     /**
      * Crée un graphique à partir des données de vente et de stock d'une table de la base de données.

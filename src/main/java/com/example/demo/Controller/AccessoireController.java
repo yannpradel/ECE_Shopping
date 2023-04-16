@@ -17,7 +17,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -27,7 +26,7 @@ import java.util.ResourceBundle;
  * Gère les interactions avec les éléments de l'interface graphique liés aux accessoires.
  */
 public class AccessoireController implements Initializable {
-    private Bijou bijou;
+
     @FXML
     private GridPane gridpane;
 
@@ -55,8 +54,6 @@ public class AccessoireController implements Initializable {
 
     @FXML
     void gotoBijoux(ActionEvent event) throws IOException {
-        // System.out.println("aaaaa" + counter);
-        //welcomeText.setText("Button Clicked " + counter);
         FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/bijouPage.fxml"));
         Parent root = load.load();
 
@@ -129,8 +126,6 @@ public class AccessoireController implements Initializable {
         int row = 0;
         for (Accessoire objet : accessoires) {
 
-            // image = new Image(getClass().getResource("/com/example/demo/ab.png").toExternalForm());
-            //Image image = new Image("https://www.shutterstock.com/image-vector/open-book-vector-clipart-silhouette-600w-358417976.jpg");
             Image image = new Image(objet.getImage());
 
             // Créez un ImageView pour l'image de l'objet
@@ -249,8 +244,7 @@ public class AccessoireController implements Initializable {
      */
     @FXML
     void gotoMenu(ActionEvent event) throws IOException {
-        // System.out.println("aaaaa" + counter);
-        //welcomeText.setText("Button Clicked " + counter);
+
         FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/cataloguePage.fxml"));
         Parent root = load.load();
 
@@ -267,8 +261,6 @@ public class AccessoireController implements Initializable {
      */
     @FXML
     void gotoAccess(ActionEvent event) throws IOException {
-        // System.out.println("aaaaa" + counter);
-        //welcomeText.setText("Button Clicked " + counter);
         FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/accessPage.fxml"));
         Parent root = load.load();
 
@@ -286,8 +278,6 @@ public class AccessoireController implements Initializable {
      */
     @FXML
     void gotoBook(ActionEvent event) throws IOException {
-        // System.out.println("aaaaa" + counter);
-        //welcomeText.setText("Button Clicked " + counter);
         FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/bookPage.fxml"));
         Parent root = load.load();
 
@@ -306,8 +296,6 @@ public class AccessoireController implements Initializable {
      */
     @FXML
     void gotoProfile(ActionEvent event) throws IOException {
-        // System.out.println("aaaaa" + counter);
-        //welcomeText.setText("Button Clicked " + counter);
         FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/profilePage.fxml"));
         Parent root = load.load();
 
@@ -325,8 +313,6 @@ public class AccessoireController implements Initializable {
     @FXML
     void gotoDisconnect(ActionEvent event) throws IOException {
         SessionManager.clearSession();
-        // System.out.println("aaaaa" + counter);
-        //welcomeText.setText("Button Clicked " + counter);
         FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/ConnexionPage.fxml"));
         Parent root = load.load();
 
@@ -344,8 +330,6 @@ public class AccessoireController implements Initializable {
      */
     @FXML
     void gotoPanier(ActionEvent event) throws IOException {
-        // System.out.println("aaaaa" + counter);
-        //welcomeText.setText("Button Clicked " + counter);
         FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/panierPage.fxml"));
         Parent root = load.load();
 
@@ -399,20 +383,18 @@ public class AccessoireController implements Initializable {
         int row = 0;
         for (Accessoire objet : accessoires) {
 
-            // image = new Image(getClass().getResource("/com/example/demo/ab.png").toExternalForm());
-            //Image image = new Image("https://www.shutterstock.com/image-vector/open-book-vector-clipart-silhouette-600w-358417976.jpg");
             Image image = new Image(objet.getImage());
 
-            // Créez un ImageView pour l'image de l'objet
+
             ImageView imageView = new ImageView();
             imageView.setImage(image);
             imageView.setFitWidth(100);
             imageView.setPreserveRatio(true);
 
-            // Créez un Label pour le nom de l'objet
+
             Label nomLabel = new Label(objet.getName());
 
-            // Créez un Label pour la description de l'objet
+
             Label authorLabel = new Label(objet.getDescription());
             authorLabel.setWrapText(true);
 
@@ -435,8 +417,7 @@ public class AccessoireController implements Initializable {
 
 
 
-            // Ajoutez les éléments à la GridPane
-            //gridpane.add(imageView, 0, row);
+
 
             gridpane.add(imageView,0,row);
             gridpane.add(nomLabel, 1, row);
@@ -505,7 +486,7 @@ public class AccessoireController implements Initializable {
 
 
 
-            // Incrémentez le numéro de ligne
+
             row++;
         }
         scrollpane.setContent(gridpane);

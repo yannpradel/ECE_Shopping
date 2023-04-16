@@ -190,9 +190,9 @@
                                           <Insets left="20.0" right="20.0" top="4.0" />
                                        </VBox.margin>
                                     </Separator>
-                                    <ImageView fitHeight="436.0" fitWidth="642.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                    <ImageView fitHeight="436.0" fitWidth="642.0" opacity="0.01" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@rob_y.gif" />
+                                          <Image url="@coeur%20viole72t.png" />
                                        </image>
                                        <VBox.margin>
                                           <Insets left="165.0" />
@@ -281,7 +281,7 @@
                                           <Image url="@bague-de-fiancailles.png" />
                                        </image>
                                     </ImageView>
-                                    <Button fx:id="bijouxClick1111" mnemonicParsing="false" onAction="#gotoBijoux" prefHeight="39.0" prefWidth="147.0" style="-fx-background-color: #808080;" text="Bijoux" textAlignment="CENTER">
+                                    <Button fx:id="bijouxClick16111" mnemonicParsing="false" onAction="#gotoBijoux" prefHeight="39.0" prefWidth="147.0" style="-fx-background-color: #808080;" text="Bijoux" textAlignment="CENTER">
                                        <font>
                                           <Font name="Cambria" size="21.0" />
                                        </font>

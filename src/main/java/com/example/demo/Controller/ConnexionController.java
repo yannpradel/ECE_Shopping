@@ -9,15 +9,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.EventObject;
-import java.util.ResourceBundle;
 /**
  * Contrôleur de la vue connexionPage.fxml.
  * Gère les interactions avec les éléments de l'interface graphique liés à la connexion.
@@ -29,8 +25,6 @@ public class ConnexionController {
     @FXML
     private PasswordField passwordField;
 
-    @FXML
-    private Button connexionButton;
     /**
      * Gère l'événement du clic sur le bouton de connexion.
      * Récupère les valeurs des champs nom d'utilisateur et mot de passe et les utilise pour se connecter à la base de données.
@@ -47,9 +41,7 @@ public class ConnexionController {
 
         if(database.Connexion(username,password) == true)
         {
-            //database.effacePanier();
-            //Compte compte = new Compte(username,password,database.getAdminS());
-            //email = SQL GET EMAIL FROM USERNAME AND PASSWORD
+
             Compte compte = new Compte(username,password);
             SessionManager.setLoggedInUser(compte);
             System.out.println(SessionManager.getLoggedInUser().getEmail());

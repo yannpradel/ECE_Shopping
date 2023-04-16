@@ -3,7 +3,6 @@ package com.example.demo.Controller;
 import com.example.demo.SessionManager;
 import com.example.demo.model.*;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -26,14 +25,11 @@ import java.util.ResourceBundle;
  * Gère les interactions avec les éléments de l'interface graphique liés au profil utilisateur.
  */
 public class ProfilController implements Initializable {
-    private Bijou bijou;
+
     @FXML
     private GridPane gridpane;
 
     public List<Historique> historiques;
-
-    @FXML
-    TextField searchBar;
 
 
     @FXML
@@ -68,8 +64,6 @@ public class ProfilController implements Initializable {
      */
     @FXML
     void gotoBijoux(ActionEvent event) throws IOException {
-        // System.out.println("aaaaa" + counter);
-        //welcomeText.setText("Button Clicked " + counter);
         FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/bijouPage.fxml"));
         Parent root = load.load();
 
@@ -86,8 +80,6 @@ public class ProfilController implements Initializable {
      */
     @FXML
     void gotoMenu(ActionEvent event) throws IOException {
-        // System.out.println("aaaaa" + counter);
-        //welcomeText.setText("Button Clicked " + counter);
         FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/cataloguePage.fxml"));
         Parent root = load.load();
 
@@ -104,8 +96,6 @@ public class ProfilController implements Initializable {
      */
     @FXML
     void gotoAccess(ActionEvent event) throws IOException {
-        // System.out.println("aaaaa" + counter);
-        //welcomeText.setText("Button Clicked " + counter);
         FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/accessPage.fxml"));
         Parent root = load.load();
 
@@ -125,8 +115,6 @@ public class ProfilController implements Initializable {
 
     @FXML
     void gotoBook(ActionEvent event) throws IOException {
-        // System.out.println("aaaaa" + counter);
-        //welcomeText.setText("Button Clicked " + counter);
         FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/bookPage.fxml"));
         Parent root = load.load();
 
@@ -146,8 +134,6 @@ public class ProfilController implements Initializable {
 
     @FXML
     void gotoPanier(ActionEvent event) throws IOException {
-        // System.out.println("aaaaa" + counter);
-        //welcomeText.setText("Button Clicked " + counter);
         FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/panierPage.fxml"));
         Parent root = load.load();
 
@@ -167,8 +153,6 @@ public class ProfilController implements Initializable {
 
     @FXML
     void gotoProfile(ActionEvent event) throws IOException {
-        // System.out.println("aaaaa" + counter);
-        //welcomeText.setText("Button Clicked " + counter);
         FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/profilePage.fxml"));
         Parent root = load.load();
 
@@ -186,8 +170,6 @@ public class ProfilController implements Initializable {
     @FXML
     void gotoDisconnect(ActionEvent event) throws IOException {
         SessionManager.clearSession();
-        // System.out.println("aaaaa" + counter);
-        //welcomeText.setText("Button Clicked " + counter);
         FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/ConnexionPage.fxml"));
         Parent root = load.load();
 
@@ -197,19 +179,6 @@ public class ProfilController implements Initializable {
         stage.show();
     }
 
-    @FXML
-    private void onConfirmButtonClicked(ActionEvent event) throws IOException{
-        DatabaseModel database = new DatabaseModel();
-        int balance = database.ConfirmationAchatpage(SessionManager.getLoggedInUser().getFirstName());
-        SessionManager.getLoggedInUser().setBalance(balance);
-        FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/panierPage.fxml"));
-        Parent root = load.load();
-
-        Scene scene = new Scene(root);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
-    }
     /**
      * Affiche les informations d'un compte dont le prénom est égal à celui passé en paramètre.
      * Les informations sont récupérées depuis une base de données via l'objet DatabaseModel.
@@ -254,20 +223,20 @@ public class ProfilController implements Initializable {
                     System.out.println("L'objet : " + row + "est un accessoire ou un bijou");
                     Image image = new Image(objet.getImage());
 
-                    // Créez un ImageView pour l'image de l'objet
+
                     ImageView imageView = new ImageView();
                     imageView.setImage(image);
                     imageView.setFitWidth(100);
                     imageView.setPreserveRatio(true);
 
-                    // Créez un Label pour le nom de l'objet
+
                     Label nomLabel = new Label(objet.getName());
 
-                    // Créez un Label pour la description de l'objet
+
                     Label authorLabel = new Label(objet.getDescription());
                     authorLabel.setWrapText(true);
 
-                    // Créez un Label pour le nom de l'objet
+
                     Label quantLabel = new Label(String.valueOf(objet.getQuantity()));
 
                     Label priceLabel = new Label(String.valueOf(objet.getPrice()));
@@ -290,23 +259,21 @@ public class ProfilController implements Initializable {
 
                 if(objet.getTable_nom().equals("livres")) {
                     System.out.println("L'objet : " + row + "est un livre");
-                    // image = new Image(getClass().getResource("/com/example/demo/ab.png").toExternalForm());
-                    //Image image = new Image("https://www.shutterstock.com/image-vector/open-book-vector-clipart-silhouette-600w-358417976.jpg");
                     Image image = new Image(objet.getImage());
 
-                    // Créez un ImageView pour l'image de l'objet
+
                     ImageView imageView = new ImageView();
                     imageView.setImage(image);
                     imageView.setFitWidth(100);
                     imageView.setPreserveRatio(true);
 
-                    // Créez un Label pour le nom de l'objet
+
                     Label nomLabel = new Label(objet.getTitle());
 
-                    // Créez un Label pour le nom de l'objet
+
                     Label quantLabel = new Label(String.valueOf(objet.getQuantity()));
 
-                    // Créez un Label pour la description de l'objet
+
                     Label authorLabel = new Label(objet.getAuthor());
                     authorLabel.setWrapText(true);
 
@@ -317,9 +284,6 @@ public class ProfilController implements Initializable {
                     button2.setText("Suprimmer");
                     button2.setStyle("-fx-background-color: #676767;");
 
-                    // Ajoutez les éléments à la GridPane
-                    //gridpane.add(imageView, 0, row);
-
                     gridpane.add(imageView, 0, row);
                     gridpane.add(nomLabel, 1, row);
                     gridpane.add(authorLabel, 2, row);
@@ -329,7 +293,6 @@ public class ProfilController implements Initializable {
 
 
 
-                // Incrémentez le numéro de ligne
                 row++;
             }
             scrollpane.setContent(gridpane);

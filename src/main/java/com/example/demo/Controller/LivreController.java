@@ -16,9 +16,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.w3c.dom.Text;
-
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -28,7 +25,6 @@ import java.util.ResourceBundle;
  * Gère les interactions avec les éléments de l'interface graphique liés aux livres.
  */
 public class LivreController implements Initializable {
-    private Bijou bijou;
     @FXML
     private GridPane gridpane;
 
@@ -125,8 +121,6 @@ public class LivreController implements Initializable {
         int row = 0;
         for (Livre objet : livres) {
 
-            // image = new Image(getClass().getResource("/com/example/demo/ab.png").toExternalForm());
-            //Image image = new Image("https://www.shutterstock.com/image-vector/open-book-vector-clipart-silhouette-600w-358417976.jpg");
             Image image = new Image(objet.getImage());
 
             // Créez un ImageView pour l'image de l'objet
@@ -159,8 +153,6 @@ public class LivreController implements Initializable {
                     )
             );
 
-            // Ajoutez les éléments à la GridPane
-            //gridpane.add(imageView, 0, row);
 
             gridpane.add(imageView,0,row);
             gridpane.add(nomLabel, 1, row);
@@ -206,9 +198,6 @@ public class LivreController implements Initializable {
                     alerte.setTitle("Ajout de la réduction");
                     alerte.setHeaderText("Réduction !");
                     alerte.setContentText("La réduction a bien été appliquée (lorsqu'un utilisateur achète plus de 4 éléments)");//database.mettreAJourLivresFX(2, "Le Seigneur des Anneaux", "J.R.R. Tolkien", "Houghton Mifflin Harcourt", "1954-1955", "978-2-1234-5678-9", 1, 20.0f, 15.0f, 100, 50, 25, "seigneur_des_anneaux.jpg");
-                    //database.descriptiontabbrutarray("livres",0,0);
-                    //database.mettreAJourLivresFX(livres.get(0).getId(), livres.get(2).getTitle(), livres.get(2).getAuthor(), livres.get(2).getPublisher(), livres.get(2).getPublicationDate(), livres.get(2).getIsbn(), livres.get(2).getEnReduction(),(float)livres.get(2).getPrice(), (float)livres.get(2).getPriceReduc(), livres.get(2).getStockQuantity(), livres.get(2).getVenduSansReduc(), livres.get(2).getVenduReduc(), livres.get(2).getImage());
-
                     alerte.showAndWait();
                 });
                 MenuItem non = new MenuItem("Sans réduction");
@@ -246,8 +235,7 @@ public class LivreController implements Initializable {
      */
     @FXML
     void gotoBijoux(ActionEvent event) throws IOException {
-        // System.out.println("aaaaa" + counter);
-        //welcomeText.setText("Button Clicked " + counter);
+
         FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/bijouPage.fxml"));
         Parent root = load.load();
 
@@ -265,8 +253,7 @@ public class LivreController implements Initializable {
     @FXML
     void gotoDisconnect(ActionEvent event) throws IOException {
         SessionManager.clearSession();
-        // System.out.println("aaaaa" + counter);
-        //welcomeText.setText("Button Clicked " + counter);
+
         FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/ConnexionPage.fxml"));
         Parent root = load.load();
 
@@ -285,8 +272,7 @@ public class LivreController implements Initializable {
      */
     @FXML
     void gotoProfile(ActionEvent event) throws IOException {
-        // System.out.println("aaaaa" + counter);
-        //welcomeText.setText("Button Clicked " + counter);
+
         FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/profilePage.fxml"));
         Parent root = load.load();
 
@@ -303,8 +289,7 @@ public class LivreController implements Initializable {
      */
     @FXML
     void gotoMenu(ActionEvent event) throws IOException {
-        // System.out.println("aaaaa" + counter);
-        //welcomeText.setText("Button Clicked " + counter);
+
         FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/cataloguePage.fxml"));
         Parent root = load.load();
 
@@ -321,8 +306,6 @@ public class LivreController implements Initializable {
      */
     @FXML
     void gotoAccess(ActionEvent event) throws IOException {
-        // System.out.println("aaaaa" + counter);
-        //welcomeText.setText("Button Clicked " + counter);
         FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/accessPage.fxml"));
         Parent root = load.load();
 
@@ -340,8 +323,6 @@ public class LivreController implements Initializable {
      */
     @FXML
     void gotoBook(ActionEvent event) throws IOException {
-        // System.out.println("aaaaa" + counter);
-        //welcomeText.setText("Button Clicked " + counter);
         FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/bookPage.fxml"));
         Parent root = load.load();
 
@@ -359,8 +340,6 @@ public class LivreController implements Initializable {
      */
     @FXML
     void gotoPanier(ActionEvent event) throws IOException {
-        // System.out.println("aaaaa" + counter);
-        //welcomeText.setText("Button Clicked " + counter);
         FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/panierPage.fxml"));
         Parent root = load.load();
 
@@ -400,20 +379,18 @@ public class LivreController implements Initializable {
         int row = 0;
         for (Livre objet : livres) {
 
-            // image = new Image(getClass().getResource("/com/example/demo/ab.png").toExternalForm());
-            //Image image = new Image("https://www.shutterstock.com/image-vector/open-book-vector-clipart-silhouette-600w-358417976.jpg");
             Image image = new Image(objet.getImage());
 
-            // Créez un ImageView pour l'image de l'objet
+
             ImageView imageView = new ImageView();
             imageView.setImage(image);
             imageView.setFitWidth(100);
             imageView.setPreserveRatio(true);
 
-            // Créez un Label pour le nom de l'objet
+
             Label nomLabel = new Label(objet.getTitle());
 
-            // Créez un Label pour la description de l'objet
+
             Label authorLabel = new Label(objet.getAuthor());
             authorLabel.setWrapText(true);
 
@@ -434,8 +411,7 @@ public class LivreController implements Initializable {
                     )
             );
 
-            // Ajoutez les éléments à la GridPane
-            //gridpane.add(imageView, 0, row);
+
 
             gridpane.add(imageView,0,row);
             gridpane.add(nomLabel, 1, row);
@@ -480,9 +456,8 @@ public class LivreController implements Initializable {
                     Alert alerte = new Alert(Alert.AlertType.INFORMATION);
                     alerte.setTitle("Ajout de la réduction");
                     alerte.setHeaderText("Réduction !");
-                    alerte.setContentText("La réduction a bien été appliquée (lorsqu'un utilisateur achète plus de 4 éléments)");//database.mettreAJourLivresFX(2, "Le Seigneur des Anneaux", "J.R.R. Tolkien", "Houghton Mifflin Harcourt", "1954-1955", "978-2-1234-5678-9", 1, 20.0f, 15.0f, 100, 50, 25, "seigneur_des_anneaux.jpg");
-                    //database.descriptiontabbrutarray("livres",0,0);
-                    //database.mettreAJourLivresFX(livres.get(0).getId(), livres.get(2).getTitle(), livres.get(2).getAuthor(), livres.get(2).getPublisher(), livres.get(2).getPublicationDate(), livres.get(2).getIsbn(), livres.get(2).getEnReduction(),(float)livres.get(2).getPrice(), (float)livres.get(2).getPriceReduc(), livres.get(2).getStockQuantity(), livres.get(2).getVenduSansReduc(), livres.get(2).getVenduReduc(), livres.get(2).getImage());
+                    alerte.setContentText("La réduction a bien été appliquée (lorsqu'un utilisateur achète plus de 4 éléments)");
+
                 });
                 MenuItem non = new MenuItem("Sans réduction");
                 non.setOnAction(e -> {
@@ -504,7 +479,7 @@ public class LivreController implements Initializable {
 
 
 
-            // Incrémentez le numéro de ligne
+
             row++;
         }
         scrollpane.setContent(gridpane);

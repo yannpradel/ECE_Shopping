@@ -121,41 +121,26 @@ public class Historique {
         return author;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
-    }
 
     public String getPublisher() {
         return publisher;
     }
 
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
-    }
 
     public String getPublicationDate() {
         return publicationDate;
     }
 
-    public void setPublicationDate(String publicationDate) {
-        this.publicationDate = publicationDate;
-    }
 
     public String getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
 
     public int getEnReduction() {
         return enReduction;
     }
 
-    public void setEnReduction(int enReduction) {
-        this.enReduction = enReduction;
-    }
 
     public double getPrice() {
         return price;
@@ -169,33 +154,21 @@ public class Historique {
         return priceReduc;
     }
 
-    public void setPriceReduc(double priceReduc) {
-        this.priceReduc = priceReduc;
-    }
 
     public int getStockQuantity() {
         return stockQuantity;
     }
 
-    public void setStockQuantity(int stockQuantity) {
-        this.stockQuantity = stockQuantity;
-    }
 
     public int getVenduSansReduc() {
         return venduSansReduc;
     }
 
-    public void setVenduSansReduc(int venduSansReduc) {
-        this.venduSansReduc = venduSansReduc;
-    }
 
     public int getVenduReduc() {
         return venduReduc;
     }
 
-    public void setVenduReduc(int venduReduc) {
-        this.venduReduc = venduReduc;
-    }
 
     public String getImage() {
         return image;

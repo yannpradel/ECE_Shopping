@@ -115,10 +115,7 @@ public class Compte {
     public String getLastName() {
         return lastName;
     }
-
-    public String getPassword() {
-        return password;
-    }
+    
 
     public void setBalance(int balance) {
         this.balance=balance;

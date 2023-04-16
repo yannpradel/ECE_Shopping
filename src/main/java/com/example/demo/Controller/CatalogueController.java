@@ -2,7 +2,6 @@ package com.example.demo.Controller;
 
 
 import com.example.demo.SessionManager;
-import javafx.collections.FXCollections;
 
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -12,11 +11,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -29,15 +23,11 @@ import java.util.ResourceBundle;
  * Gère les interactions avec les éléments de l'interface graphique liés au catalogue.
  */
 public class CatalogueController{
-    @FXML
-    private Label welcomeText;
 
     int counter = 0;
 
     VBox vbox1 = new VBox();
 
-    @FXML
-    private Button bijouxClick;
     /**
      *Méthode appelée lors du clic sur le bouton qui dirige l'utilisateur vers la page des bijoux.
      *@param event Événement du clic sur le bouton
@@ -46,8 +36,7 @@ public class CatalogueController{
     @FXML
     void gotoBijoux(ActionEvent event) throws IOException {
         counter++;
-       // System.out.println("aaaaa" + counter);
-        //welcomeText.setText("Button Clicked " + counter);
+
         FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/bijouPage.fxml"));
         Parent root = load.load();
 
@@ -65,9 +54,6 @@ public class CatalogueController{
      */
     @FXML
     void gotoMenu(ActionEvent event) throws IOException {
-        counter++;
-        // System.out.println("aaaaa" + counter);
-        //welcomeText.setText("Button Clicked " + counter);
         FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/cataloguePage.fxml"));
         Parent root = load.load();
 
@@ -86,8 +72,6 @@ public class CatalogueController{
      */
     @FXML
     void gotoProfile(ActionEvent event) throws IOException {
-        // System.out.println("aaaaa" + counter);
-        //welcomeText.setText("Button Clicked " + counter);
         FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/profilePage.fxml"));
         Parent root = load.load();
 
@@ -105,8 +89,6 @@ public class CatalogueController{
     @FXML
     void gotoDisconnect(ActionEvent event) throws IOException {
         SessionManager.clearSession();
-        // System.out.println("aaaaa" + counter);
-        //welcomeText.setText("Button Clicked " + counter);
         FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/ConnexionPage.fxml"));
         Parent root = load.load();
 
@@ -124,8 +106,6 @@ public class CatalogueController{
      */
     @FXML
     void gotoPanier(ActionEvent event) throws IOException {
-        // System.out.println("aaaaa" + counter);
-        //welcomeText.setText("Button Clicked " + counter);
         FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/panierPage.fxml"));
         Parent root = load.load();
 
@@ -142,9 +122,6 @@ public class CatalogueController{
      */
     @FXML
     void gotoAccess(ActionEvent event) throws IOException {
-        counter++;
-        // System.out.println("aaaaa" + counter);
-        //welcomeText.setText("Button Clicked " + counter);
         FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/accessPage.fxml"));
         Parent root = load.load();
 
@@ -163,9 +140,6 @@ public class CatalogueController{
      */
     @FXML
     void gotoBook(ActionEvent event) throws IOException {
-        counter++;
-        // System.out.println("aaaaa" + counter);
-        //welcomeText.setText("Button Clicked " + counter);
         FXMLLoader load = new FXMLLoader(getClass().getResource("/com/example/demo/bookPage.fxml"));
         Parent root = load.load();
 

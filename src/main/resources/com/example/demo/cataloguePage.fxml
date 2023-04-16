@@ -196,7 +196,7 @@
                                           <Image url="@bague-de-fiancailles.png" />
                                        </image>
                                     </ImageView>
-                                    <Button fx:id="bijouxClick1111" mnemonicParsing="false" onAction="#gotoBijoux" prefHeight="39.0" prefWidth="147.0" style="-fx-background-color: #808080;" text="Bijoux" textAlignment="CENTER">
+                                    <Button fx:id="bijouxClick111131" mnemonicParsing="false" onAction="#gotoBijoux" prefHeight="39.0" prefWidth="147.0" style="-fx-background-color: #808080;" text="Bijoux" textAlignment="CENTER">
                                        <font>
                                           <Font name="Cambria" size="21.0" />
                                        </font>
