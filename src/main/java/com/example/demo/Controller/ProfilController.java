@@ -21,7 +21,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-
+/**
+ * Contrôleur de la vue profilePage.fxml.
+ * Gère les interactions avec les éléments de l'interface graphique liés au profil utilisateur.
+ */
 public class ProfilController implements Initializable {
     private Bijou bijou;
     @FXML
@@ -57,7 +60,11 @@ public class ProfilController implements Initializable {
 
     @FXML
     ScrollPane scrollpane = new ScrollPane();
-
+    /**
+     *Méthode appelée lors du clic sur le bouton qui dirige l'utilisateur vers la page des bijoux.
+     *@param event Événement du clic sur le bouton
+     *@throws IOException Si une erreur se produit lors du chargement de la page
+     */
     @FXML
     void gotoBijoux(ActionEvent event) throws IOException {
         // System.out.println("aaaaa" + counter);
@@ -71,7 +78,11 @@ public class ProfilController implements Initializable {
         stage.show();
 
     }
-
+    /**
+     * Change la scène courante vers la page du catalogue principal.
+     * @param event L'événement de clic sur le bouton "Menu".
+     * @throws IOException Si une erreur se produit lors du chargement de la page.
+     */
     @FXML
     void gotoMenu(ActionEvent event) throws IOException {
         // System.out.println("aaaaa" + counter);
@@ -85,7 +96,11 @@ public class ProfilController implements Initializable {
         stage.show();
 
     }
-
+    /**
+     * Loads the "accessPage.fxml" file and displays it in the scene
+     * @param event The ActionEvent triggered by clicking the "Accessoires" button
+     * @throws IOException if the file "accessPage.fxml" cannot be loaded
+     */
     @FXML
     void gotoAccess(ActionEvent event) throws IOException {
         // System.out.println("aaaaa" + counter);
@@ -99,6 +114,13 @@ public class ProfilController implements Initializable {
         stage.show();
 
     }
+
+    /**
+     * Méthode appelée lorsqu'on clique sur le bouton "Book" pour afficher la page de livres.
+     * Charge la vue "bookPage.fxml" via FXMLLoader, la définit comme racine de la scène et affiche la scène dans la fenêtre actuelle.
+     * @param event L'événement déclencheur de l'action.
+     * @throws IOException Si une erreur se produit lors du chargement de la vue "bookPage.fxml".
+     */
 
     @FXML
     void gotoBook(ActionEvent event) throws IOException {
@@ -114,7 +136,12 @@ public class ProfilController implements Initializable {
 
     }
 
-
+    /**
+     * Méthode appelée lorsqu'on clique sur le bouton "Panier".
+     * Charge la page de panier et l'affiche dans la fenêtre en cours.
+     * @param event L'événement de clic sur le bouton.
+     * @throws IOException Si une erreur survient lors du chargement de la page.
+     */
 
     @FXML
     void gotoPanier(ActionEvent event) throws IOException {
@@ -129,6 +156,13 @@ public class ProfilController implements Initializable {
         stage.show();
 
     }
+    /**
+     * Méthode appelée lors du clic sur le bouton "Profil".
+     * Charge le fichier FXML correspondant à la page de profil et affiche la scène.
+     *
+     * @param event l'événement associé au clic sur le bouton "Profil"
+     * @throws IOException si une erreur survient lors du chargement du fichier FXML
+     */
 
     @FXML
     void gotoProfile(ActionEvent event) throws IOException {
@@ -143,7 +177,11 @@ public class ProfilController implements Initializable {
         stage.show();
 
     }
-
+    /**
+     * Méthode appelée lorsqu'on clique sur le bouton "Déconnexion". Elle permet de déconnecter l'utilisateur en vidant la session en cours, puis de rediriger l'utilisateur vers la page de connexion.
+     * @param event un événement ActionEvent
+     * @throws IOException si une erreur d'entrée/sortie se produit
+     */
     @FXML
     void gotoDisconnect(ActionEvent event) throws IOException {
         SessionManager.clearSession();
@@ -156,7 +194,6 @@ public class ProfilController implements Initializable {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
-
     }
 
     @FXML
@@ -172,6 +209,18 @@ public class ProfilController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+    /**
+     * Affiche les informations d'un compte dont le prénom est égal à celui passé en paramètre.
+     * Les informations sont récupérées depuis une base de données via l'objet DatabaseModel.
+     * Les informations affichées incluent le prénom, le nom de famille, l'e-mail, le solde, et l'adresse postale du compte.
+     * Ensuite, cette méthode affiche les objets historiques associés à ce compte dans une grille (GridPane).
+     * Si un objet historique est un livre, l'image de couverture, le titre, l'auteur, le prix, et la quantité sont affichés.
+     * Si un objet historique est un accessoire ou un bijou, l'image, le nom, la description, le prix, et la quantité sont affichés.
+     * Chaque objet historique est affiché sur une ligne différente de la grille.
+     * Enfin, un bouton "Supprimer" est affiché pour chaque objet historique.
+     *
+     * @param name le prénom du compte dont les informations sont à afficher
+     */
 
     private void afficherInfo(String name)
     {
@@ -287,8 +336,12 @@ public class ProfilController implements Initializable {
 
         }
 
-
-
+    /**
+     * Cette méthode est appelée lors du chargement de l'interface utilisateur pour initialiser les éléments de l'interface et afficher les informations de l'utilisateur connecté. Si l'utilisateur connecté est un administrateur, elle affiche également un menu déroulant avec la liste des utilisateurs, permettant à l'administrateur de sélectionner un utilisateur et d'afficher ses informations.
+     *
+     * @param url l'URL de l'emplacement racine de l'interface utilisateur
+     * @param rb les ressources locales pour la localisation
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         splitmenu.setVisible(false);
